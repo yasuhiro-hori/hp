@@ -3,7 +3,7 @@ services:
     image: node:22
     working_dir: /app
     volumes:
-      - ./hp:/app
+      - ./front:/app
     ports:
       - "3000:3000"
       - "3001:3001"

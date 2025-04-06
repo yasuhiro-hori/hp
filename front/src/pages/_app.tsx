@@ -1,10 +1,12 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import "@/styles/globals.css";
+import type {AppProps} from "next/app";
+import Head from 'next/head'
+import {useRouter} from "next/router";
 
-export default function Document() {
-  return (
-    <Html lang="ja">
+export default function App({Component, pageProps}: AppProps) {
+    const { basePath } = useRouter()
+    return <>
         <Head>
-            <meta charSet="utf-8" />
             <meta name="description" content="自動化技術を活用したソリューションを開発・提供する技術系企業サイトです。" />
             <meta name="keywords" content="スタートアップ, システム開発, 自動化, クラウド, 技術顧問, フルスタック, AWS, FastAPI, Next.js, Go, テクシズ" />
             <meta name="theme-color" content="#ffffff" />
@@ -12,11 +14,9 @@ export default function Document() {
             <meta property="og:description" content="自動化技術を活用したソリューションを開発・提供する技術系企業サイトです。" />
             <meta property="og:url" content="https://tecsiz.co.jp" />
             <meta property="og:type" content="website" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href={`${basePath}/favicon.ico`} />
         </Head>
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+        <Component {...pageProps} />
+    </>;
 }
