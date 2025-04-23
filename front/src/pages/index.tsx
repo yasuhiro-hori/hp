@@ -126,6 +126,7 @@ export default function Home() {
                 <div className="margin-top: 2rem;">
                     <p><strong>創業：</strong>2020年9月</p>
                     <p><strong>設立：</strong>2025年4月</p>
+                    <p><strong>所在地：</strong>東京都港区海岸3-2-15 パークフラッツ芝浦705</p>
                     <p><strong>代表者：</strong>堀 靖弘</p>
                     <p><strong>資本金：</strong>300万円</p>
                     <p><strong>事業内容：</strong>システム開発・ITコンサルティング・クラウド導入支援</p>
