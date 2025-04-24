@@ -115,7 +115,7 @@ export default function Home() {
                 <p>フルリモート・フレックスタイム制を採用。副業・兼業も相談可能です。</p>
 
                 <h3>応募方法</h3>
-                <p><a href="mailto:hori@tecsiz.co.jp">メールにてご応募をお願いいたします。</a></p>
+                <p><a href="mailto:info@tecsiz.co.jp">メールにてご応募をお願いいたします。</a></p>
             </section>
 
 
@@ -135,7 +135,7 @@ export default function Home() {
 
             <section className="section" id="contact">
                 <h2>お問い合わせ</h2>
-                <p><a href="mailto:hori@tecsiz.co.jp">お気軽にお問い合わせください。</a></p>
+                <p><a href="mailto:info@tecsiz.co.jp">お気軽にお問い合わせください。</a></p>
             </section>
             <footer className="footer">
                 &copy; {new Date().getFullYear()} 株式会社テクシズ
