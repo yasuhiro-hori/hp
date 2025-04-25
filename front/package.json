@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "deploy": "gh-pages -d out -b gh-pages -r https://github.com/yasuhiro-hori/hp.git",
+    "deploy": "gh-pages -d out -b gh-pages -r https://github.com/yasuhiro-hori/hp.git -c tecsiz.co.jp",
     "start": "next start",
     "lint": "next lint"
   },
