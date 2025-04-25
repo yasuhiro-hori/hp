@@ -81,7 +81,7 @@ nav a {
 }
 
 /* SP対応 */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 767px) {
     .logo {
         display: none;
     }

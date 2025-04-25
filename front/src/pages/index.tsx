@@ -44,17 +44,28 @@ export default function Home() {
                 <p>
                     既存のオンプレミス環境やレガシーシステムを、AWSやGCPなどのクラウド環境へスムーズに移行します。
                     セキュリティ、コスト、パフォーマンスを考慮した最適な設計を行います。
+                    <br/>
                 </p>
 
                 <h3>技術コンサルティング</h3>
                 <p>
                     開発体制の見直し、技術選定支援、コードレビュー、パフォーマンスチューニングなど、技術面での課題解決を支援します。
-                    CTO代行や技術顧問契約も可能です。
+                    CTO代行や技術顧問契約にも対応可能です。<br/>
+                    また、他社エンジニアチームや開発ベンダー様との協業体制の構築・技術支援にも柔軟に対応いたします。
+                </p>
+                <p>
+                    <strong>【参考価格】</strong><br/>
+                    Webシステム開発：案件単価150万円〜（税別）<br/>
+                    クラウド移行支援：案件単価100万円〜（税別）<br/>
+                    技術顧問（アドバイザリー型）：月額30万円〜（税別）<br/>
+                    CTO代行（プロダクト開発支援型）：月額80万円〜（税別）<br/>
+                    ※案件内容に応じたお見積り・ご提案が可能です。<br/>
+                    <strong>まずはお気軽に<a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">お問い合わせ</a>ください。</strong>
                 </p>
             </section>
 
             <section className="section" id="alliance">
-                <h2>実績</h2>
+                <h2>事例</h2>
                 <h3>ヤネミル</h3>
                 <div style={{marginBottom: '2rem'}}>
                     <Image
@@ -68,7 +79,7 @@ export default function Home() {
                     <h3>屋根パネル搭載シミュレーションシステム</h3>
                     <p>
                         航空画像を活用した屋根上の太陽光パネル設置シミュレーションシステムを開発いたしました。本システムは、実際に何枚のパネルが設置可能かを自動算出します。<br/>
-                        本システムの利用やパネル設置リストの販売にも対応しておりますので、詳しくはお問い合わせください。
+                        本システムの利用やパネル設置リストの販売にも対応しておりますので、詳しくは<a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">お問い合わせ</a>ください。
                     </p>
                 </div>
             </section>
@@ -136,7 +147,7 @@ export default function Home() {
 
             <section className="section" id="contact">
                 <h2>お問い合わせ</h2>
-                <p><a style={{color: "inherit"}} href="mailto:info@tecsiz.co.jp">お気軽にお問い合わせください。</a></p>
+                <p><a style={{color: "inherit"}} href="mailto:info@tecsiz.co.jp">info@tecsiz.co.jp</a></p>
             </section>
             <footer className="footer">
                 &copy; {new Date().getFullYear()} 株式会社テクシズ
