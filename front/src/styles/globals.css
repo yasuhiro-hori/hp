@@ -9,6 +9,15 @@ body {
 }
 
 header {
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
     background: #1a1a1a;
     color: white;
     padding: 1rem 2rem;
@@ -78,6 +87,11 @@ nav a {
 .nav-links {
     display: flex;
     gap: 1rem;
+}
+.logo {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.1em;
 }
 
 /* SP対応 */

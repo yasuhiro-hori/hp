@@ -14,7 +14,7 @@ export default function Home() {
             <header>
                 <nav>
                     <div className="nav-container">
-                        <div className="logo">TECSIZ</div>
+                        <div><a href="#top" className="logo">TECSIZ</a></div>
                         <button className="menu-toggle" onClick={toggleMenu}>☰</button>
                     </div>
                     <div ref={menuRef} className="nav-links" id="nav-menu" onClick={toggleMenu}>
@@ -26,7 +26,7 @@ export default function Home() {
                 </nav>
             </header>
 
-            <section className="hero">
+            <section id="top" className="hero">
                 <h1>ビジネスを加速させるシステム開発</h1>
                 <p>高品質・スピーディー・柔軟対応。お客様の課題を解決します。</p>
             </section>
@@ -55,12 +55,12 @@ export default function Home() {
                 </p>
                 <p>
                     <strong>【参考価格】</strong><br/>
-                    Webシステム開発：案件単価150万円〜（税別）<br/>
-                    クラウド移行支援：案件単価100万円〜（税別）<br/>
-                    技術顧問（アドバイザリー型）：月額30万円〜（税別）<br/>
-                    CTO代行（プロダクト開発支援型）：月額80万円〜（税別）<br/>
+                    ・Webシステム開発：案件単価150万円〜（税別）<br/>
+                    ・クラウド移行支援：案件単価100万円〜（税別）<br/>
+                    ・技術顧問（アドバイザリー型）：月額30万円〜（税別）<br/>
+                    ・CTO代行（プロダクト開発支援型）：月額80万円〜（税別）<br/>
                     ※案件内容に応じたお見積り・ご提案が可能です。<br/>
-                    <strong>まずはお気軽に<a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">お問い合わせ</a>ください。</strong>
+                    <strong><a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">まずはご相談ください。</a></strong>
                 </p>
             </section>
 
@@ -88,11 +88,9 @@ export default function Home() {
                 <div>
                     <h3>対応言語・フレームワーク</h3>
                     <p>
-                        <strong>言語：</strong>Go / PHP / Ruby / Python / Java<br/>
+                        <strong>言語：</strong>Go / PHP / Ruby / Python / Java / JavaScript / TypeScript<br/>
                         <strong>フレームワーク：</strong>
-                        Echo / Gin（Go）、Laravel / CakePHP（PHP）、Ruby on Rails（Ruby）、FastAPI / Django（Python）、Spring
-                        Boot（Java）<br/>
-                        Vue.js / React / Next.js
+                        Echo・Gin（Go） / Laravel・CakePHP（PHP） / Ruby on Rails（Ruby） / FastAPI・Django（Python） / Spring Boot（Java） / Vue.js・React・Next.js（JavaScript/TypeScript）
                     </p>
 
                     <h3>インフラ・クラウド</h3>
@@ -147,10 +145,11 @@ export default function Home() {
 
             <section className="section" id="contact">
                 <h2>お問い合わせ</h2>
+                <p>以下のメールアドレスまでご連絡ください。</p>
                 <p><a style={{color: "inherit"}} href="mailto:info@tecsiz.co.jp">info@tecsiz.co.jp</a></p>
             </section>
             <footer className="footer">
-                &copy; {new Date().getFullYear()} 株式会社テクシズ
+                &copy; {new Date().getFullYear()} TECSIZ Co., Ltd.
             </footer>
         </>)
 }
