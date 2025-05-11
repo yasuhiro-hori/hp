@@ -56,7 +56,6 @@ export default function Home() {
                 <p>
                     <strong>【参考価格】</strong><br/>
                     ・Webシステム開発：案件単価150万円〜（税別）<br/>
-                    ・クラウド移行支援：案件単価100万円〜（税別）<br/>
                     ・技術顧問（アドバイザリー型）：月額30万円〜（税別）<br/>
                     ・CTO代行（プロダクト開発支援型）：月額80万円〜（税別）<br/>
                     ※案件内容に応じたお見積り・ご提案が可能です。<br/>
@@ -134,10 +133,7 @@ export default function Home() {
 
                 <div className="margin-top: 2rem;">
                     <p><strong>会社名：</strong>株式会社テクシズ</p>
-                    <p><strong>創業：</strong>2020年9月</p>
-                    <p><strong>設立：</strong>2025年4月</p>
-                    <p><strong>所在地：</strong>東京都港区海岸3-2-15-705</p>
-                    <p><strong>役員：</strong>代表取締役社長&emsp;堀 靖弘</p>
+                    <p><strong>代表者：</strong>堀 靖弘</p>
                     <p><strong>資本金：</strong>300万円</p>
                     <p><strong>事業内容：</strong>システム開発・ITコンサルティング・クラウド導入支援</p>
                 </div>
