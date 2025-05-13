@@ -1,10 +1,7 @@
-import Image from 'next/image'
 import {useRef} from "react";
-import {useRouter} from "next/router";
 
 export default function Home() {
     const menuRef = useRef<HTMLDivElement>(null);
-    const {basePath} = useRouter()
     const toggleMenu = () => {
         menuRef.current?.classList.toggle('open');
     }
