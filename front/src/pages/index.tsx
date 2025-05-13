@@ -63,25 +63,6 @@ export default function Home() {
                 </p>
             </section>
 
-            <section className="section" id="alliance">
-                <h2>事例</h2>
-                <h3>ヤネミル</h3>
-                <div style={{marginBottom: '2rem'}}>
-                    <Image
-                        src={`${basePath}/yanemiru.png`}
-                        alt="屋根パネル搭載シミュレーションシステム"
-                        width={800}                 // ← 必須
-                        height={600}                // ← 必須
-                        style={{maxWidth: '100%', height: 'auto'}}
-                        priority
-                    />
-                    <h3>屋根パネル搭載シミュレーションシステム</h3>
-                    <p>
-                        航空画像を活用した屋根上の太陽光パネル設置シミュレーションシステムを開発いたしました。本システムは、実際に何枚のパネルが設置可能かを自動算出します。<br/>
-                        本システムの利用やパネル設置リストの販売にも対応しておりますので、詳しくは<a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">お問い合わせ</a>ください。
-                    </p>
-                </div>
-            </section>
             <section className="section" id="tech">
                 <h2>技術スタック</h2>
                 <div>
