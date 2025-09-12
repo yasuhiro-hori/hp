@@ -108,7 +108,7 @@ export default function Home() {
                 <div className="margin-top: 2rem;">
                     <p><strong>会社名：</strong>株式会社テクシズ</p>
                     <p><strong>代表者：</strong>堀 靖弘</p>
-                    <p><strong>所在地：</strong>東京都港区浜松町２丁目２番１５号　浜松町ダイヤビル２Ｆ</p>
+                    <p><strong>所在地：</strong>東京都港区浜松町２丁目２番１５号 浜松町ダイヤビル２Ｆ</p>
                     <p><strong>事業内容：</strong>システム開発・ITコンサルティング・クラウド導入支援</p>
                 </div>
             </section>
