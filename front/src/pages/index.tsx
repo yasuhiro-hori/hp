@@ -51,11 +51,7 @@ export default function Home() {
                     また、他社エンジニアチームや開発ベンダー様との協業体制の構築・技術支援にも柔軟に対応いたします。
                 </p>
                 <p>
-                    <strong>【参考価格】</strong><br/>
-                    ・Webシステム開発：案件単価150万円〜（税別）<br/>
-                    ・技術顧問（アドバイザリー型）：月額30万円〜（税別）<br/>
-                    ・CTO代行（プロダクト開発支援型）：月額80万円〜（税別）<br/>
-                    ※案件内容に応じたお見積り・ご提案が可能です。<br/>
+                    案件内容に応じたお見積り・ご提案が可能です。<br/>
                     <strong><a style={{color: "inherit", textDecoration: "underline"}} href="mailto:info@tecsiz.co.jp">まずはご相談ください。</a></strong>
                 </p>
             </section>
@@ -112,7 +108,7 @@ export default function Home() {
                 <div className="margin-top: 2rem;">
                     <p><strong>会社名：</strong>株式会社テクシズ</p>
                     <p><strong>代表者：</strong>堀 靖弘</p>
-                    <p><strong>資本金：</strong>300万円</p>
+                    <p><strong>所在地：</strong>東京都港区浜松町２丁目２番１５号　浜松町ダイヤビル２Ｆ</p>
                     <p><strong>事業内容：</strong>システム開発・ITコンサルティング・クラウド導入支援</p>
                 </div>
             </section>
