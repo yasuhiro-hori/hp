@@ -150,7 +150,7 @@ export default function Home() {
 
         <section className="section" id="about">
           <h2>会社概要</h2>
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+          <div className="about-grid">
             <div>
               <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>技術の力で、<br />新たな価値を。</h3>
               <p>

@@ -56,11 +56,24 @@ header {
   align-items: center;
 }
 
-.logo {
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  border-radius: 12px;
+}
+
+.logo-text {
   font-size: 1.5rem;
   font-weight: 700;
   background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.05em;
 }
@@ -194,6 +207,12 @@ header {
   font-size: 0.95rem;
 }
 
+/* About Grid */
+.about-grid {
+  display: grid;
+  gap: 2rem;
+}
+
 /* Tech Stack */
 .tech-list {
   display: flex;
@@ -246,5 +265,14 @@ header {
 
   .nav-links.open {
     transform: translateY(0);
+  }
+}
+
+/* Desktop Responsive */
+@media (min-width: 769px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
   }
 }
