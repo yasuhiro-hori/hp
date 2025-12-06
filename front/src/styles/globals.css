@@ -264,3 +264,70 @@ header {
     align-items: center;
   }
 }
+
+/* Tree View Styles */
+.tree-view {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #a3a3a3;
+  background: #111;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--card-border);
+  overflow-x: auto;
+}
+
+.tree-node {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+/* 階層を表す縦線 */
+.tree-node::before {
+  content: '';
+  position: absolute;
+  left: 0.4rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 最後の要素は線を途中で止める */
+.tree-node:last-child::before {
+  height: 0.8em;
+}
+
+/* 階層を表す横線 */
+.tree-node::after {
+  content: '';
+  position: absolute;
+  left: 0.4rem;
+  top: 0.8em;
+  width: 0.6rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tree-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tree-folder {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tree-file {
+  color: #e5e5e5;
+}
+
+.tree-desc {
+  color: #666;
+  font-size: 0.85em;
+  font-style: italic;
+  margin-left: 0.5rem;
+}

@@ -21,6 +21,7 @@ export default function Home() {
           <button className="menu-toggle" onClick={toggleMenu}>☰</button>
           <div ref={menuRef} className="nav-links" id="nav-menu" onClick={() => menuRef.current?.classList.remove('open')}>
             <a href="#services">サービス</a>
+            <a href="#products">プロダクト</a>
             <a href="#tech">技術スタック</a>
             <a href="#recruit">採用情報</a>
             <a href="#about">会社概要</a>
@@ -65,6 +66,170 @@ export default function Home() {
                 CTO代行や技術顧問として経営視点での技術戦略立案を行うほか、アジャイル開発の導入支援やエンジニア教育など、
                 貴社のエンジニアリングチームの自走力を高め、組織全体の成長を強力にバックアップします。
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="products">
+          <h2>プロダクト</h2>
+
+          <div className="card" style={{ maxWidth: '100%' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+              <div>
+                <h3 style={{ fontSize: '1.8rem', color: 'var(--primary-color)' }}>Admin Template</h3>
+                <p style={{ fontSize: '1.1rem', color: '#e5e5e5', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+                  半スクラッチで始める。<br />
+                  最強の管理画面開発基盤。
+                </p>
+                <p style={{ marginBottom: '2rem' }}>
+                  「Reactの知識がなくてもコピペで機能追加できる」をコンセプトに設計された、業務システム特化型のNext.jsテンプレート。
+                  実務で磨き上げられた「保守しやすいディレクトリ構造」と、最初から実装済みの必須機能（検索、CSV、認証）により、
+                  管理画面開発の工数を劇的に削減します。
+                </p>
+
+                <div>
+                  <h4 style={{ marginBottom: '1rem', color: 'white' }}>Key Features</h4>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Vertical Slice Architecture</strong>: 機能ごとの独立性を担保</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Config-Driven Development</strong>: 設定ファイルベースの開発体験</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Authentication</strong>: AWS Cognito (OIDC) 連携ロジック実装済み</span>
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Docker & Build System</strong>: Prod/Dev環境別のDockerfile完備</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* ディレクトリ構造の可視化 */}
+              <div className="tree-view">
+                <div style={{ color: '#e5e5e5', marginBottom: '0.5rem' }}>// 実務に最適化された実際のディレクトリ構成</div>
+                <div className="tree-content"><span className="tree-folder">src/</span></div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">API通信とReact QueryのHooksを集約</span></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">atomic/</span> <span className="tree-desc">Atomic Designに基づくUIパーツ</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">dialog/</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">form/</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">table/</span></div></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">layouts/</span> <span className="tree-desc">共通レイアウト定義</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-file">ListPageContainer.tsx</span> <span className="tree-desc" style={{ color: 'var(--accent-color)' }}>← 一覧画面の共通枠</span></div></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">modules/</span> <span className="tree-desc">機能（ドメイン）単位で構成</span></div>
+
+                  <div className="tree-node">
+                    <div className="tree-content"><span className="tree-folder">plans/</span> <span className="tree-desc">プラン管理機能</span></div>
+                    <div className="tree-node"><div className="tree-content"><span className="tree-file">ListTable.tsx</span></div></div>
+                    <div className="tree-node"><div className="tree-content"><span className="tree-file">Search.tsx</span></div></div>
+                    <div className="tree-node"><div className="tree-content"><span className="tree-file">config.ts</span></div></div>
+                  </div>
+
+                  <div className="tree-node">
+                    <div className="tree-content"><span className="tree-folder">contracts/</span> <span className="tree-desc">契約管理機能</span></div>
+                  </div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">pages/</span> <span className="tree-desc">ルーティング定義のみ</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+              <a href="#contact" className="cta-button">
+                デモ・導入のご相談はこちら
+              </a>
+            </div>
+          </div>
+
+          <div className="card" style={{ maxWidth: '100%', marginTop: '3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+              <div>
+                <h3 style={{ fontSize: '1.8rem', color: 'var(--primary-color)' }}>Go Backend Template</h3>
+                <p style={{ fontSize: '1.1rem', color: '#e5e5e5', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+                  堅牢で高速。<br />
+                  Clean Architecture採用のGolang基盤。
+                </p>
+                <p style={{ marginBottom: '2rem' }}>
+                  大規模開発に耐えうる「Clean Architecture」をベースに、実用的なカスタマイズを施したGo言語バックエンドテンプレート。
+                  SQLBoilerによるType-safeなデータベース操作、Ginによる高速なAPI処理、そしてドメインロジックの純粋性を保つ設計により、
+                  長期的な保守性とパフォーマンスを両立します。
+                </p>
+
+                <div>
+                  <h4 style={{ marginBottom: '1rem', color: 'white' }}>Key Features</h4>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Clean Architecture</strong>: 責務の分離とテスタビリティの確保</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Authentication</strong>: Cognito (JWT) 検証ミドルウェア完備</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Docker & Build System</strong>: マルチステージビルド対応のDockerfileとMakeコマンド完備</span>
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Type-safe ORM</strong>: SQLBoilerによる型安全かつ高速なDB操作</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Goディレクトリ構造の可視化 */}
+              <div className="tree-view">
+                <div style={{ color: '#e5e5e5', marginBottom: '0.5rem' }}>// 責務が明確に分離されたレイヤードアーキテクチャ</div>
+                <div className="tree-content"><span className="tree-folder">root/</span></div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">cmd/</span> <span className="tree-desc">エントリポイント</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-file">main.go</span></div></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">adapter/</span> <span className="tree-desc">外部との入出力を担当 (Controller)</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">HTTPハンドラー</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">gateway/</span></div></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">domain/</span> <span className="tree-desc">ビジネスロジックの中核（依存なし）</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">entity/</span> <span className="tree-desc">ドメインモデル</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">repository/</span> <span className="tree-desc">インターフェース定義</span></div></div>
+                </div>
+
+                <div className="tree-node">
+                  <div className="tree-content"><span className="tree-folder">infrastructure/</span> <span className="tree-desc">技術的詳細・実装</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">persistence/</span> <span className="tree-desc">DBアクセス実装</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">auth/</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+              <a href="#contact" className="cta-button">
+                詳細な技術仕様を聞く
+              </a>
             </div>
           </div>
         </section>
