@@ -32,7 +32,10 @@ export default function Home() {
       <main>
         <section id="top" className="hero">
           <h1>ビジネスを加速させる<br />システム開発</h1>
-          <p>高品質・スピーディー・柔軟対応。<br />お客様の課題を技術の力で解決します。</p>
+          <p>
+            技術の力で、ビジネスを加速させる。<br />
+            高品質・スピーディーな開発で、新たな価値を創造します。
+          </p>
           <a href="#contact" className="cta-button">お問い合わせ</a>
         </section>
 
@@ -43,21 +46,24 @@ export default function Home() {
               <h3>Webシステム開発</h3>
               <p>
                 業務効率化・自動化を実現するためのWebアプリケーションを、要件定義から設計・開発・保守までワンストップで提供します。
-                モダンな技術選定により、拡張性と保守性の高いシステムを構築します。
+                React/Next.jsやGoなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
+                BtoBの管理画面からBtoCのサービスサイトまで、幅広いニーズに対応可能です。
               </p>
             </div>
             <div className="card">
               <h3>クラウド移行支援</h3>
               <p>
-                既存のオンプレミス環境やレガシーシステムを、AWSやGCPなどのクラウド環境へスムーズに移行。
-                サーバーレスアーキテクチャの採用により、運用コストの削減とスケーラビリティの向上を実現します。
+                既存のオンプレミス環境やレガシーシステムを、AWSやGCPなどのクラウド環境へスムーズに移行します。
+                単なるリフト＆シフトだけでなく、サーバーレスアーキテクチャやコンテナ技術（Docker/Kubernetes）の採用により、
+                運用コストの削減、セキュリティの強化、そしてスケーラビリティの向上を実現するクラウドネイティブな設計を提案します。
               </p>
             </div>
             <div className="card">
               <h3>技術コンサルティング</h3>
               <p>
-                開発体制の見直し、技術選定支援、コードレビュー、パフォーマンスチューニングなど、技術面での課題解決を支援。
-                CTO代行や技術顧問として、貴社のエンジニアリングチームを強力にバックアップします。
+                開発体制の見直し、技術選定支援、コードレビュー、パフォーマンスチューニングなど、技術面でのあらゆる課題解決を支援します。
+                CTO代行や技術顧問として経営視点での技術戦略立案を行うほか、アジャイル開発の導入支援やエンジニア教育など、
+                貴社のエンジニアリングチームの自走力を高め、組織全体の成長を強力にバックアップします。
               </p>
             </div>
           </div>
@@ -105,9 +111,11 @@ export default function Home() {
           <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <h3>私たちと一緒に働きませんか</h3>
             <p>
-              株式会社テクシズは、急成長中のスタートアップです。
-              少数精鋭のチームで、スピード感を持って価値あるプロダクトを次々と生み出しています。
-              自由と責任を尊重し、技術でビジネスに貢献したい方を歓迎します。
+              株式会社テクシズは、技術力で社会にインパクトを与える急成長中のスタートアップです。
+              私たちは「技術を楽しむこと」と「プロフェッショナルとしての成果」の両立を大切にしています。
+              少数精鋭のチームだからこそ、一人ひとりの裁量が大きく、エンジニアとしてスピーディーに成長できる環境があります。
+              フルリモートワークやフレックスタイム制を導入しており、ライフスタイルに合わせた柔軟な働き方が可能です。
+              自由と責任を尊重し、新しい技術への挑戦を恐れず、チームと共に成長していける仲間を募集しています。
             </p>
             <div style={{ marginTop: '2rem' }}>
               <h4>募集ポジション</h4>
@@ -116,9 +124,16 @@ export default function Home() {
               <h4 style={{ marginTop: '1.5rem' }}>歓迎スキル</h4>
               <div className="tech-list">
                 <span className="tech-tag">Go</span>
+                <span className="tech-tag">TypeScript</span>
                 <span className="tech-tag">React</span>
+                <span className="tech-tag">Next.js</span>
+                <span className="tech-tag">Python</span>
+                <span className="tech-tag">PHP</span>
                 <span className="tech-tag">AWS</span>
+                <span className="tech-tag">Docker</span>
+                <span className="tech-tag">Terraform</span>
                 <span className="tech-tag">自走力</span>
+                <span className="tech-tag">チーム開発経験</span>
               </div>
 
               <div style={{ marginTop: '2rem', textAlign: 'center' }}>
@@ -138,7 +153,11 @@ export default function Home() {
           <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
             <div>
               <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>技術の力で、<br />新たな価値を。</h3>
-              <p>株式会社テクシズは、最先端の技術力でお客様のビジネスを支援するシステム開発会社です。</p>
+              <p>
+                株式会社テクシズは、最先端の技術力と深いビジネス理解を武器に、お客様のビジネスを成功へと導くシステム開発会社です。
+                私たちは単にシステムを作るだけでなく、お客様の「実現したいこと」を深く理解し、最適なソリューションを提案するパートナーでありたいと考えています。
+                変化の激しいIT業界において、常に最新のトレンドをキャッチアップし、最高のパフォーマンスを発揮することで、社会に貢献し続けます。
+              </p>
             </div>
             <div className="card">
               <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1rem 2rem' }}>
