@@ -138,7 +138,6 @@ export default function Home() {
                     <div className="tree-content"><span className="tree-folder">plans/</span> <span className="tree-desc">プラン管理機能</span></div>
                     <div className="tree-node"><div className="tree-content"><span className="tree-file">ListTable.tsx</span></div></div>
                     <div className="tree-node"><div className="tree-content"><span className="tree-file">Search.tsx</span></div></div>
-                    <div className="tree-node"><div className="tree-content"><span className="tree-file">config.ts</span></div></div>
                   </div>
 
                   <div className="tree-node">
@@ -168,9 +167,9 @@ export default function Home() {
                   Clean Architecture採用のGolang基盤。
                 </p>
                 <p style={{ marginBottom: '2rem' }}>
-                  大規模開発に耐えうる「Clean Architecture」をベースに、実用的なカスタマイズを施したGo言語バックエンドテンプレート。
-                  SQLBoilerによるType-safeなデータベース操作、Ginによる高速なAPI処理、そしてドメインロジックの純粋性を保つ設計により、
-                  長期的な保守性とパフォーマンスを両立します。
+                  大規模開発に耐えうる「Clean Architecture」をベースに、全ての依存関係解決と初期化処理をエントリーポイント（cmd）に集約。
+                  これによりドメインロジックの純粋性を完全に保ち、SQLBoilerによるType-safeなDB操作やGinによる高速なAPI処理と共存させています。
+                  「どこで何が起きているか」が明確な、保守性の高い設計です。
                 </p>
 
                 <div>
@@ -202,26 +201,33 @@ export default function Home() {
                 <div className="tree-content"><span className="tree-folder">root/</span></div>
 
                 <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">cmd/</span> <span className="tree-desc">エントリポイント</span></div>
+                  <div className="tree-content"><span className="tree-folder">cmd/</span> <span className="tree-desc">エントリポイント (責務の集約)</span></div>
                   <div className="tree-node"><div className="tree-content"><span className="tree-file">main.go</span></div></div>
                 </div>
 
                 <div className="tree-node">
                   <div className="tree-content"><span className="tree-folder">adapter/</span> <span className="tree-desc">外部との入出力を担当 (Controller)</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">HTTPハンドラー</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">gateway/</span></div></div>
+                  <div className="tree-node">
+                    <div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">機能単位で完結 (Vertical Slice)</span></div>
+                    <div className="tree-node">
+                      <div className="tree-content"><span className="tree-folder">projects/</span> <span className="tree-desc">機能ごとにHandler/Repo/Usecaseを集約</span></div>
+                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">handlers/</span></div></div>
+                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">repositories/</span></div></div>
+                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">usecases/</span></div></div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">domain/</span> <span className="tree-desc">ビジネスロジックの中核（依存なし）</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">entity/</span> <span className="tree-desc">ドメインモデル</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">repository/</span> <span className="tree-desc">インターフェース定義</span></div></div>
+                  <div className="tree-content"><span className="tree-folder">domain/</span> <span className="tree-desc">ビジネスロジックの中核</span></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">entity/</span> <span className="tree-desc">自動生成エンティティ</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">models/</span> <span className="tree-desc">ドメインモデル</span></div></div>
                 </div>
 
                 <div className="tree-node">
                   <div className="tree-content"><span className="tree-folder">infrastructure/</span> <span className="tree-desc">技術的詳細・実装</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">persistence/</span> <span className="tree-desc">DBアクセス実装</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">auth/</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">db/</span> <span className="tree-desc">DB接続・設定</span></div></div>
+                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">middleware/</span></div></div>
                 </div>
               </div>
             </div>
