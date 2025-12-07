@@ -111,42 +111,30 @@ export default function Home() {
               </div>
 
               {/* ディレクトリ構造の可視化 */}
-              <div className="tree-view">
-                <div style={{ color: '#e5e5e5', marginBottom: '0.5rem' }}>// 実務に最適化された実際のディレクトリ構成</div>
-                <div className="tree-content"><span className="tree-folder">src/</span></div>
-
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">API通信とReact QueryのHooksを集約</span></div>
+              {/* アーキテクチャの概念図（Admin） */}
+              <div className="arch-container" style={{ background: '#111', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--card-border)' }}>
+                <div style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#a3a3a3', fontSize: '0.95rem', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  Vertical Slice: 複雑性を分断し、開発速度を加速させる
                 </div>
 
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">atomic/</span> <span className="tree-desc">Atomic Designに基づくUIパーツ</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">dialog/</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">form/</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">table/</span></div></div>
-                </div>
-
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">layouts/</span> <span className="tree-desc">共通レイアウト定義</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-file">ListPageContainer.tsx</span> <span className="tree-desc" style={{ color: 'var(--accent-color)' }}>← 一覧画面の共通枠</span></div></div>
-                </div>
-
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">modules/</span> <span className="tree-desc">機能（ドメイン）単位で構成</span></div>
-
-                  <div className="tree-node">
-                    <div className="tree-content"><span className="tree-folder">plans/</span> <span className="tree-desc">プラン管理機能</span></div>
-                    <div className="tree-node"><div className="tree-content"><span className="tree-file">ListTable.tsx</span></div></div>
-                    <div className="tree-node"><div className="tree-content"><span className="tree-file">Search.tsx</span></div></div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  <div className="arch-box" style={{ border: '1px solid #3b82f6', background: 'rgba(59, 130, 246, 0.1)', color: '#93c5fd', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+                    <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Feature Modules (Domain)</strong>
+                    <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>ビジネス機能ごとの独立したカプセル (Projects, Contracts...)</div>
                   </div>
 
-                  <div className="tree-node">
-                    <div className="tree-content"><span className="tree-folder">contracts/</span> <span className="tree-desc">契約管理機能</span></div>
-                  </div>
-                </div>
+                  <div style={{ textAlign: 'center', color: '#666' }}>⬇ 依存 (Uses)</div>
 
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">pages/</span> <span className="tree-desc">ルーティング定義のみ</span></div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div className="arch-box" style={{ border: '1px solid #10b981', background: 'rgba(16, 185, 129, 0.1)', color: '#6ee7b7', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+                      <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Shared UI</strong>
+                      <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>再利用可能な部品 (Atomic Design)</div>
+                    </div>
+                    <div className="arch-box" style={{ border: '1px solid #8b5cf6', background: 'rgba(139, 92, 246, 0.1)', color: '#c4b5fd', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+                      <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Core / Libs</strong>
+                      <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>API, Auth, Hooks</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -163,13 +151,13 @@ export default function Home() {
               <div>
                 <h3 style={{ fontSize: '1.8rem', color: 'var(--primary-color)' }}>Go Backend Template</h3>
                 <p style={{ fontSize: '1.1rem', color: '#e5e5e5', marginBottom: '1.5rem', fontWeight: 'bold' }}>
-                  堅牢で高速。<br />
-                  Clean Architecture採用のGolang基盤。
+                  10年戦える。<br />
+                  技術的負債を生まない堅牢な設計。
                 </p>
                 <p style={{ marginBottom: '2rem' }}>
-                  大規模開発に耐えうる「Clean Architecture」をベースに、全ての依存関係解決と初期化処理をエントリーポイント（cmd）に集約。
-                  これによりドメインロジックの純粋性を完全に保ち、SQLBoilerによるType-safeなDB操作やGinによる高速なAPI処理と共存させています。
-                  「どこで何が起きているか」が明確な、保守性の高い設計です。
+                  外部システム（DBやWebフレームワーク）への依存を徹底的に排除する「Clean Architecture」を採用。
+                  ビジネスロジックをシステムの中心に保護することで、将来的な技術変更や機能拡張に柔軟に対応できます。
+                  「何を作るか（ドメイン）」と「どう動かすか（インフラ）」を明確に分離した、持続可能なシステム基盤です。
                 </p>
 
                 <div>
@@ -196,38 +184,32 @@ export default function Home() {
               </div>
 
               {/* Goディレクトリ構造の可視化 */}
-              <div className="tree-view">
-                <div style={{ color: '#e5e5e5', marginBottom: '0.5rem' }}>// 責務が明確に分離されたレイヤードアーキテクチャ</div>
-                <div className="tree-content"><span className="tree-folder">root/</span></div>
-
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">cmd/</span> <span className="tree-desc">エントリポイント (責務の集約)</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-file">main.go</span></div></div>
+              {/* Goアーキテクチャの概念図 */}
+              <div className="arch-container" style={{ background: '#111', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--card-border)' }}>
+                <div style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#a3a3a3', fontSize: '0.95rem', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  Domain-Centric: 技術の変化から、ビジネスの核心を守り抜く
                 </div>
 
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">adapter/</span> <span className="tree-desc">外部との入出力を担当 (Controller)</span></div>
-                  <div className="tree-node">
-                    <div className="tree-content"><span className="tree-folder">api/</span> <span className="tree-desc">機能単位で完結 (Vertical Slice)</span></div>
-                    <div className="tree-node">
-                      <div className="tree-content"><span className="tree-folder">projects/</span> <span className="tree-desc">機能ごとにHandler/Repo/Usecaseを集約</span></div>
-                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">handlers/</span></div></div>
-                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">repositories/</span></div></div>
-                      <div className="tree-node"><div className="tree-content"><span className="tree-folder">usecases/</span></div></div>
-                    </div>
+                <div style={{ position: 'relative', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {/* Outer: Infrastructure */}
+                  <div style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', border: '2px dashed #666', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ background: '#111', padding: '0 5px', color: '#888', fontSize: '0.8rem' }}>Infrastructure (DB, Web)</span>
                   </div>
-                </div>
 
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">domain/</span> <span className="tree-desc">ビジネスロジックの中核</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">entity/</span> <span className="tree-desc">自動生成エンティティ</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">models/</span> <span className="tree-desc">ドメインモデル</span></div></div>
-                </div>
+                  {/* Middle: Interface Adapters */}
+                  <div style={{ position: 'absolute', width: '80%', height: '80%', borderRadius: '50%', border: '2px solid #3b82f6', background: 'rgba(59, 130, 246, 0.05)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '0' }}>Interface Adapters</span>
+                  </div>
 
-                <div className="tree-node">
-                  <div className="tree-content"><span className="tree-folder">infrastructure/</span> <span className="tree-desc">技術的詳細・実装</span></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">db/</span> <span className="tree-desc">DB接続・設定</span></div></div>
-                  <div className="tree-node"><div className="tree-content"><span className="tree-folder">middleware/</span></div></div>
+                  {/* Inner: Use Cases */}
+                  <div style={{ position: 'absolute', width: '60%', height: '60%', borderRadius: '50%', border: '2px solid #8b5cf6', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '5px' }}>Use Cases</span>
+                  </div>
+
+                  {/* Core: Domain */}
+                  <div style={{ position: 'absolute', width: '35%', height: '35%', borderRadius: '50%', background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)' }}>
+                    <span style={{ color: '#000', fontWeight: 'bold' }}>Domain</span>
+                  </div>
                 </div>
               </div>
             </div>
