@@ -217,6 +217,39 @@ header {
   color: #e5e5e5;
 }
 
+/* Toggle Switch */
+.toggle-container {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.3rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--card-border);
+  margin-bottom: 2rem;
+}
+
+.toggle-button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.6rem;
+  border: none;
+  background: transparent;
+  color: #a3a3a3;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.toggle-button.active {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.toggle-button:not(.active):hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
 /* Footer */
 .footer {
   border-top: 1px solid var(--card-border);
