@@ -14,6 +14,13 @@ export default function Home() {
       <Head>
         <title>株式会社テクシズ | TECSIZ Co., Ltd.</title>
         <meta name="description" content="ビジネスを加速させるシステム開発。高品質・スピーディー・柔軟対応。" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <meta property="og:title" content="株式会社テクシズ | TECSIZ Co., Ltd." />
+        <meta property="og:description" content="ビジネスを加速させるシステム開発。高品質・スピーディー・柔軟対応。" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="株式会社テクシズ" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <header>
