@@ -47,7 +47,7 @@ export default function Home() {
               <h3>Webシステム開発</h3>
               <p>
                 業務効率化・自動化を実現するためのWebアプリケーションを、要件定義から設計・開発・保守までワンストップで提供します。
-                React/Next.jsやGoなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
+                React/Next.jsやGo、Rustなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
                 BtoBの管理画面からBtoCのサービスサイトまで、幅広いニーズに対応可能です。
               </p>
             </div>
@@ -220,6 +220,76 @@ export default function Home() {
               </a>
             </div>
           </div>
+
+          <div className="card" style={{ maxWidth: '100%', marginTop: '3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+              <div>
+                <h3 style={{ fontSize: '1.8rem', color: 'var(--primary-color)' }}>Rust Backend Template</h3>
+                <p style={{ fontSize: '1.1rem', color: '#e5e5e5', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+                  安全性とパフォーマンスの極致。<br />
+                  メモリ安全かつ超高速なバックエンド基盤。
+                </p>
+                <p style={{ marginBottom: '2rem' }}>
+                  Rustの強力な型システムと所有権モデルを最大限に活かした、エンタープライズ品質のバックエンドテンプレート。
+                  Go版と同様にClean Architectureを採用し、ビジネスロジックを技術的詳細から完全に分離。
+                  高い実行速度とメモリ効率を維持しつつ、ランタイムエラーをコンパイル時に徹底的に排除します。
+                </p>
+
+                <div>
+                  <h4 style={{ marginBottom: '1rem', color: 'white' }}>Key Features</h4>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Clean Architecture</strong>: ドメインロジックを中心とした堅牢な設計</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Axum & Tower</strong>: 並行処理に強いモダンな非同期Webスタック</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>SeaORM (Async)</strong>: 型安全なデータベース操作と非同期I/O</span>
+                    </li>
+                    <li style={{ display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>Zod-like Validation</strong>: シリアライザによる厳密な入力バリデーション</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Rustディレクトリ構造の可視化 (Go版と同じビジュアルをベースに色味を変更) */}
+              <div className="arch-container" style={{ background: '#111', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--card-border)' }}>
+                <div style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#a3a3a3', fontSize: '0.95rem', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+                  Strict Safety: 実行時の安定性を、コンパイル時に保証する
+                </div>
+
+                <div style={{ position: 'relative', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', border: '2px dashed #666', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ background: '#111', padding: '0 5px', color: '#888', fontSize: '0.8rem' }}>Infrastructure (Axum, DB)</span>
+                  </div>
+
+                  <div style={{ position: 'absolute', width: '80%', height: '80%', borderRadius: '50%', border: '2px solid #ef4444', background: 'rgba(239, 68, 68, 0.05)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '0' }}>Adapters</span>
+                  </div>
+
+                  <div style={{ position: 'absolute', width: '60%', height: '60%', borderRadius: '50%', border: '2px solid #f97316', background: 'rgba(249, 115, 22, 0.1)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '10px' }}>
+                    <span style={{ color: '#f97316', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '5px' }}>Usecases</span>
+                  </div>
+
+                  <div style={{ position: 'absolute', width: '35%', height: '35%', borderRadius: '50%', background: '#dea584', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(222, 165, 132, 0.4)' }}>
+                    <span style={{ color: '#000', fontWeight: 'bold' }}>Domain</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+              <a href="#contact" className="cta-button">
+                詳細な技術仕様を聞く
+              </a>
+            </div>
+          </div>
         </section>
 
         <section className="section" id="tech">
@@ -229,6 +299,7 @@ export default function Home() {
               <h3>言語・フレームワーク</h3>
               <div className="tech-list">
                 <span className="tech-tag">Go</span>
+                <span className="tech-tag">Rust</span>
                 <span className="tech-tag">TypeScript</span>
                 <span className="tech-tag">Python</span>
                 <span className="tech-tag">PHP</span>
@@ -277,6 +348,7 @@ export default function Home() {
               <h4 style={{ marginTop: '1.5rem' }}>歓迎スキル</h4>
               <div className="tech-list">
                 <span className="tech-tag">Go</span>
+                <span className="tech-tag">Rust</span>
                 <span className="tech-tag">TypeScript</span>
                 <span className="tech-tag">React</span>
                 <span className="tech-tag">Next.js</span>
