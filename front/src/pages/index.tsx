@@ -35,7 +35,7 @@ export default function Home() {
         <section id="top" className="hero">
           <h1>ビジネスを加速させる<br />システム開発</h1>
           <p>
-            技術の力で、ビジネスを加速させる。<br />
+            技術の力でビジネスを加速させる。<br />
             高品質・スピーディーな開発で、新たな価値を創造します。
           </p>
           <a href="#contact" className="cta-button">お問い合わせ</a>
@@ -73,6 +73,10 @@ export default function Home() {
 
         <section className="section" id="products">
           <h2>プロダクト</h2>
+          <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3rem', color: '#a3a3a3' }}>
+            言語特性を最大限に活かした開発テンプレート<br />
+            高品質なシステムを圧倒的なスピードで立ち上げます。
+          </p>
 
           <div className="card" style={{ maxWidth: '100%' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
@@ -175,9 +179,8 @@ export default function Home() {
                       技術的負債を生まない堅牢な設計
                     </p>
                     <p style={{ marginBottom: '2rem' }}>
-                      外部システム（DBやWebフレームワーク）への依存を徹底的に排除する「Clean Architecture」を採用。
-                      ビジネスロジックをシステムの中心に保護することで、将来的な技術変更や機能拡張に柔軟に対応できます。
-                      「何を作るか（ドメイン）」と「どう動かすか（インフラ）」を明確に分離した、持続可能なシステム基盤です。
+                      Goのシンプルさと高い並行処理能力を最大限に引き出すため、言語特性に最適化された独自のテンプレート基盤を構築。
+                      外部システム（DBやWebフレームワーク）への依存を徹底的に排除する「Clean Architecture」を採用し、ビジネスロジックをシステムの中心に保護することで、将来的な技術変更や機能拡張に柔軟に対応できます。
                     </p>
 
                     <div>
@@ -233,9 +236,9 @@ export default function Home() {
                       メモリ安全かつ超高速なバックエンド基盤
                     </p>
                     <p style={{ marginBottom: '2rem' }}>
-                      Rustの強力な型システムと所有権モデルを最大限に活かした、エンタープライズ品質のバックエンドテンプレート。
-                      Go版と同様にClean Architectureを採用し、ビジネスロジックを技術的詳細から完全に分離。
-                      高い実行速度とメモリ効率を維持しつつ、ランタイムエラーをコンパイル時に徹底的に排除します。
+                      Rustの強力な型システムと所有権モデルを最大限に活かし、メモリ安全かつ超高速な実行性能を両立した言語特化型テンプレート。
+                      Go版同様のClean ArchitectureをRustの特性に落とし込み、ビジネスロジックを技術的詳細から完全に分離。
+                      高い実行効率を維持しつつ、ランタイムエラーをコンパイル時に徹底的に排除する、極めて堅牢なシステム基盤を提供します。
                     </p>
 
                     <div>
