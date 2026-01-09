@@ -312,6 +312,7 @@ export default function Home() {
                 <span className="tech-tag">Go</span>
                 <span className="tech-tag">Rust</span>
                 <span className="tech-tag">TypeScript</span>
+                <span className="tech-tag">Svelte</span>
                 <span className="tech-tag">Python</span>
                 <span className="tech-tag">PHP</span>
                 <span className="tech-tag">React</span>
@@ -325,17 +326,32 @@ export default function Home() {
               <h3>インフラ・クラウド</h3>
               <div className="tech-list">
                 <span className="tech-tag">AWS</span>
+                <span className="tech-tag">Google Cloud (GCP)</span>
                 <span className="tech-tag">Docker</span>
+                <span className="tech-tag">Kubernetes</span>
                 <span className="tech-tag">Terraform</span>
+                <span className="tech-tag">CloudFormation</span>
+                <span className="tech-tag">GitHub Actions</span>
                 <span className="tech-tag">Fargate</span>
                 <span className="tech-tag">Lambda</span>
                 <span className="tech-tag">CloudRun</span>
               </div>
             </div>
             <div className="card">
+              <h3>データベース・ミドルウェア</h3>
+              <div className="tech-list">
+                <span className="tech-tag">PostgreSQL</span>
+                <span className="tech-tag">MySQL</span>
+                <span className="tech-tag">Redis</span>
+                <span className="tech-tag">MongoDB</span>
+                <span className="tech-tag">gRPC</span>
+                <span className="tech-tag">GraphQL</span>
+              </div>
+            </div>
+            <div className="card">
               <h3>得意分野</h3>
               <p style={{ marginTop: '1rem' }}>
-                MVP開発 / 新規プロダクト開発 / マイクロサービス化 / パフォーマンス最適化 / アジャイル開発
+                AI/LLM統合開発 / MVP開発 / 新規プロダクト開発 / マイクロサービス化 / パフォーマンス最適化 / アジャイル開発
               </p>
             </div>
           </div>
@@ -361,6 +377,7 @@ export default function Home() {
                 <span className="tech-tag">Go</span>
                 <span className="tech-tag">Rust</span>
                 <span className="tech-tag">TypeScript</span>
+                <span className="tech-tag">Svelte</span>
                 <span className="tech-tag">React</span>
                 <span className="tech-tag">Next.js</span>
                 <span className="tech-tag">Python</span>
@@ -368,6 +385,7 @@ export default function Home() {
                 <span className="tech-tag">AWS</span>
                 <span className="tech-tag">Docker</span>
                 <span className="tech-tag">Terraform</span>
+                <span className="tech-tag">AI / LLM</span>
                 <span className="tech-tag">自走力</span>
                 <span className="tech-tag">チーム開発経験</span>
               </div>
