@@ -21,6 +21,27 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="株式会社テクシズ" />
         <meta name="twitter:card" content="summary_large_image" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "株式会社テクシズ",
+              "alternateName": "TECSIZ Co., Ltd.",
+              "url": "https://tecsiz.co.jp",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "浜松町2-2-15 浜松町ダイヤビル2F",
+                "addressLocality": "港区",
+                "addressRegion": "東京都",
+                "postalCode": "105-0013",
+                "addressCountry": "JP"
+              },
+              "description": "GoやRust、Next.jsを用いた高品質・スピーディーなシステム開発。クリーンアーキテクチャによる保守性の高い設計を提供します。"
+            })
+          }}
+        />
       </Head>
 
       <header>
@@ -33,7 +54,7 @@ export default function Home() {
             <a href="#tech">技術スタック</a>
             <a href="#recruit">採用情報</a>
             <a href="#about">会社概要</a>
-            <a href="#contact">お問い合わせ</a>
+            <a href="#contact" className="nav-cta">お問い合わせ</a>
           </div>
         </nav>
       </header>
@@ -73,6 +94,36 @@ export default function Home() {
                 開発体制の見直し、技術選定支援、コードレビュー、パフォーマンスチューニングなど、技術面でのあらゆる課題解決を支援します。
                 CTO代行や技術顧問として経営視点での技術戦略立案を行うほか、アジャイル開発の導入支援やエンジニア教育など、
                 貴社のエンジニアリングチームの自走力を高め、組織全体の成長を強力にバックアップします。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="strength">
+          <h2>テクシズの強み</h2>
+          <div className="strength-grid">
+            <div className="card strength-card">
+              <span className="strength-icon">🚀</span>
+              <h3>圧倒的な開発スピード</h3>
+              <p>
+                Go/Rustの自社開発テンプレートを活用し、高品質なバックエンド基盤を短期間で構築。
+                要件定義からMVPリリースまで、最短期間でビジネスの立ち上げを支援します。
+              </p>
+            </div>
+            <div className="card strength-card">
+              <span className="strength-icon">🛡️</span>
+              <h3>10年戦える堅牢な設計</h3>
+              <p>
+                Clean Architectureをベースとした設計により、技術的負債を最小限に抑えます。
+                将来の機能拡張や技術変更にも柔軟に対応できる、保守性の高いコードを提供します。
+              </p>
+            </div>
+            <div className="card strength-card">
+              <span className="strength-icon">🧬</span>
+              <h3>モダン技術への深い造詣</h3>
+              <p>
+                Go, Rust, TypeScript, AI(LLM)など、最新技術を実戦投入。
+                パフォーマンスと安全性が求められる大規模システムから、スピード重視のスタートアップまで対応可能です。
               </p>
             </div>
           </div>
@@ -303,6 +354,27 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section" id="workflow">
+          <h2>開発の流れ</h2>
+          <div className="workflow-container">
+            {[
+              { title: "ヒアリング・要件定義", desc: "お客様のビジネス課題を深く掘り下げ、実現したいゴールを明確にします。技術的な観点から最適な解決策を提案します。" },
+              { title: "設計・アーキテクチャ選定", desc: "将来の拡張性を見据え、Clean Architectureに基づいた設計を行います。最適な技術スタックを選定します。" },
+              { title: "アジャイル開発", desc: "2週間程度のイテレーションで開発を進めます。早い段階で動くものをお見せし、フィードバックを取り入れながらブラッシュアップします。" },
+              { title: "テスト・品質保証", desc: "自動テストの導入はもちろん、セキュリティスキャンやパフォーマンスチェックを徹底し、高品質なシステムを担保します。" },
+              { title: "リリース・保守運用", desc: "クラウド環境（AWS/GCP）へのデプロイを行い、リリース後も継続的な改善や技術サポートを提供します。" },
+            ].map((step, idx) => (
+              <div key={idx} className="workflow-step">
+                <div className="step-number">{idx + 1}</div>
+                <div className="step-content">
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="section" id="tech">
           <h2>技術スタック</h2>
           <div className="grid">
@@ -397,6 +469,40 @@ export default function Home() {
                 >
                   メールで応募する
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="faq">
+          <h2>よくある質問</h2>
+          <div className="faq-container">
+            <div className="faq-item">
+              <div className="faq-question">開発期間はどのくらいかかりますか？</div>
+              <div className="faq-answer">
+                案件の規模によりますが、MVP開発であれば最短1ヶ月〜3ヶ月程度でのリリースが可能です。
+                自社開発テンプレートを活用することで、基盤構築の時間を大幅に短縮しています。
+              </div>
+            </div>
+            <div className="faq-item">
+              <div className="faq-question">既存システムの保守やリプレイスもお願いできますか？</div>
+              <div className="faq-answer">
+                はい、可能です。レガシーシステムのクラウド移行（AWS/GCP）や、Go/Rustへのリプレイスによるパフォーマンス改善など、
+                現状の課題に合わせた最適なプランを提案いたします。
+              </div>
+            </div>
+            <div className="faq-item">
+              <div className="faq-question">技術顧問やCTO代行としての参画は可能ですか？</div>
+              <div className="faq-answer">
+                可能です。週1回からの技術相談や、エンジニア採用の技術面談、コードレビュー体制の構築など、
+                単なる受託開発に留まらない伴走型のサポートを提供しています。
+              </div>
+            </div>
+            <div className="faq-item">
+              <div className="faq-question">Rustを使用した開発のメリットは何ですか？</div>
+              <div className="faq-answer">
+                Rustはメモリ安全性が高く、実行速度が極めて速いため、計算リソースの節約（インフラコスト削減）と
+                バグの少ない堅牢なシステム構築が可能です。特に高トラフィックなAPIや複雑なビジネスロジックを持つシステムに最適です。
               </div>
             </div>
           </div>
