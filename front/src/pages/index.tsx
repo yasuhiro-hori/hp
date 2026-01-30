@@ -528,7 +528,7 @@ export default function Home() {
                 <span>堀 靖弘</span>
 
                 <strong>所在地</strong>
-                <span>東京都港区浜松町2-2-15<br />浜松町ダイヤビル2F</span>
+                <span>105-0013<br />東京都港区浜松町2-2-15 浜松町ダイヤビル2F</span>
 
                 <strong>事業内容</strong>
                 <span>システム開発・ITコンサルティング</span>
