@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
-import type {AppProps} from "next/app";
+import type { AppProps } from "next/app";
 import Head from 'next/head'
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import Script from 'next/script';
 
-export default function App({Component, pageProps}: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
     const { basePath } = useRouter()
     return <>
         <Head>
@@ -17,6 +18,19 @@ export default function App({Component, pageProps}: AppProps) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href={`${basePath}/favicon.ico`} />
         </Head>
+        <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-J99R1TMD8Z"
+            strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-J99R1TMD8Z');
+            `}
+        </Script>
         <Component {...pageProps} />
     </>;
 }
