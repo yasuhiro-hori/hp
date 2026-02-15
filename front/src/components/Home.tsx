@@ -42,8 +42,8 @@ export default function Home() {
               <h3>Webシステム開発</h3>
               <p>
                 業務効率化・自動化を実現するためのWebアプリケーションを、要件定義から設計・開発・保守までワンストップで提供します。
-                React/Next.jsやGo、Rustなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
-                BtoBの管理画面からBtoCেরサービスサイトまで、幅広いニーズに対応可能です。
+                Astro, React/Next.jsやGo、Rustなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
+                BtoBの管理画面からBtoCのサービスサイトまで、幅広いニーズに対応可能です。
               </p>
             </div>
             <div className="card">
@@ -55,11 +55,12 @@ export default function Home() {
               </p>
             </div>
             <div className="card">
-              <h3>技術コンサルティング</h3>
+              <h3>AI/LLMシステム開発</h3>
               <p>
-                開発体制の見直し、技術選定支援、コードレビュー、パフォーマンスチューニングなど、技術面でのあらゆる課題解決を支援します。
-                CTO代行や技術顧問として経営視点での技術戦略立案を行うほか、アジャイル開発の導入支援やエンジニア教育など、
-                貴社のエンジニアリングチームの自走力を高め、組織全体の成長を強力にバックアップします。
+                ChatGPTやClaude、Geminiなどの大規模言語モデル（LLM）を統合した次世代のシステムを開発します。
+                RAG（検索拡張生成）による社内ドキュメント活用、AIエージェントによる業務自動化、AIによるコード生成効率化など、
+                実ビジネスに直結するAIソリューションを提案。
+                単なるAPI連携に留まらず、プロンプトエンジニアリングやベクターデータベース構築を含めた最適なアーキテクチャを実現します。
               </p>
             </div>
           </div>
@@ -86,10 +87,11 @@ export default function Home() {
             </div>
             <div className="card strength-card">
               <span className="strength-icon">🧬</span>
-              <h3>モダン技術への深い造詣</h3>
+              <h3>モダン技術 & AIの融合</h3>
               <p>
                 Go, Rust, TypeScript, AI(LLM)など、最新技術を実戦投入。
-                パフォーマンスと安全性が求められる大規模システムから、スピード重視のスタートアップまで対応可能です。
+                最新のAIエージェント技術と信頼性の高いバックエンド技術を組み合わせ、
+                スピードと堅牢性を両立した、未来を見据えたシステムを構築します。
               </p>
             </div>
           </div>
@@ -130,6 +132,10 @@ export default function Home() {
                     <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
                       <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
                       <span><strong>Authentication</strong>: AWS Cognito (OIDC) 連携ロジック実装済み</span>
+                    </li>
+                    <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
+                      <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
+                      <span><strong>AI Integration</strong>: LLM(GPT/Claude)連携・RAG構成の即時導入が可能</span>
                     </li>
                     <li style={{ display: 'flex', alignItems: 'center', color: '#a3a3a3' }}>
                       <span style={{ color: 'var(--accent-color)', marginRight: '0.5rem', fontWeight: 'bold' }}>✓</span>
@@ -355,6 +361,7 @@ export default function Home() {
                 <span className="tech-tag">PHP</span>
                 <span className="tech-tag">React</span>
                 <span className="tech-tag">Next.js</span>
+                <span className="tech-tag">Astro</span>
                 <span className="tech-tag">Vue.js</span>
                 <span className="tech-tag">Laravel</span>
                 <span className="tech-tag">FastAPI</span>
@@ -418,6 +425,7 @@ export default function Home() {
                 <span className="tech-tag">Svelte</span>
                 <span className="tech-tag">React</span>
                 <span className="tech-tag">Next.js</span>
+                <span className="tech-tag">Astro</span>
                 <span className="tech-tag">Python</span>
                 <span className="tech-tag">PHP</span>
                 <span className="tech-tag">AWS</span>
