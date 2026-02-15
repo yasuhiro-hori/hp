@@ -1,9 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Home from "../components/Home";
+import Navbar from "../components/Navbar";
+import Hero from "../components/sections/Hero.astro";
+import Services from "../components/sections/Services.astro";
+import Strengths from "../components/sections/Strengths.astro";
+import Products from "../components/sections/Products.astro";
+import Workflow from "../components/sections/Workflow.astro";
+import TechStack from "../components/sections/TechStack.astro";
+import Recruit from "../components/sections/Recruit.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import About from "../components/sections/About.astro";
+import Contact from "../components/sections/Contact.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/globals.css";
 ---
 
 <Layout title="株式会社テクシズ | TECSIZ Co., Ltd.">
-    <Home client:load />
+    <Navbar client:load />
+    <main>
+        <Hero />
+        <Services />
+        <Strengths />
+        <Products />
+        <Workflow />
+        <TechStack />
+        <Recruit />
+        <FAQ />
+        <About />
+        <Contact />
+    </main>
+    <Footer />
 </Layout>

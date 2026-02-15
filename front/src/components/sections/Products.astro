@@ -1,0 +1,171 @@
+---
+import BackendTemplates from "../BackendTemplates";
+---
+
+<section class="section" id="products">
+    <h2>プロダクト</h2>
+    <p
+        style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #a3a3a3;"
+    >
+        言語特性を最大限に活かした開発テンプレート<br />
+        高品質なシステムを圧倒的なスピードで立ち上げます。
+    </p>
+
+    <div class="card" style="max-width: 100%;">
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: start;"
+        >
+            <div>
+                <h3 style="font-size: 1.8rem; color: var(--primary-color);">
+                    Admin Template
+                </h3>
+                <p
+                    style="font-size: 1.1rem; color: #e5e5e5; margin-bottom: 1.5rem; font-weight: bold;"
+                >
+                    半スクラッチで始める。<br />
+                    最強の管理画面開発基盤。
+                </p>
+                <p style="margin-bottom: 2rem;">
+                    「Reactの知識がなくてもコピペで機能追加できる」をコンセプトに設計された、業務システム特化型のNext.jsテンプレート。
+                    実務で磨き上げられた「保守しやすいディレクトリ構造」と、最初から実装済みの必須機能（検索、CSV、認証）により、
+                    管理画面開発の工数を劇的に削減します。
+                </p>
+
+                <div>
+                    <h4 style="margin-bottom: 1rem; color: white;">
+                        Key Features
+                    </h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li
+                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: #a3a3a3;"
+                        >
+                            <span
+                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
+                                >✓</span
+                            >
+                            <span
+                                ><strong>Vertical Slice Architecture</strong>:
+                                機能ごとの独立性を担保</span
+                            >
+                        </li>
+                        <li
+                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: #a3a3a3;"
+                        >
+                            <span
+                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
+                                >✓</span
+                            >
+                            <span
+                                ><strong>Config-Driven Development</strong>:
+                                設定ファイルベースの開発体験</span
+                            >
+                        </li>
+                        <li
+                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: #a3a3a3;"
+                        >
+                            <span
+                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
+                                >✓</span
+                            >
+                            <span
+                                ><strong>Authentication</strong>: AWS Cognito
+                                (OIDC) 連携ロジック実装済み</span
+                            >
+                        </li>
+                        <li
+                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: #a3a3a3;"
+                        >
+                            <span
+                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
+                                >✓</span
+                            >
+                            <span
+                                ><strong>AI Integration</strong>:
+                                LLM(GPT/Claude)連携・RAG構成の即時導入が可能</span
+                            >
+                        </li>
+                        <li
+                            style="display: flex; align-items: center; color: #a3a3a3;"
+                        >
+                            <span
+                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
+                                >✓</span
+                            >
+                            <span
+                                ><strong>Docker & Build System</strong>:
+                                Prod/Dev環境別のDockerfile完備</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="arch-container"
+                style="background: #111; padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border);"
+            >
+                <div
+                    style="text-align: center; margin-bottom: 1.5rem; color: #a3a3a3; font-size: 0.95rem; font-family: monospace; letter-spacing: 0.05em;"
+                >
+                    Vertical Slice: 複雑性を分断し、開発速度を加速させる
+                </div>
+
+                <div style="display: grid; gap: 1rem;">
+                    <div
+                        class="arch-box"
+                        style="border: 1px solid #3b82f6; background: rgba(59, 130, 246, 0.1); color: #93c5fd; padding: 1rem; border-radius: 0.5rem; text-align: center;"
+                    >
+                        <strong style="display: block; margin-bottom: 0.5rem;"
+                            >Feature Modules (Domain)</strong
+                        >
+                        <div style="font-size: 0.8rem; opacity: 0.8;">
+                            ビジネス機能ごとの独立したカプセル (Projects,
+                            Contracts...)
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; color: #666;">
+                        ⬇ 依存 (Uses)
+                    </div>
+
+                    <div
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"
+                    >
+                        <div
+                            class="arch-box"
+                            style="border: 1px solid #10b981; background: rgba(16, 185, 129, 0.1); color: #6ee7b7; padding: 1rem; border-radius: 0.5rem; text-align: center;"
+                        >
+                            <strong
+                                style="display: block; margin-bottom: 0.5rem;"
+                                >Shared UI</strong
+                            >
+                            <div style="font-size: 0.8rem; opacity: 0.8;">
+                                再利用可能な部品 (Atomic Design)
+                            </div>
+                        </div>
+                        <div
+                            class="arch-box"
+                            style="border: 1px solid #8b5cf6; background: rgba(139, 92, 246, 0.1); color: #c4b5fd; padding: 1rem; border-radius: 0.5rem; text-align: center;"
+                        >
+                            <strong
+                                style="display: block; margin-bottom: 0.5rem;"
+                                >Core / Libs</strong
+                            >
+                            <div style="font-size: 0.8rem; opacity: 0.8;">
+                                API, Auth, Hooks
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="#contact" class="cta-button">
+                デモ・導入のご相談はこちら
+            </a>
+        </div>
+    </div>
+
+    <BackendTemplates client:visible />
+</section>

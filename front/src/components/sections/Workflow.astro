@@ -1,0 +1,41 @@
+---
+const steps = [
+    {
+        title: "ヒアリング・要件定義",
+        desc: "お客様のビジネス課題を深く掘り下げ、実現したいゴールを明確にします。技術的な観点から最適な解決策を提案します。",
+    },
+    {
+        title: "設計・アーキテクチャ選定",
+        desc: "将来の拡張性を見据え、Clean Architectureに基づいた設計を行います。最適な技術スタックを選定します。",
+    },
+    {
+        title: "アジャイル開発",
+        desc: "2週間程度のイテレーションで開発を進めます。早い段階で動くものをお見せし、フィードバックを取り入れながらブラッシュアップします。",
+    },
+    {
+        title: "テスト・品質保証",
+        desc: "自動テストの導入はもちろん、セキュリティスキャンやパフォーマンスチェックを徹底し、高品質なシステムを担保します。",
+    },
+    {
+        title: "リリース・保守運用",
+        desc: "クラウド環境（AWS/GCP）へのデプロイを行い、リリース後も継続的な改善や技術サポートを提供します。",
+    },
+];
+---
+
+<section class="section" id="workflow">
+    <h2>開発の流れ</h2>
+    <div class="workflow-container">
+        {
+            steps.map((step, idx) => (
+                <div class="workflow-step">
+                    <div class="step-number">{idx + 1}</div>
+                    <div class="step-content">
+                        <h3>{step.title}</h3>
+                        <p>{step.desc}</p>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>
