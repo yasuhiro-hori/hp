@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import Head from "next/head";
 
 export default function Home() {
   const [backendType, setBackendType] = useState<'go' | 'rust'>('go');
@@ -11,39 +10,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>株式会社テクシズ | TECSIZ Co., Ltd.</title>
-        <meta name="description" content="ビジネスを加速させるシステム開発。高品質・スピーディー・柔軟対応。" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
-        <meta property="og:title" content="株式会社テクシズ | TECSIZ Co., Ltd." />
-        <meta property="og:description" content="ビジネスを加速させるシステム開発。高品質・スピーディー・柔軟対応。" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="株式会社テクシズ" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "株式会社テクシズ",
-              "alternateName": "TECSIZ Co., Ltd.",
-              "url": "https://tecsiz.co.jp",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "浜松町2-2-15 浜松町ダイヤビル2F",
-                "addressLocality": "港区",
-                "addressRegion": "東京都",
-                "postalCode": "105-0013",
-                "addressCountry": "JP"
-              },
-              "description": "GoやRust、Next.jsを用いた高品質・スピーディーなシステム開発。クリーンアーキテクチャによる保守性の高い設計を提供します。"
-            })
-          }}
-        />
-      </Head>
-
       <header>
         <nav className="nav-container">
           <div><a href="#top" className="logo">TECSIZ</a></div>
@@ -77,7 +43,7 @@ export default function Home() {
               <p>
                 業務効率化・自動化を実現するためのWebアプリケーションを、要件定義から設計・開発・保守までワンストップで提供します。
                 React/Next.jsやGo、Rustなどのモダンな技術選定により、UI/UXに優れ、将来的な拡張性と保守性の高い堅牢なシステムを構築。
-                BtoBの管理画面からBtoCのサービスサイトまで、幅広いニーズに対応可能です。
+                BtoBの管理画面からBtoCেরサービスサイトまで、幅広いニーズに対応可能です。
               </p>
             </div>
             <div className="card">
@@ -550,5 +516,5 @@ export default function Home() {
         <p>&copy; {new Date().getFullYear()} TECSIZ Co., Ltd. All rights reserved.</p>
       </footer>
     </>
-  )
+  );
 }

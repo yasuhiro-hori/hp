@@ -1,0 +1,57 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "ビジネスを加速させるシステム開発。高品質・スピーディー・柔軟対応。",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="apple-touch-icon" href="/favicon.ico" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="株式会社テクシズ" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<script
+			is:inline
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				name: "株式会社テクシズ",
+				alternateName: "TECSIZ Co., Ltd.",
+				url: "https://tecsiz.co.jp",
+				address: {
+					"@type": "PostalAddress",
+					streetAddress: "浜松町2-2-15 浜松町ダイヤビル2F",
+					addressLocality: "港区",
+					addressRegion: "東京都",
+					postalCode: "105-0013",
+					addressCountry: "JP",
+				},
+				description:
+					"GoやRust、Next.jsを用いた高品質・スピーディーなシステム開発。クリーンアーキテクチャによる保守性の高い設計を提供します。",
+			})}
+		/>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/* ここにグローバルなスタイルを移行しても良いですが、一旦既存のglobals.cssをインポートさせます */
+</style>
