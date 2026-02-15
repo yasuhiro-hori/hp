@@ -14,7 +14,7 @@
     "astro": "astro",
     "check": "astro check",
     "check:watch": "astro check --watch",
-    "deploy": "pnpm build && gh-pages -d dist -b gh-pages -r https://github.com/yasuhiro-hori/hp.git"
+    "deploy": "pnpm build && gh-pages -d dist -b gh-pages -r https://yasuhiro-hori@github.com/yasuhiro-hori/hp.git"
   },
   "dependencies": {
     "@astrojs/react": "^4.0.0",
