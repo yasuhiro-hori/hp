@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 interface Props {
 	title: string;
 	description?: string;
@@ -25,6 +27,7 @@ const {
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="株式会社テクシズ" />
 		<meta name="twitter:card" content="summary_large_image" />
+		<ClientRouter />
 		<script
 			is:inline
 			type="application/ld+json"
