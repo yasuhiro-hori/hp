@@ -142,7 +142,7 @@ export default function BackendTemplates() {
             </div>
 
             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-                <a href="#contact" className="cta-button">
+                <a href="/#contact" className="cta-button">
                     詳細な技術仕様を聞く
                 </a>
             </div>

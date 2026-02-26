@@ -24,12 +24,12 @@ export default function Navbar() {
                     id="nav-menu"
                     onClick={() => menuRef.current?.classList.remove('open')}
                 >
-                    <a href="#services">サービス</a>
-                    <a href="#products">プロダクト</a>
-                    <a href="#tech">技術スタック</a>
-                    <a href="#recruit">採用情報</a>
-                    <a href="#about">会社概要</a>
-                    <a href="#contact" className="nav-cta">
+                    <a href="/#services">サービス</a>
+                    <a href="/#tech">技術スタック</a>
+                    <a href="/#recruit">採用情報</a>
+                    <a href="/products">プロダクト</a>
+                    <a href="/about">会社概要</a>
+                    <a href="/#contact" className="nav-cta">
                         お問い合わせ
                     </a>
                 </div>
