@@ -78,8 +78,25 @@ header {
   color: #a3a3a3;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: white;
+}
+
+.nav-links a.active {
+  position: relative;
+  color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 2px;
 }
 
 .nav-cta {

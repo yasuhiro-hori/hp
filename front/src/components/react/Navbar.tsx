@@ -1,7 +1,58 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Navbar() {
     const menuRef = useRef<HTMLDivElement>(null);
+    const [activePath, setActivePath] = useState('');
+
+    useEffect(() => {
+        const handlePathChange = () => {
+            const path = window.location.pathname;
+            const hash = window.location.hash;
+
+            if (path === '/products') {
+                setActivePath('/products');
+            } else if (path === '/about') {
+                setActivePath('/about');
+            } else if (hash) {
+                setActivePath(hash);
+            } else if (path === '/') {
+                setActivePath('#top');
+            }
+        };
+
+        handlePathChange();
+        window.addEventListener('hashchange', handlePathChange);
+
+        // Scroll detection for home page sections
+        let observer: IntersectionObserver | null = null;
+        if (window.location.pathname === '/') {
+            const sections = ['top', 'services', 'tech', 'recruit'];
+            const observerOptions = {
+                root: null,
+                rootMargin: '-40% 0px -40% 0px',
+                threshold: 0
+            };
+
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        setActivePath(`#${id}`);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) observer?.observe(el);
+            });
+        }
+
+        return () => {
+            window.removeEventListener('hashchange', handlePathChange);
+            observer?.disconnect();
+        };
+    }, []);
 
     const toggleMenu = () => {
         menuRef.current?.classList.toggle('open');
@@ -11,7 +62,7 @@ export default function Navbar() {
         <header>
             <nav className="nav-container">
                 <div>
-                    <a href="#top" className="logo">
+                    <a href="/#top" className="logo">
                         TECSIZ
                     </a>
                 </div>
@@ -24,11 +75,11 @@ export default function Navbar() {
                     id="nav-menu"
                     onClick={() => menuRef.current?.classList.remove('open')}
                 >
-                    <a href="/#services">サービス</a>
-                    <a href="/#tech">技術スタック</a>
-                    <a href="/#recruit">採用情報</a>
-                    <a href="/products">プロダクト</a>
-                    <a href="/about">会社概要</a>
+                    <a href="/#services" className={activePath === '#services' ? 'active' : ''}>サービス</a>
+                    <a href="/#tech" className={activePath === '#tech' ? 'active' : ''}>技術スタック</a>
+                    <a href="/#recruit" className={activePath === '#recruit' ? 'active' : ''}>採用情報</a>
+                    <a href="/products" className={activePath === '/products' ? 'active' : ''}>プロダクト</a>
+                    <a href="/about" className={activePath === '/about' ? 'active' : ''}>会社概要</a>
                     <a href="/#contact" className="nav-cta">
                         お問い合わせ
                     </a>
