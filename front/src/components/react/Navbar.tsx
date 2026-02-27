@@ -13,6 +13,8 @@ export default function Navbar() {
                 setActivePath('/products');
             } else if (path.startsWith('/about')) {
                 setActivePath('/about');
+            } else if (path.startsWith('/recruit')) {
+                setActivePath('/recruit');
             } else if (hash) {
                 setActivePath(hash);
             } else if (path === '/') {
@@ -79,7 +81,7 @@ export default function Navbar() {
                 >
                     <a href="/#services" className={activePath === '#services' ? 'active' : ''}>サービス</a>
                     <a href="/#tech" className={activePath === '#tech' ? 'active' : ''}>技術スタック</a>
-                    <a href="/#recruit" className={activePath === '#recruit' ? 'active' : ''}>採用情報</a>
+                    <a href="/recruit" className={activePath.startsWith('/recruit') || activePath === '#recruit' ? 'active' : ''}>採用情報</a>
                     <a href="/products" className={activePath === '/products' ? 'active' : ''}>プロダクト</a>
                     <a href="/about" className={activePath === '/about' ? 'active' : ''}>会社概要</a>
                     <a href="/#contact" className="nav-cta">
