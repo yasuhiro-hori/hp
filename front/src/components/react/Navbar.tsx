@@ -9,19 +9,20 @@ export default function Navbar() {
             const path = window.location.pathname;
             const hash = window.location.hash;
 
-            if (path === '/products') {
+            if (path.startsWith('/products')) {
                 setActivePath('/products');
-            } else if (path === '/about') {
+            } else if (path.startsWith('/about')) {
                 setActivePath('/about');
             } else if (hash) {
                 setActivePath(hash);
             } else if (path === '/') {
-                setActivePath('#top');
+                setActivePath(hash || '#top');
             }
         };
 
         handlePathChange();
         window.addEventListener('hashchange', handlePathChange);
+        window.addEventListener('popstate', handlePathChange);
 
         // Scroll detection for home page sections
         let observer: IntersectionObserver | null = null;
@@ -50,6 +51,7 @@ export default function Navbar() {
 
         return () => {
             window.removeEventListener('hashchange', handlePathChange);
+            window.removeEventListener('popstate', handlePathChange);
             observer?.disconnect();
         };
     }, []);
