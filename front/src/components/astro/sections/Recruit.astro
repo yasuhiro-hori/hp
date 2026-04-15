@@ -34,14 +34,126 @@
                 <span class="tech-tag">チーム開発経験</span>
             </div>
 
-            <div style="margin-top: 2rem; text-align: center;">
-                <a
-                    href="mailto:info@tecsiz.co.jp?subject=採用応募&body=氏名と希望ポジションをご記入のうえ送信してください。"
-                    class="cta-button"
+            <div style="margin-top: 3rem;">
+                <h4 style="text-align: center; margin-bottom: 1.5rem;">まずは話を聞いてみませんか？</h4>
+                <form
+                    action="https://formspree.io/f/mkokglwj"
+                    method="POST"
+                    class="recruit-form"
                 >
-                    メールで応募する
-                </a>
+                    <input type="hidden" name="_subject" value="採用応募" />
+
+                    <div class="form-group">
+                        <label for="recruit-name">お名前</label>
+                        <input
+                            type="text"
+                            id="recruit-name"
+                            name="name"
+                            placeholder="山田 太郎"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recruit-email">メールアドレス</label>
+                        <input
+                            type="email"
+                            id="recruit-email"
+                            name="_replyto"
+                            placeholder="example@mail.com"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recruit-position">希望ポジション</label>
+                        <input
+                            type="text"
+                            id="recruit-position"
+                            name="position"
+                            placeholder="例: フロントエンドエンジニア"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recruit-portfolio">ポートフォリオ / 経歴（URL等）</label>
+                        <textarea
+                            id="recruit-portfolio"
+                            name="portfolio"
+                            rows="4"
+                            placeholder="GitHubのURLや経歴を簡単にご記入ください"
+                        ></textarea>
+                    </div>
+
+                    <!-- スパム対策用のハニポットフィールド（非表示） -->
+                    <input type="text" name="_gotcha" style="display:none" />
+
+                    <button type="submit" class="cta-button submit-btn">
+                        この内容で応募する
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .recruit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: left;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem 1rem;
+        background: var(--bg-color);
+        border: 1px solid var(--card-border);
+        border-radius: 0.75rem;
+        color: var(--text-color);
+        font-family: var(--font-main);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .submit-btn {
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        background: linear-gradient(
+            135deg,
+            var(--primary-color),
+            var(--secondary-color)
+        );
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.5);
+    }
+</style>
