@@ -66,8 +66,8 @@ export default function Navbar() {
         <header>
             <nav className="nav-container">
                 <div>
-                    <a href="/#top" className="logo">
-                        TECSIZ
+                    <a href="/#top" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                        <img src="/logo_text_thick.png" alt="TECSIZ" style={{ height: '32px', width: 'auto' }} />
                     </a>
                 </div>
                 <button className="menu-toggle" onClick={toggleMenu}>
