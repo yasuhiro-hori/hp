@@ -1,0 +1,118 @@
+<section class="section" id="ai-ocr">
+    <h2>導入実績</h2>
+    <p class="section-lead">
+        テクシズが実際に構築・支援したシステムの一例です。
+    </p>
+
+    <div class="cases-grid">
+        <a href="/products#ai-ocr" class="case-card">
+            <span class="case-tag">AI / OCR</span>
+            <h3>AI OCR 構築支援</h3>
+            <p>
+                帳票・請求書・手書き書類の読み取りをLLMと組み合わせて自動化。
+                非定型フォーマットへの対応と既存システムへの統合を実現。
+            </p>
+            <span class="case-link">詳細を見る →</span>
+        </a>
+        <a href="/products#ai-search" class="case-card">
+            <span class="case-tag">AI / ベクトル検索</span>
+            <h3>AIベクトル検索</h3>
+            <p>
+                キーワードで探せないものを、意図から探せるようにする。
+                EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新。
+            </p>
+            <span class="case-link">詳細を見る →</span>
+        </a>
+        <a href="/products#business-systems" class="case-card">
+            <span class="case-tag">Webシステム</span>
+            <h3>業務システム開発</h3>
+            <p>
+                Go / Next.js の自社テンプレートをベースに業務システムを構築。
+                管理画面・社内ツール・BtoB向けWebアプリをスピーディーに立ち上げ。
+            </p>
+            <span class="case-link">詳細を見る →</span>
+        </a>
+    </div>
+</section>
+
+<style>
+    .section-lead {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 3rem;
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+
+    .cases-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+        .cases-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .cases-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .case-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .case-card:hover {
+        color: inherit;
+        transform: translateY(-8px);
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .case-tag {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        background: rgba(37, 99, 235, 0.08);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+        margin-bottom: 1rem;
+        display: inline-block;
+        align-self: flex-start;
+    }
+
+    .case-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: var(--text-color);
+    }
+
+    .case-card p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+        flex: 1;
+    }
+
+    .case-link {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+</style>

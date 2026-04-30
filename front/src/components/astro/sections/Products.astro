@@ -1,171 +1,308 @@
----
-import BackendTemplates from "../../react/BackendTemplates";
----
-
-<section class="section" id="products">
-    <h2>プロダクト</h2>
-    <p
-        style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);"
-    >
-        言語特性を最大限に活かした開発テンプレート<br />
-        高品質なシステムを圧倒的なスピードで立ち上げます。
+<section class="section" id="ai-ocr">
+    <h2>AI OCR 構築支援</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
+        帳票・契約書・手書き書類の読み取りを自動化。<br />
+        LLMと組み合わせ、単なる文字認識を超えた「理解するOCR」を構築します。
     </p>
 
-    <div class="card" style="max-width: 100%;">
-        <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: start;"
-        >
-            <div>
-                <h3 style="font-size: 1.8rem; color: var(--primary-color);">
-                    Admin Template
-                </h3>
-                <p
-                    style="font-size: 1.1rem; color: var(--text-color); margin-bottom: 1.5rem; font-weight: bold;"
-                >
-                    半スクラッチで始める。<br />
-                    最強の管理画面開発基盤。
-                </p>
-                <p style="margin-bottom: 2rem;">
-                    「Reactの知識がなくてもコピペで機能追加できる」をコンセプトに設計された、業務システム特化型のNext.jsテンプレート。
-                    実務で磨き上げられた「保守しやすいディレクトリ構造」と、最初から実装済みの必須機能（検索、CSV、認証）により、
-                    管理画面開発の工数を劇的に削減します。
-                </p>
-
+    <div class="ocr-layout">
+        <div class="ocr-features">
+            <div class="ocr-feature-item">
                 <div>
-                    <h4 style="margin-bottom: 1rem; color: var(--text-color);">
-                        Key Features
-                    </h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li
-                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: var(--text-secondary);"
-                        >
-                            <span
-                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
-                                >✓</span
-                            >
-                            <span
-                                ><strong>Vertical Slice Architecture</strong>:
-                                機能ごとの独立性を担保</span
-                            >
-                        </li>
-                        <li
-                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: var(--text-secondary);"
-                        >
-                            <span
-                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
-                                >✓</span
-                            >
-                            <span
-                                ><strong>Config-Driven Development</strong>:
-                                設定ファイルベースの開発体験</span
-                            >
-                        </li>
-                        <li
-                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: var(--text-secondary);"
-                        >
-                            <span
-                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
-                                >✓</span
-                            >
-                            <span
-                                ><strong>Authentication</strong>: AWS Cognito
-                                (OIDC) 連携ロジック実装済み</span
-                            >
-                        </li>
-                        <li
-                            style="margin-bottom: 0.8rem; display: flex; align-items: center; color: var(--text-secondary);"
-                        >
-                            <span
-                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
-                                >✓</span
-                            >
-                            <span
-                                ><strong>AI Integration</strong>:
-                                LLM(GPT/Claude)連携・RAG構成の即時導入が可能</span
-                            >
-                        </li>
-                        <li
-                            style="display: flex; align-items: center; color: var(--text-secondary);"
-                        >
-                            <span
-                                style="color: var(--accent-color); margin-right: 0.5rem; font-weight: bold;"
-                                >✓</span
-                            >
-                            <span
-                                ><strong>Docker & Build System</strong>:
-                                Prod/Dev環境別のDockerfile完備</span
-                            >
-                        </li>
-                    </ul>
+                    <h3>あらゆる帳票に対応</h3>
+                    <p>請求書・納品書・注文書・契約書・申請書・手書き書類など、非定型フォーマットを含む幅広いドキュメントに対応。</p>
                 </div>
             </div>
-
-            <div
-                class="arch-container"
-                style="background: #f8fafc; padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border);"
-            >
-                <div
-                    style="text-align: center; margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 0.95rem; font-family: monospace; letter-spacing: 0.05em;"
-                >
-                    Vertical Slice: 複雑性を分断し、開発速度を加速させる
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>LLMによる項目理解・補正</h3>
+                    <p>OCRの読み取り結果をLLMが文脈から補正・構造化。誤読や崩れた文字にも高い精度で対処します。</p>
                 </div>
-
-                <div style="display: grid; gap: 1rem;">
-                    <div
-                        class="arch-box"
-                        style="border: 1px solid #3b82f6; background: rgba(59, 130, 246, 0.05); color: #1e40af; padding: 1rem; border-radius: 0.5rem; text-align: center;"
-                    >
-                        <strong style="display: block; margin-bottom: 0.5rem;"
-                            >Feature Modules (Domain)</strong
-                        >
-                        <div style="font-size: 0.8rem; opacity: 0.8;">
-                            ビジネス機能ごとの独立したカプセル (Projects,
-                            Contracts...)
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; color: #666;">
-                        ⬇ 依存 (Uses)
-                    </div>
-
-                    <div
-                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"
-                    >
-                        <div
-                            class="arch-box"
-                            style="border: 1px solid #10b981; background: rgba(16, 185, 129, 0.05); color: #065f46; padding: 1rem; border-radius: 0.5rem; text-align: center;"
-                        >
-                            <strong
-                                style="display: block; margin-bottom: 0.5rem;"
-                                >Shared UI</strong
-                            >
-                            <div style="font-size: 0.8rem; opacity: 0.8;">
-                                再利用可能な部品 (Atomic Design)
-                            </div>
-                        </div>
-                        <div
-                            class="arch-box"
-                            style="border: 1px solid #8b5cf6; background: rgba(139, 92, 246, 0.05); color: #5b21b6; padding: 1rem; border-radius: 0.5rem; text-align: center;"
-                        >
-                            <strong
-                                style="display: block; margin-bottom: 0.5rem;"
-                                >Core / Libs</strong
-                            >
-                            <div style="font-size: 0.8rem; opacity: 0.8;">
-                                API, Auth, Hooks
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>既存システムへの統合</h3>
+                    <p>API経由で既存の基幹システムや業務アプリとシームレスに連携。データ入力作業を大幅に自動化します。</p>
+                </div>
+            </div>
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>セキュアな自社環境構築</h3>
+                    <p>機密文書を外部に送信しない、プライベートクラウド・オンプレミス構成にも対応。コンプライアンス要件を満たした設計を提案します。</p>
                 </div>
             </div>
         </div>
 
-        <div style="margin-top: 2rem; text-align: center;">
-            <a href="/#contact" class="cta-button">
-                デモ・導入のご相談はこちら
-            </a>
+        <div class="card" style="height: fit-content;">
+            <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--primary-color);">処理フロー</h3>
+            <div class="ocr-flow">
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">1</div>
+                    <div>
+                        <strong>ドキュメント入力</strong>
+                        <p>スキャン画像・PDF・スマホ撮影など各種形式に対応</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">2</div>
+                    <div>
+                        <strong>OCRエンジンで文字認識</strong>
+                        <p>Google Document AI / Azure Form Recognizer 等を活用</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">3</div>
+                    <div>
+                        <strong>LLMで補正・構造化</strong>
+                        <p>GPT / Claude が文脈を理解し項目を整形・検証</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">4</div>
+                    <div>
+                        <strong>システムへ自動連携</strong>
+                        <p>API / DB / CSVで既存業務フローに組み込み</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .ocr-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .ocr-features {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .ocr-feature-item h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+        color: var(--text-color);
+    }
+
+    .ocr-feature-item p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .ocr-flow {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ocr-flow-step {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .ocr-flow-step strong {
+        display: block;
+        font-size: 1rem;
+        color: var(--text-color);
+        margin-bottom: 0.2rem;
+    }
+
+    .ocr-flow-step p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .ocr-flow-badge {
+        min-width: 28px;
+        height: 28px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .ocr-flow-arrow {
+        padding-left: 0.9rem;
+        color: var(--card-border);
+        font-size: 1.2rem;
+        line-height: 1;
+        margin: 0.3rem 0;
+    }
+
+    .template-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .feature-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+
+    .check {
+        color: var(--accent-color);
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .ocr-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .template-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section" id="ai-search" style="border-top: 1px solid var(--card-border);">
+    <h2>AIベクトル検索</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
+        キーワードで探せないものを、意図から探せるようにする。<br />
+        EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新します。
+    </p>
+
+    <div class="ocr-layout">
+        <div class="ocr-features">
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>ユーザーの意図を理解して検索</h3>
+                    <p>「夏に着られる涼しいワンピース」「駅近で日当たりのいい2LDK」など、曖昧な言葉でも意図に近いものを上位表示。直感的な検索体験を実現します。</p>
+                </div>
+            </div>
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>表記ゆれ・言い回しの違いを吸収</h3>
+                    <p>「求人」「募集」「採用」など言い回しが違っても同じ意味として扱えるため、取りこぼしのない検索結果を返せます。</p>
+                </div>
+            </div>
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>あらゆるサービスに組み込み可能</h3>
+                    <p>EC・求人・不動産・レシピなど、コンテンツの種類を問わず導入できます。既存の検索機能をAPIで置き換える形での実装も可能です。</p>
+                </div>
+            </div>
+            <div class="ocr-feature-item">
+                <div>
+                    <h3>大規模カタログにも対応</h3>
+                    <p>数十万件の商品・物件・求人データでも高速に類似検索。スケーラブルなベクトルDB構成で運用負荷を最小限に抑えます。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: fit-content;">
+            <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--primary-color);">活用例</h3>
+            <div class="ocr-flow">
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">1</div>
+                    <div>
+                        <strong>EC / ショッピング</strong>
+                        <p>商品名・説明文をベクトル化し、ユーザーの検索意図に近い商品を提示</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">2</div>
+                    <div>
+                        <strong>求人・採用マッチング</strong>
+                        <p>スキルや希望条件を自然文で入力し、条件に近い求人を自動サジェスト</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">3</div>
+                    <div>
+                        <strong>不動産・物件検索</strong>
+                        <p>「子育てしやすい環境」など感覚的な条件でも関連物件を引き当て</p>
+                    </div>
+                </div>
+                <div class="ocr-flow-arrow">↓</div>
+                <div class="ocr-flow-step">
+                    <div class="ocr-flow-badge">4</div>
+                    <div>
+                        <strong>FAQ・サポート</strong>
+                        <p>ユーザーの問い合わせ文から意味的に近いFAQを自動提示し、問い合わせ数を削減</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="business-systems" style="border-top: 1px solid var(--card-border);">
+    <h2>業務システム開発</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
+        自社開発のテンプレートをベースに、管理画面・社内ツール・BtoB向けWebアプリを高品質・短期間で構築します。
+    </p>
+
+    <div class="template-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+        <div class="card">
+            <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Admin Template</h3>
+            <p style="font-weight: bold; margin-bottom: 1rem;">半スクラッチで始める最強の管理画面開発基盤。</p>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">「Reactの知識がなくてもコピペで機能追加できる」をコンセプトに設計されたNext.jsテンプレート。検索・CSV・認証などの必須機能が実装済みで、管理画面開発の工数を劇的に削減します。</p>
+            <ul class="feature-list">
+                <li><span class="check">✓</span><span><strong>Vertical Slice Architecture</strong>: 機能ごとの独立性を担保</span></li>
+                <li><span class="check">✓</span><span><strong>Config-Driven Development</strong>: 設定ファイルベースの開発体験</span></li>
+                <li><span class="check">✓</span><span><strong>Authentication</strong>: AWS Cognito (OIDC) 連携実装済み</span></li>
+                <li><span class="check">✓</span><span><strong>AI Integration</strong>: LLM連携・RAG構成の即時導入が可能</span></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Go / Rust Backend Template</h3>
+            <p style="font-weight: bold; margin-bottom: 1rem;">10年戦える、技術的負債を生まない堅牢な設計。</p>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Go・Rustそれぞれの言語特性に最適化したClean Architectureベースのテンプレート。ビジネスロジックを外部依存から切り離し、将来の技術変更や機能拡張に柔軟に対応できます。</p>
+            <ul class="feature-list">
+                <li><span class="check">✓</span><span><strong>Clean Architecture</strong>: 責務の分離とテスタビリティの確保</span></li>
+                <li><span class="check">✓</span><span><strong>Authentication</strong>: Cognito (JWT) 検証ミドルウェア完備</span></li>
+                <li><span class="check">✓</span><span><strong>Type-safe ORM</strong>: 型安全かつ高速なDB操作</span></li>
+                <li><span class="check">✓</span><span><strong>Docker & Build System</strong>: Prod/Dev環境別Dockerfile完備</span></li>
+            </ul>
         </div>
     </div>
 
-    <BackendTemplates client:visible />
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
+    </div>
 </section>

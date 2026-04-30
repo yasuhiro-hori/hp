@@ -79,9 +79,9 @@ export default function Navbar() {
                     id="nav-menu"
                     onClick={() => menuRef.current?.classList.remove('open')}
                 >
-                    <a href="/recruit" className={activePath.startsWith('/recruit') || activePath === '#recruit' ? 'active' : ''}>採用情報</a>
-                    <a href="/products" className={activePath.startsWith('/products') || activePath === '/products' ? 'active' : ''}>プロダクト</a>
+                    <a href="/products" className={activePath.startsWith('/products') || activePath === '/products' ? 'active' : ''}>ソリューション</a>
                     <a href="/about" className={activePath === '/about' ? 'active' : ''}>会社概要</a>
+                    <a href="/recruit" className={activePath.startsWith('/recruit') || activePath === '#recruit' ? 'active' : ''}>採用情報</a>
                     <a href="/#contact" className="nav-cta">
                         お問い合わせ
                     </a>
