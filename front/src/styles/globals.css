@@ -172,6 +172,7 @@ header {
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
+  text-wrap: balance;
 }
 
 .cta-button {
