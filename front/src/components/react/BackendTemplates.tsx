@@ -90,7 +90,7 @@ export default function BackendTemplates() {
                     <div className="bt-diagram-tagline">{d.tagline}</div>
 
                     <div className="bt-svg-wrap">
-                        <svg width="320" height="320" viewBox="0 0 320 320">
+                        <svg width="100%" height="100%" viewBox="0 0 320 320">
                             <circle
                                 cx="160"
                                 cy="160"
@@ -271,7 +271,10 @@ export default function BackendTemplates() {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    height: 320px;
+                    width: 100%;
+                    max-width: 320px;
+                    aspect-ratio: 1;
+                    margin: 0 auto;
                     position: relative;
                 }
                 .bt-diagram-foot {
