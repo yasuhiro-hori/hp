@@ -478,6 +478,11 @@ header.bp-nav {
   color: #7aa7d9;
   letter-spacing: 0.16em;
 }
+.bp-footer-bottom a {
+  color: #7aa7d9;
+  text-decoration: none;
+}
+.bp-footer-bottom a:hover { text-decoration: underline; }
 
 /* ============================================
    Mobile
