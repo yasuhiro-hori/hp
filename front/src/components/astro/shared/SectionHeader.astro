@@ -1,0 +1,14 @@
+---
+interface Props {
+  no: string;
+  en: string;
+  jp: string;
+}
+const { jp } = Astro.props;
+---
+
+<div class="bp-section-header">
+  <div class="bp-section-header__title">
+    <h2>{jp}</h2>
+  </div>
+</div>

@@ -9,8 +9,8 @@ export default function Navbar() {
             const path = window.location.pathname;
             const hash = window.location.hash;
 
-            if (path.startsWith('/products')) {
-                setActivePath('/products');
+            if (path.startsWith('/services')) {
+                setActivePath('/services');
             } else if (path.startsWith('/about')) {
                 setActivePath('/about');
             } else if (path.startsWith('/recruit')) {
@@ -33,7 +33,7 @@ export default function Navbar() {
             const observerOptions = {
                 root: null,
                 rootMargin: '-40% 0px -40% 0px',
-                threshold: 0
+                threshold: 0,
             };
 
             observer = new IntersectionObserver((entries) => {
@@ -63,27 +63,88 @@ export default function Navbar() {
     };
 
     return (
-        <header>
-            <nav className="nav-container">
-                <div>
-                    <a href="/#top" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-                        <img src="/logo_text_thick.png" alt="TECSIZ" style={{ height: '32px', width: 'auto' }} />
+        <header className="bp-nav">
+            <nav className="bp-nav-inner">
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                    <a
+                        href="/"
+                        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+                    >
+                        <div
+                            style={{
+                                width: 32,
+                                height: 32,
+                                background: 'var(--bp-ink)',
+                                color: 'var(--bp-paper)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontWeight: 700,
+                                fontSize: 18,
+                                fontFamily: 'var(--font-mono)',
+                            }}
+                        >
+                            T
+                        </div>
+                    </a>
+                    <a
+                        href="/"
+                        style={{ textDecoration: 'none', color: 'var(--bp-ink)' }}
+                    >
+                        <div
+                            style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                letterSpacing: '0.06em',
+                                fontFamily: 'var(--font-mono)',
+                            }}
+                        >
+                            TECSIZ
+                        </div>
+                        <div
+                            style={{
+                                fontSize: 10,
+                                color: 'var(--bp-muted)',
+                                letterSpacing: '0.15em',
+                                marginTop: 2,
+                                fontFamily: 'var(--font-mono)',
+                            }}
+                        >
+                            SOFTWARE.DEVELOPMENT.STUDIO
+                        </div>
                     </a>
                 </div>
-                <button className="menu-toggle" onClick={toggleMenu}>
+
+                <button className="menu-toggle" onClick={toggleMenu} aria-label="メニュー">
                     ☰
                 </button>
+
                 <div
                     ref={menuRef}
                     className="nav-links"
                     id="nav-menu"
                     onClick={() => menuRef.current?.classList.remove('open')}
                 >
-                    <a href="/products" className={activePath.startsWith('/products') || activePath === '/products' ? 'active' : ''}>ソリューション</a>
-                    <a href="/about" className={activePath === '/about' ? 'active' : ''}>会社概要</a>
-                    <a href="/recruit" className={activePath.startsWith('/recruit') || activePath === '#recruit' ? 'active' : ''}>採用情報</a>
+                    <a
+                        href="/services"
+                        className={activePath.startsWith('/services') ? 'active' : ''}
+                    >
+                        services
+                    </a>
+                    <a
+                        href="/recruit"
+                        className={activePath.startsWith('/recruit') ? 'active' : ''}
+                    >
+                        recruit
+                    </a>
+                    <a
+                        href="/about"
+                        className={activePath === '/about' ? 'active' : ''}
+                    >
+                        about
+                    </a>
                     <a href="/#contact" className="nav-cta">
-                        お問い合わせ
+                        → contact
                     </a>
                 </div>
             </nav>

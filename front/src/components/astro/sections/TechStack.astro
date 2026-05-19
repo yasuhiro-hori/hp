@@ -1,44 +1,108 @@
-<section class="section" id="tech">
-    <h2>技術スタック</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>言語・フレームワーク</h3>
-            <div class="tech-list">
-                <span class="tech-tag">Go</span>
-                <span class="tech-tag">Rust</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">Astro</span>
-            </div>
+---
+import CornerMarks from "../shared/CornerMarks.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
+
+const groups = [
+    {
+        label: "languages",
+        items: ["Go", "Rust", "TypeScript", "Python"],
+    },
+    {
+        label: "frontend",
+        items: ["React", "Next.js", "Astro"],
+    },
+    {
+        label: "infra",
+        items: ["AWS", "GCP", "Docker", "Terraform", "GitHub Actions"],
+    },
+    {
+        label: "ai · data",
+        items: ["Claude", "OpenAI", "LangChain", "RAG", "pgvector", "PostgreSQL"],
+    },
+];
+---
+
+<section id="tech" class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="06" en="TECH STACK" jp="技術スタック" right={`${groups.length} GROUPS`} />
+
+        <div class="tech-grid">
+            {
+                groups.map((g) => (
+                    <div class="tech-card">
+                        <CornerMarks />
+                        <div class="tech-label">// {g.label}</div>
+                        <div class="tech-tags">
+                            {g.items.map((t) => <span class="tech-tag">{t}</span>)}
+                        </div>
+                    </div>
+                ))
+            }
         </div>
-        <div class="card">
-            <h3>インフラ・クラウド</h3>
-            <div class="tech-list">
-                <span class="tech-tag">AWS</span>
-                <span class="tech-tag">Google Cloud</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Terraform</span>
-                <span class="tech-tag">GitHub Actions</span>
-            </div>
-        </div>
-        <div class="card">
-            <h3>AI・データ</h3>
-            <div class="tech-list">
-                <span class="tech-tag">Claude</span>
-                <span class="tech-tag">OpenAI</span>
-                <span class="tech-tag">LangChain</span>
-                <span class="tech-tag">RAG</span>
-                <span class="tech-tag">pgvector</span>
-                <span class="tech-tag">PostgreSQL</span>
-            </div>
-        </div>
-        <div class="card">
-            <h3>得意分野</h3>
-            <p style="margin-top: 1rem;">
+
+        <div class="tech-skills">
+            <CornerMarks />
+            <div class="bp-label-small skills-label">● 得意分野 / SPECIALTIES</div>
+            <p>
                 FDE × SaaS開発 / AIネイティブプロダクト / 新規プロダクト立ち上げ / LLM統合 / 高速プロトタイピング
             </p>
         </div>
     </div>
 </section>
+
+<style>
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+        .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .tech-grid { grid-template-columns: 1fr; }
+    }
+
+    .tech-card {
+        background: var(--bp-paper);
+        border: 1.5px solid var(--bp-ink);
+        padding: 20px;
+        position: relative;
+        min-height: 200px;
+    }
+
+    .tech-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        font-weight: 600;
+        border-bottom: 1px dashed var(--bp-border-dash);
+        padding-bottom: 10px;
+        margin-bottom: 18px;
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tech-skills {
+        background: var(--bp-paper);
+        border: 1.5px solid var(--bp-ink);
+        padding: 24px 28px;
+        position: relative;
+    }
+    .skills-label {
+        margin-bottom: 12px;
+    }
+    .tech-skills p {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--bp-ink);
+        margin: 0;
+    }
+</style>

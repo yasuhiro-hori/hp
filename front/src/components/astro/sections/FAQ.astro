@@ -1,39 +1,132 @@
-<section class="section" id="faq">
-    <h2>よくある質問</h2>
-    <div class="faq-container">
-        <div class="faq-item">
-            <div class="faq-question">FDEとは何ですか？どんな形で関わりますか？</div>
-            <div class="faq-answer">
-                Forward Deployed Engineerの略で、顧客の現場に入り込んで課題を一緒に解決するエンジニアのことです。
-                週次での定例ミーティングや現場へのヒアリングを通じて、単なる開発の発注先ではなくチームの一員として関わります。
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                どんな企業・フェーズに向いていますか？
-            </div>
-            <div class="faq-answer">
-                「こういうツールがあれば業務が変わる」という現場の課題感はあるが、要件にまとめきれていない企業に向いています。
-                スタートアップから中堅企業まで、新しいプロダクトを一緒に作りたい方はお気軽にご相談ください。
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                作ったプロダクトの権利はどうなりますか？
-            </div>
-            <div class="faq-answer">
-                契約内容によって柔軟に対応します。顧客側に帰属するケースも、共同で育てていくケースも相談可能です。
-                まずはどういう形が双方にとって良いかを一緒に考えるところから始めます。
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                開発期間はどのくらいかかりますか？
-            </div>
-            <div class="faq-answer">
-                最初の動くプロトタイプであれば、最短数週間で作ることを目指します。
-                自社テンプレート基盤とAI活用の開発フローにより、従来の受託開発より大幅にスピードアップしています。
-            </div>
+---
+import SectionHeader from "../shared/SectionHeader.astro";
+
+const faqs = [
+    {
+        q: "FDEとは何ですか？どんな形で関わりますか？",
+        a: "Forward Deployed Engineerの略で、顧客の現場に入り込んで課題を一緒に解決するエンジニアのことです。週次での定例ミーティングや現場へのヒアリングを通じて、単なる開発の発注先ではなくチームの一員として関わります。",
+    },
+    {
+        q: "どんな企業・フェーズに向いていますか？",
+        a: "「こういうツールがあれば業務が変わる」という現場の課題感はあるが、要件にまとめきれていない企業に向いています。スタートアップから中堅企業まで、新しいプロダクトを一緒に作りたい方はお気軽にご相談ください。",
+    },
+    {
+        q: "作ったプロダクトの権利はどうなりますか？",
+        a: "契約内容によって柔軟に対応します。顧客側に帰属するケースも、共同で育てていくケースも相談可能です。まずはどういう形が双方にとって良いかを一緒に考えるところから始めます。",
+    },
+    {
+        q: "開発期間はどのくらいかかりますか？",
+        a: "最初の動くプロトタイプであれば、最短数週間で作ることを目指します。自社テンプレート基盤とAI活用の開発フローにより、従来の受託開発より大幅にスピードアップしています。",
+    },
+];
+---
+
+<section id="faq" class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="05" en="FAQ" jp="よくある質問" right={`${faqs.length} ITEMS`} />
+
+        <div class="faq-list">
+            {
+                faqs.map((f, i) => (
+                    <details class="faq-item" open={i === 0}>
+                        <summary>
+                            <span class="faq-q-label">Q</span>
+                            <span class="faq-q-text">{f.q}</span>
+                            <span class="faq-toggle" aria-hidden="true">[+]</span>
+                        </summary>
+                        <div class="faq-a">
+                            <span class="faq-a-label">A</span>
+                            <p>{f.a}</p>
+                        </div>
+                    </details>
+                ))
+            }
         </div>
     </div>
 </section>
+
+<style>
+    .faq-list {
+        max-width: 960px;
+        margin: 0 auto;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+
+    .faq-item {
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+    .faq-item summary {
+        display: grid;
+        grid-template-columns: 70px 1fr 32px;
+        gap: 20px;
+        padding: 22px 8px;
+        cursor: pointer;
+        list-style: none;
+        align-items: center;
+        transition: background 0.15s ease;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { background: rgba(10, 29, 58, 0.03); }
+
+    .faq-q-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-q-text {
+        font-family: var(--font-sans);
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        letter-spacing: -0.005em;
+    }
+    .faq-toggle {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--bp-blue);
+        text-align: right;
+        transition: transform 0.2s ease;
+    }
+    .faq-item[open] .faq-toggle {
+        transform: rotate(45deg);
+    }
+
+    .faq-a {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 20px;
+        padding: 0 8px 24px;
+        border-top: 1px dashed var(--bp-border-dash);
+        padding-top: 18px;
+    }
+    .faq-a-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-accent);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-a p {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+
+    @media (max-width: 700px) {
+        .faq-item summary {
+            grid-template-columns: 56px 1fr 24px;
+            gap: 12px;
+            padding: 18px 4px;
+        }
+        .faq-q-text { font-size: 15px; }
+        .faq-a {
+            grid-template-columns: 56px 1fr;
+            gap: 12px;
+            padding: 14px 4px 18px;
+        }
+    }
+</style>

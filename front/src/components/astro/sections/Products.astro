@@ -1,308 +1,376 @@
-<section class="section" id="ai-ocr">
-    <h2>AI OCR</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
-        帳票・契約書・手書き書類の読み取りを自動化。<br />
-        LLMと組み合わせ、単なる文字認識を超えた「理解するOCR」を構築します。
-    </p>
+---
+import CornerMarks from "../shared/CornerMarks.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
+import DrawingHeader from "../shared/DrawingHeader.astro";
 
-    <div class="ocr-layout">
-        <div class="ocr-features">
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>あらゆる帳票に対応</h3>
-                    <p>請求書・納品書・注文書・契約書・申請書・手書き書類など、非定型フォーマットを含む幅広いドキュメントに対応。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>LLMによる項目理解・補正</h3>
-                    <p>OCRの読み取り結果をLLMが文脈から補正・構造化。誤読や崩れた文字にも高い精度で対処します。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>既存システムへの統合</h3>
-                    <p>API経由で既存の基幹システムや業務アプリとシームレスに連携。データ入力作業を大幅に自動化します。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>セキュアな自社環境構築</h3>
-                    <p>機密文書を外部に送信しない、プライベートクラウド・オンプレミス構成にも対応。コンプライアンス要件を満たした設計を提案します。</p>
-                </div>
-            </div>
+const sections = [
+    {
+        anchor: "ai-ocr",
+        id: "OCR",
+        no: "01",
+        title: "AI OCR",
+        sub: "帳票・契約書・手書き書類の読み取りを自動化。LLMと組み合わせ、単なる文字認識を超えた『理解するOCR』を構築します。",
+        features: [
+            {
+                t: "あらゆる帳票に対応",
+                d: "請求書・納品書・注文書・契約書・申請書・手書き書類など、非定型フォーマットを含む幅広いドキュメントに対応。",
+            },
+            {
+                t: "LLMによる項目理解・補正",
+                d: "OCRの読み取り結果をLLMが文脈から補正・構造化。誤読や崩れた文字にも高い精度で対処します。",
+            },
+            {
+                t: "既存システムへの統合",
+                d: "API経由で既存の基幹システムや業務アプリとシームレスに連携。データ入力作業を大幅に自動化します。",
+            },
+            {
+                t: "セキュアな自社環境構築",
+                d: "機密文書を外部に送信しない、プライベートクラウド・オンプレミス構成にも対応。コンプライアンス要件を満たした設計を提案します。",
+            },
+        ],
+        flowTitle: "PROCESS.FLOW / 処理フロー",
+        flow: [
+            { t: "ドキュメント入力", d: "スキャン画像・PDF・スマホ撮影など各種形式に対応" },
+            { t: "OCRエンジンで文字認識", d: "Google Document AI / Azure Form Recognizer 等を活用" },
+            { t: "LLMで補正・構造化", d: "GPT / Claude が文脈を理解し項目を整形・検証" },
+            { t: "システムへ自動連携", d: "API / DB / CSVで既存業務フローに組み込み" },
+        ],
+    },
+    {
+        anchor: "ai-search",
+        id: "SEARCH",
+        no: "02",
+        title: "AIベクトル検索",
+        sub: "キーワードで探せないものを、意図から探せるようにする。EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新します。",
+        features: [
+            {
+                t: "ユーザーの意図を理解",
+                d: "「夏に着られる涼しいワンピース」「駅近で日当たりのいい2LDK」など、曖昧な言葉でも意図に近いものを上位表示。直感的な検索体験を実現します。",
+            },
+            {
+                t: "表記ゆれを吸収",
+                d: "「求人」「募集」「採用」など言い回しが違っても同じ意味として扱えるため、取りこぼしのない検索結果を返せます。",
+            },
+            {
+                t: "あらゆるサービスに組み込み可能",
+                d: "EC・求人・不動産・レシピなど、コンテンツの種類を問わず導入できます。既存の検索機能をAPIで置き換える形での実装も可能です。",
+            },
+            {
+                t: "大規模カタログにも対応",
+                d: "数十万件の商品・物件・求人データでも高速に類似検索。スケーラブルなベクトルDB構成で運用負荷を最小限に。",
+            },
+        ],
+        flowTitle: "APPLICATIONS / 活用例",
+        flow: [
+            { t: "EC / ショッピング", d: "商品名・説明文をベクトル化し、検索意図に近い商品を提示" },
+            { t: "求人・採用マッチング", d: "スキルや希望条件を自然文で入力し条件に近い求人を自動サジェスト" },
+            { t: "不動産・物件検索", d: "「子育てしやすい環境」など感覚的な条件でも関連物件を引き当て" },
+            { t: "FAQ・サポート", d: "問い合わせ文から意味的に近いFAQを自動提示し問い合わせ数を削減" },
+        ],
+    },
+    {
+        anchor: "business-systems",
+        id: "SYSTEM",
+        no: "03",
+        title: "業務システム開発",
+        sub: "自社開発のテンプレートをベースに、管理画面・社内ツール・BtoB向けWebアプリを高品質・短期間で構築します。",
+        features: [
+            {
+                t: "Admin Template",
+                d: "『Reactの知識がなくてもコピペで機能追加できる』をコンセプトに設計されたNext.jsテンプレート。検索・CSV・認証などの必須機能が実装済み。",
+            },
+            {
+                t: "Vertical Slice Architecture",
+                d: "機能ごとの独立性を担保。並行開発と機能単位のリリースが可能。",
+            },
+            {
+                t: "Config-Driven Development",
+                d: "設定ファイルベースの開発体験。新規画面の追加が極めて短時間で完了。",
+            },
+            {
+                t: "AI Integration",
+                d: "LLM連携・RAG構成の即時導入が可能。最初から AI ネイティブな設計。",
+            },
+        ],
+        flowTitle: "ADMIN.TEMPLATE / 構成例",
+        flow: [
+            { t: "Authentication", d: "AWS Cognito (OIDC) 連携実装済み" },
+            { t: "CRUD + Search + CSV", d: "管理画面に必須の機能群が動作する状態" },
+            { t: "AI 機能の組み込み", d: "LLM 呼び出しや RAG を最小コードで追加" },
+            { t: "本番運用基盤", d: "Docker / IaC / CI で運用フローまでセットアップ" },
+        ],
+    },
+];
+---
+
+<section class="bp-section products-hero bp-grid-bg">
+    <div class="bp-section-inner">
+        <DrawingHeader drawing="02-PRODUCTS / ソリューション" sheet="02" />
+        <div class="ph-grid">
+            <h1>
+                実装済みの<br />
+                <span class="hl">3つの解</span>と、その<br />基盤テンプレート。
+            </h1>
+            <p>
+                現場で何度も繰り返し求められる課題に対して、再現性のある解として作り込んできた領域。ゼロから検討する必要のない、検証済みの選択肢。
+            </p>
         </div>
 
-        <div class="card" style="height: fit-content;">
-            <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--primary-color);">処理フロー</h3>
-            <div class="ocr-flow">
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">1</div>
-                    <div>
-                        <strong>ドキュメント入力</strong>
-                        <p>スキャン画像・PDF・スマホ撮影など各種形式に対応</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">2</div>
-                    <div>
-                        <strong>OCRエンジンで文字認識</strong>
-                        <p>Google Document AI / Azure Form Recognizer 等を活用</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">3</div>
-                    <div>
-                        <strong>LLMで補正・構造化</strong>
-                        <p>GPT / Claude が文脈を理解し項目を整形・検証</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">4</div>
-                    <div>
-                        <strong>システムへ自動連携</strong>
-                        <p>API / DB / CSVで既存業務フローに組み込み</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem; text-align: center;">
-                <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
-            </div>
+        <div class="ph-index">
+            {
+                sections.map((s, _) => (
+                    <a href={`#${s.anchor}`} class="ph-index-item">
+                        <div class="ph-idx-id">● P.{s.no}</div>
+                        <div class="ph-idx-t">{s.title}</div>
+                    </a>
+                ))
+            }
+            <a href="#backend-templates" class="ph-index-item">
+                <div class="ph-idx-id">● P.04</div>
+                <div class="ph-idx-t">Backend テンプレート</div>
+            </a>
         </div>
     </div>
 </section>
 
+{
+    sections.map((s) => (
+        <section id={s.anchor} class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no={s.no} en={s.id} jp={s.title} />
+                <p class="prod-sub">{s.sub}</p>
+
+                <div class="prod-grid">
+                    <div class="prod-features">
+                        {s.features.map((f, i) => (
+                            <div class="prod-feature">
+                                <div class="prod-feature-id">F.0{i + 1}</div>
+                                <div>
+                                    <h3>{f.t}</h3>
+                                    <p>{f.d}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div class="prod-flow">
+                        <CornerMarks />
+                        <div class="bp-label-small" style="margin-bottom: 22px">
+                            ● {s.flowTitle}
+                        </div>
+                        {s.flow.map((step, i) => (
+                            <div class="prod-step">
+                                <div class="prod-step-num-col">
+                                    <div class="prod-step-num">{i + 1}</div>
+                                    {i < s.flow.length - 1 && <div class="prod-step-line" />}
+                                </div>
+                                <div class="prod-step-content">
+                                    <div class="prod-step-t">{step.t}</div>
+                                    <div class="prod-step-d">{step.d}</div>
+                                </div>
+                            </div>
+                        ))}
+                        <div class="prod-flow-cta">
+                            <a href="/#contact" class="bp-btn">$ inquire --about={s.id.toLowerCase()}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    ))
+}
+
 <style>
-    .ocr-layout {
+    .products-hero {
+        padding-top: 64px;
+        padding-bottom: 56px;
+    }
+
+    .ph-grid {
+        display: grid;
+        grid-template-columns: 1fr 480px;
+        gap: 56px;
+        align-items: end;
+    }
+    @media (max-width: 900px) {
+        .ph-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+    }
+
+    .ph-grid h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(40px, 6vw, 80px);
+        font-weight: 900;
+        line-height: 1.02;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+    .hl { color: var(--bp-blue); }
+    .ph-grid p {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+
+    .ph-index {
+        margin-top: 56px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--bp-ink);
+    }
+    @media (max-width: 900px) {
+        .ph-index { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .ph-index { grid-template-columns: 1fr; }
+    }
+
+    .ph-index-item {
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--bp-ink);
+        border-right: 1px solid var(--bp-ink);
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s ease;
+    }
+    .ph-index-item:last-child { border-right: none; }
+    .ph-index-item:hover {
+        background: rgba(10, 29, 58, 0.04);
+        color: inherit;
+    }
+    .ph-idx-id {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        margin-bottom: 6px;
+    }
+    .ph-idx-t {
+        font-family: var(--font-sans);
+        font-size: 17px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        letter-spacing: -0.01em;
+    }
+
+    .prod-sub {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 40px;
+        max-width: 880px;
+    }
+
+    .prod-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: start;
+        gap: 24px;
+    }
+    @media (max-width: 900px) {
+        .prod-grid { grid-template-columns: 1fr; }
     }
 
-    .ocr-features {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
+    .prod-feature {
+        border-top: 1.5px solid var(--bp-ink);
+        padding: 22px 0;
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 16px;
     }
-
-    .ocr-feature-item h3 {
-        font-size: 1.1rem;
+    .prod-features .prod-feature:last-child {
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+    .prod-feature-id {
+        font-family: var(--font-mono);
+        font-size: 12px;
         font-weight: 700;
-        margin: 0 0 0.4rem;
-        color: var(--text-color);
+        color: var(--bp-blue);
+        letter-spacing: 0.1em;
+        line-height: 1.4;
     }
-
-    .ocr-feature-item p {
+    .prod-feature h3 {
+        font-family: var(--font-sans);
+        font-size: 19px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 0 0 6px;
+        letter-spacing: -0.015em;
+    }
+    .prod-feature p {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
         margin: 0;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        line-height: 1.7;
     }
 
-    .ocr-flow {
+    .prod-flow {
+        border: 1.5px solid var(--bp-ink);
+        padding: 28px;
+        background: var(--bp-paper);
+        position: relative;
+        height: fit-content;
+    }
+    .prod-step {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        align-items: baseline;
+    }
+    .prod-step-num-col {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        align-self: stretch;
     }
-
-    .ocr-flow-step {
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-
-    .ocr-flow-step strong {
-        display: block;
-        font-size: 1rem;
-        color: var(--text-color);
-        margin-bottom: 0.2rem;
-    }
-
-    .ocr-flow-step p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        line-height: 1.5;
-    }
-
-    .ocr-flow-badge {
-        min-width: 28px;
-        height: 28px;
-        background: var(--primary-color);
-        color: white;
+    .prod-step-num {
+        width: 32px;
+        height: 32px;
+        border: 1.5px solid var(--bp-ink);
         border-radius: 50%;
+        background: var(--bp-paper);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
-        font-size: 0.85rem;
-        flex-shrink: 0;
-        margin-top: 0.1rem;
-    }
-
-    .ocr-flow-arrow {
-        padding-left: 0.9rem;
-        color: var(--card-border);
-        font-size: 1.2rem;
-        line-height: 1;
-        margin: 0.3rem 0;
-    }
-
-    .template-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-    }
-
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .feature-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-
-    .check {
-        color: var(--accent-color);
-        font-weight: bold;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-ink);
         flex-shrink: 0;
     }
-
-    @media (max-width: 768px) {
-        .ocr-layout {
-            grid-template-columns: 1fr;
-        }
-
-        .template-grid {
-            grid-template-columns: 1fr;
-        }
+    .prod-step-line {
+        flex: 1;
+        width: 0;
+        border-left: 1.5px dashed var(--bp-blue);
+        min-height: 12px;
+    }
+    .prod-step-content {
+        padding-bottom: 16px;
+    }
+    .prod-step-t {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 4px;
+    }
+    .prod-step-d {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        color: var(--bp-muted);
+        line-height: 1.7;
+    }
+    .prod-flow-cta {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px dashed var(--bp-border-dash);
+        text-align: center;
     }
 </style>
-
-<section class="section" id="ai-search" style="border-top: 1px solid var(--card-border);">
-    <h2>AIベクトル検索</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
-        キーワードで探せないものを、意図から探せるようにする。<br />
-        EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新します。
-    </p>
-
-    <div class="ocr-layout">
-        <div class="ocr-features">
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>ユーザーの意図を理解して検索</h3>
-                    <p>「夏に着られる涼しいワンピース」「駅近で日当たりのいい2LDK」など、曖昧な言葉でも意図に近いものを上位表示。直感的な検索体験を実現します。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>表記ゆれ・言い回しの違いを吸収</h3>
-                    <p>「求人」「募集」「採用」など言い回しが違っても同じ意味として扱えるため、取りこぼしのない検索結果を返せます。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>あらゆるサービスに組み込み可能</h3>
-                    <p>EC・求人・不動産・レシピなど、コンテンツの種類を問わず導入できます。既存の検索機能をAPIで置き換える形での実装も可能です。</p>
-                </div>
-            </div>
-            <div class="ocr-feature-item">
-                <div>
-                    <h3>大規模カタログにも対応</h3>
-                    <p>数十万件の商品・物件・求人データでも高速に類似検索。スケーラブルなベクトルDB構成で運用負荷を最小限に抑えます。</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="height: fit-content;">
-            <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--primary-color);">活用例</h3>
-            <div class="ocr-flow">
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">1</div>
-                    <div>
-                        <strong>EC / ショッピング</strong>
-                        <p>商品名・説明文をベクトル化し、ユーザーの検索意図に近い商品を提示</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">2</div>
-                    <div>
-                        <strong>求人・採用マッチング</strong>
-                        <p>スキルや希望条件を自然文で入力し、条件に近い求人を自動サジェスト</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">3</div>
-                    <div>
-                        <strong>不動産・物件検索</strong>
-                        <p>「子育てしやすい環境」など感覚的な条件でも関連物件を引き当て</p>
-                    </div>
-                </div>
-                <div class="ocr-flow-arrow">↓</div>
-                <div class="ocr-flow-step">
-                    <div class="ocr-flow-badge">4</div>
-                    <div>
-                        <strong>FAQ・サポート</strong>
-                        <p>ユーザーの問い合わせ文から意味的に近いFAQを自動提示し、問い合わせ数を削減</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem; text-align: center;">
-                <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="business-systems" style="border-top: 1px solid var(--card-border);">
-    <h2>業務システム開発</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
-        自社開発のテンプレートをベースに、管理画面・社内ツール・BtoB向けWebアプリを高品質・短期間で構築します。
-    </p>
-
-    <div class="template-grid">
-        <div class="card">
-            <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Admin Template</h3>
-            <p style="font-weight: bold; margin-bottom: 1rem;">半スクラッチで始める最強の管理画面開発基盤。</p>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">「Reactの知識がなくてもコピペで機能追加できる」をコンセプトに設計されたNext.jsテンプレート。検索・CSV・認証などの必須機能が実装済みで、管理画面開発の工数を劇的に削減します。</p>
-            <ul class="feature-list">
-                <li><span class="check">✓</span><span><strong>Vertical Slice Architecture</strong>: 機能ごとの独立性を担保</span></li>
-                <li><span class="check">✓</span><span><strong>Config-Driven Development</strong>: 設定ファイルベースの開発体験</span></li>
-                <li><span class="check">✓</span><span><strong>Authentication</strong>: AWS Cognito (OIDC) 連携実装済み</span></li>
-                <li><span class="check">✓</span><span><strong>AI Integration</strong>: LLM連携・RAG構成の即時導入が可能</span></li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">Go / Rust Backend Template</h3>
-            <p style="font-weight: bold; margin-bottom: 1rem;">10年戦える、技術的負債を生まない堅牢な設計。</p>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Go・Rustそれぞれの言語特性に最適化したClean Architectureベースのテンプレート。ビジネスロジックを外部依存から切り離し、将来の技術変更や機能拡張に柔軟に対応できます。</p>
-            <ul class="feature-list">
-                <li><span class="check">✓</span><span><strong>Clean Architecture</strong>: 責務の分離とテスタビリティの確保</span></li>
-                <li><span class="check">✓</span><span><strong>Authentication</strong>: Cognito (JWT) 検証ミドルウェア完備</span></li>
-                <li><span class="check">✓</span><span><strong>Type-safe ORM</strong>: 型安全かつ高速なDB操作</span></li>
-                <li><span class="check">✓</span><span><strong>Docker & Build System</strong>: Prod/Dev環境別Dockerfile完備</span></li>
-            </ul>
-        </div>
-    </div>
-
-    <div style="margin-top: 2rem; text-align: center;">
-        <a href="/#contact" class="cta-button">導入のご相談はこちら</a>
-    </div>
-</section>

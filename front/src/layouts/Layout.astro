@@ -21,13 +21,16 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="color-scheme" content="dark" />
+		<meta name="color-scheme" content="light" />
+		<meta name="theme-color" content="#fafaf6" />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"
 			rel="stylesheet"
 		/>
+
 		<link rel="apple-touch-icon" href="/favicon.ico" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -61,7 +64,3 @@ const {
 		<slot />
 	</body>
 </html>
-
-<style is:global>
-	/* ここにグローバルなスタイルを移行しても良いですが、一旦既存のglobals.cssをインポートさせます */
-</style>

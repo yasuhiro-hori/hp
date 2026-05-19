@@ -1,7 +1,195 @@
-<section id="top" class="hero">
-    <h1>顧客の現場に入り、プロダクトをつくる。</h1>
-    <p>
-        Forward Deployed Engineerとして業務課題を一緒に定義し、AIを活用してSaaSを共創します。<br />受託でも、自社サービスでもない新しいかたちの開発スタジオです。
-    </p>
+---
+import CornerMarks from "../shared/CornerMarks.astro";
+import DrawingHeader from "../shared/DrawingHeader.astro";
+---
 
+<section id="top" class="hero bp-grid-bg">
+    <div class="hero-inner">
+        <DrawingHeader drawing="01-HERO" sheet="01" />
+
+        <div class="hero-layout">
+            <div class="hero-main">
+                <div class="hero-tag">▸ FORWARD DEPLOYED ENGINEERING — AI×SAAS</div>
+
+                <h1>
+                    現場で<br />
+                    <span class="hl">設計</span>する<br />
+                    ソフトウェア。
+                </h1>
+
+                <p class="hero-lead">
+                    Forward Deployed Engineer
+                    として業務課題を一緒に定義し、AIを活用してSaaSを共創する。受託でも自社サービスでもない、新しいかたちの開発スタジオ。
+                </p>
+
+                <div class="hero-actions">
+                    <a href="/#contact" class="bp-btn">$ tecsiz --contact</a>
+                    <a href="/services" class="bp-btn bp-btn-outline">view works/</a>
+                </div>
+            </div>
+
+            <div class="hero-spec bp-card-relative">
+                <CornerMarks />
+                <div class="bp-label-small spec-title">株式会社テクシズ</div>
+                <p class="spec-desc">
+                    Forward Deployed Engineer
+                    として業務課題を一緒に定義し、AIを活用してSaaSを共創する。受託でも自社サービスでもない、新しいかたちの開発スタジオ。
+                </p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>type</td>
+                            <td>studio · forward-deployed</td>
+                        </tr>
+                        <tr>
+                            <td>model</td>
+                            <td>AI-native · co-creation</td>
+                        </tr>
+                        <tr>
+                            <td>cycle</td>
+                            <td>数週間〜 / continuous</td>
+                        </tr>
+                        <tr>
+                            <td>stack</td>
+                            <td>go · ts · llm · ai-agents</td>
+                        </tr>
+                        <tr>
+                            <td>based</td>
+                            <td>東京 · tokyo · jp</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </section>
+
+<style>
+    .hero {
+        padding: 64px 48px 80px;
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+    .hero-inner {
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .hero-tag {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.16em;
+        margin-bottom: 32px;
+    }
+
+    .hero-layout {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 56px;
+        align-items: start;
+    }
+    @media (max-width: 900px) {
+        .hero-layout {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+    }
+
+    h1 {
+        font-family: var(--font-sans),serif;
+        font-size: clamp(48px, 7vw, 92px);
+        font-weight: 900;
+        line-height: 1;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+    .hl { color: var(--bp-blue); }
+
+    .hero-lead {
+        font-family: var(--font-sans),serif;
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        max-width: 540px;
+        margin: 28px 0 0;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 36px;
+        flex-wrap: wrap;
+    }
+
+    /* Spec card */
+    .bp-card-relative {
+        position: relative;
+    }
+    .hero-spec {
+        background: var(--bp-paper);
+        border: 1.5px solid var(--bp-ink);
+        padding: 28px;
+    }
+    .spec-title {
+        margin-bottom: 16px;
+        letter-spacing: 0.18em;
+    }
+    .spec-desc {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink);
+        margin: 0 0 24px;
+    }
+    .hero-spec table {
+        width: 100%;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        border-collapse: collapse;
+        color: var(--bp-ink);
+    }
+    .hero-spec tr {
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .hero-spec td {
+        padding: 8px 0;
+        letter-spacing: 0.04em;
+    }
+    .hero-spec td:first-child {
+        color: var(--bp-muted);
+        width: 30%;
+        letter-spacing: 0.08em;
+    }
+
+    /* Dim line */
+    .dim-row {
+        margin-top: 64px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .dim-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--bp-blue);
+        white-space: nowrap;
+    }
+    .dim-line {
+        flex: 1;
+        height: 1px;
+        background: var(--bp-ink);
+        position: relative;
+    }
+    .dim-line span {
+        position: absolute;
+        top: -6px;
+        width: 1px;
+        height: 12px;
+        background: var(--bp-ink);
+    }
+    @media (max-width: 600px) {
+        .dim-row { display: none; }
+    }
+</style>

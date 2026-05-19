@@ -1,26 +1,110 @@
-<section class="section" id="services">
-    <h2>サービス</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>FDE × 課題発見</h3>
-            <p>
-                Forward Deployed Engineer として顧客の現場に常駐し、業務の実態から課題を一緒に定義します。
-                要件書を受け取るのではなく、「本当に何が問題か」を掴むところから始めるのがテクシズのスタイルです。
-            </p>
-        </div>
-        <div class="card">
-            <h3>AI駆動のSaaS開発</h3>
-            <p>
-                定義した課題に対して、AI開発ツールと自社テンプレート基盤を組み合わせ、従来の数倍のスピードでプロダクトを立ち上げます。
-                LLM統合やAIエージェントの組み込みも当然のように行い、最初から「AIネイティブ」なプロダクトとして設計します。
-            </p>
-        </div>
-        <div class="card">
-            <h3>プロダクトとして育てる</h3>
-            <p>
-                SaaSはリリースがスタートです。現場の声を聞きながら継続的に機能を追加し、使われるプロダクトへと進化させます。
-                顧客の成長がそのままプロダクトの成長になる、長期的なパートナーシップを大切にしています。
-            </p>
+---
+import CornerMarks from "../shared/CornerMarks.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
+
+const items = [
+    {
+        jp: "現場に入る",
+        en: "on-site / FDE",
+        d: "顧客の現場に常駐し、業務の実態から課題を一緒に定義する。要件書を受け取るのではなく、「本当に何が問題か」を掴むところから始める。",
+        tags: ["ヒアリング", "業務分析", "週次定例"],
+    },
+    {
+        jp: "AIで作る",
+        en: "AI-native build",
+        d: "自社テンプレート基盤とAI駆動の開発フローで、議論より先に動くものを作る。AIが生成したコードはエンジニアが設計意図を持って確認・整形。LLM統合やAIエージェントの組み込みも当然のように。",
+        tags: ["テンプレート", "LLM統合", "高速プロト", "エンジニアレビュー"],
+    },
+    {
+        jp: "プロダクトに育てる",
+        en: "grow as product",
+        d: "リリースはスタート。現場の反応を見ながら継続的に改善し、使われるプロダクトへ育てる。顧客の成長がプロダクトの成長になる。",
+        tags: ["伴走", "イテレーション", "長期パートナー"],
+    },
+];
+---
+
+<section id="services" class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="02" en="SERVICES" jp="提供価値" />
+
+        <div class="svc-grid">
+            {
+                items.map((x) => (
+                    <article class="svc-card">
+                        <CornerMarks />
+                        <h3>{x.jp}</h3>
+                        <div class="svc-en">{x.en}</div>
+                        <p>{x.d}</p>
+                        <div class="svc-tags">
+                            {x.tags.map((t) => <span class="bp-tag">{t}</span>)}
+                        </div>
+                    </article>
+                ))
+            }
         </div>
     </div>
 </section>
+
+<style>
+    .svc-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+    @media (max-width: 900px) {
+        .svc-grid { grid-template-columns: 1fr; }
+    }
+
+    .svc-card {
+        background: var(--bp-paper);
+        border: 1.5px solid var(--bp-ink);
+        padding: 28px;
+        position: relative;
+    }
+
+    .svc-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        margin-bottom: 28px;
+        font-weight: 600;
+    }
+    .svc-meta .muted {
+        opacity: 0.5;
+    }
+
+    .svc-card h3 {
+        font-family: var(--font-sans),serif;
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 0 0 8px;
+        letter-spacing: -0.015em;
+    }
+
+    .svc-en {
+        font-family: var(--font-mono),serif;
+        font-size: 12px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+        margin-bottom: 20px;
+    }
+
+    .svc-card p {
+        font-family: var(--font-sans),serif;
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 24px;
+    }
+
+    .svc-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+</style>

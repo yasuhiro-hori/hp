@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/react/Navbar";
-import RecruitContent from "../components/astro/sections/Recruit.astro";
+import Recruit from "../components/astro/sections/Recruit.astro";
 import Footer from "../layouts/Footer.astro";
 import "../styles/globals.css";
 ---
@@ -9,11 +9,7 @@ import "../styles/globals.css";
 <Layout title="採用情報 | 株式会社テクシズ">
     <Navbar client:load />
     <main>
-        <div style="padding-top: 80px; min-height: 80vh;">
-            <div class="container">
-                <RecruitContent />
-            </div>
-        </div>
+        <Recruit />
     </main>
     <Footer />
 </Layout>

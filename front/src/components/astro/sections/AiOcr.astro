@@ -1,118 +1,135 @@
-<section class="section" id="ai-ocr">
-    <h2>導入実績</h2>
-    <p class="section-lead">
-        テクシズが実際に構築・支援したシステムの一例です。
-    </p>
+---
+import SectionHeader from "../shared/SectionHeader.astro";
 
-    <div class="cases-grid">
-        <a href="/products#ai-ocr" class="case-card">
-            <span class="case-tag">AI / OCR</span>
-            <h3>AI OCR</h3>
-            <p>
-                帳票・請求書・手書き書類の読み取りをLLMと組み合わせて自動化。
-                非定型フォーマットへの対応と既存システムへの統合を実現。
-            </p>
-            <span class="case-link">詳細を見る →</span>
-        </a>
-        <a href="/products#ai-search" class="case-card">
-            <span class="case-tag">AI / ベクトル検索</span>
-            <h3>AIベクトル検索</h3>
-            <p>
-                キーワードで探せないものを、意図から探せるようにする。
-                EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新。
-            </p>
-            <span class="case-link">詳細を見る →</span>
-        </a>
-        <a href="/products#business-systems" class="case-card">
-            <span class="case-tag">Webシステム</span>
-            <h3>業務システム開発</h3>
-            <p>
-                Go / Next.js の自社テンプレートをベースに業務システムを構築。
-                管理画面・社内ツール・BtoB向けWebアプリをスピーディーに立ち上げ。
-            </p>
-            <span class="case-link">詳細を見る →</span>
-        </a>
+const cases = [
+    {
+        id: 1,
+        tag: "AI / OCR",
+        t: "AI OCR",
+        d: "帳票・請求書・手書き書類の読み取りをLLMと組み合わせて自動化。非定型フォーマットへの対応と既存システムへの統合を実現。",
+        stack: "Python · Claude · pgvector",
+        href: "/services#ai-ocr",
+    },
+    {
+        id: 2,
+        tag: "AI / SEARCH",
+        t: "AIベクトル検索",
+        d: "キーワードで探せないものを、意図から探せるようにする。EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新。",
+        stack: "pgvector · Next.js · Go",
+        href: "/services#ai-search",
+    },
+    {
+        id: 3,
+        tag: "WEB / SYSTEM",
+        t: "業務システム開発",
+        d: "Go / Next.js の自社テンプレートをベースに業務システムを構築。管理画面・社内ツール・BtoB向けWebアプリをスピーディーに立ち上げ。",
+        stack: "Go · Next.js · AWS",
+        href: "/services#business-systems",
+    },
+];
+---
+
+<section id="works" class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="04" en="WORKS" jp="導入実績" />
+
+        <div class="works-grid">
+            {
+                cases.map((c) => (
+                    <a href={c.href} class="work-card">
+                        <div class="work-body">
+                            <div class="work-meta">
+                                <span>● {c.tag}</span>
+                            </div>
+                            <h3>{c.t}</h3>
+                            <p>{c.d}</p>
+                            <div class="work-stack">stack: {c.stack}</div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
     </div>
 </section>
 
 <style>
-    .section-lead {
-        text-align: center;
-        max-width: 600px;
-        margin: 0 auto 3rem;
-        color: var(--text-secondary);
-        font-size: 1rem;
-    }
-
-    .cases-grid {
+    .works-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        gap: 16px;
     }
-
     @media (max-width: 900px) {
-        .cases-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .works-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 600px) {
-        .cases-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .case-card {
+    .work-card {
+        background: var(--bp-paper-2);
+        border: 1.5px solid var(--bp-ink);
         display: flex;
         flex-direction: column;
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 1.5rem;
-        padding: 2.5rem;
-        box-shadow: var(--shadow-sm);
         text-decoration: none;
         color: inherit;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.18s ease;
     }
-
-    .case-card:hover {
+    .work-card:hover {
+        transform: translateY(-2px);
         color: inherit;
-        transform: translateY(-8px);
-        border-color: var(--primary-color);
-        box-shadow: var(--shadow-lg);
+    }
+    .work-card:hover h3 {
+        color: var(--bp-blue);
     }
 
-    .case-tag {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--primary-color);
-        background: rgba(37, 99, 235, 0.08);
-        border: 1px solid rgba(37, 99, 235, 0.2);
-        padding: 0.2rem 0.6rem;
-        border-radius: 9999px;
-        margin-bottom: 1rem;
-        display: inline-block;
-        align-self: flex-start;
+    .work-preview {
+        height: 160px;
+        background-color: var(--bp-paper);
+        border-bottom: 1px solid var(--bp-ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .work-preview span {
+        font-family: var(--font-mono),serif;
+        font-size: 12px;
+        color: var(--bp-ink);
+        letter-spacing: 0.12em;
+        opacity: 0.6;
     }
 
-    .case-card h3 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        color: var(--text-color);
-    }
+    .work-body { padding: 22px; }
 
-    .case-card p {
-        font-size: 0.95rem;
-        color: var(--text-secondary);
-        line-height: 1.7;
-        margin-bottom: 1.25rem;
-        flex: 1;
+    .work-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono),serif;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        margin-bottom: 16px;
     }
+    .work-meta .muted { opacity: 0.5; }
 
-    .case-link {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--primary-color);
+    .work-card h3 {
+        font-family: var(--font-sans),serif;
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 0 0 10px;
+        letter-spacing: -0.015em;
+        transition: color 0.15s ease;
+    }
+    .work-card p {
+        font-family: var(--font-sans),serif;
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+        margin: 0 0 20px;
+    }
+    .work-stack {
+        padding-top: 14px;
+        border-top: 1px dashed var(--bp-border-dash);
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        color: var(--bp-muted);
+        letter-spacing: 0.06em;
     }
 </style>

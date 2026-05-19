@@ -1,159 +1,477 @@
-<section class="section" id="recruit">
-    <h2>採用情報</h2>
-    <div class="card" style="max-width: 800px; margin: 0 auto;">
-        <h3>私たちと一緒に働きませんか</h3>
-        <p>
-            株式会社テクシズは、技術力で社会にインパクトを与える急成長中のスタートアップです。
-            私たちは「技術を楽しむこと」と「プロフェッショナルとしての成果」の両立を大切にしています。
-            少数精鋭のチームだからこそ、一人ひとりの裁量が大きく、エンジニアとしてスピーディーに成長できる環境があります。
-            フルリモートワークやフレックスタイム制を導入しており、ライフスタイルに合わせた柔軟な働き方が可能です。
-            自由と責任を尊重し、新しい技術への挑戦を恐れず、チームと共に成長していける仲間を募集しています。
+---
+import CornerMarks from "../shared/CornerMarks.astro";
+import SectionHeader from "../shared/SectionHeader.astro";
+import DrawingHeader from "../shared/DrawingHeader.astro";
+
+const reasons = [
+    {
+        id: "01",
+        t: "AIを『使う側』で居続けられる",
+        d: "Claude / GPT / Codex を当然の道具として日常的に使う。生産性とプロダクト性能の両方を引き上げ、退屈な作業から解放される。",
+    },
+    {
+        id: "02",
+        t: "顧客の現場で、設計する",
+        d: "FDE として現場に入り、業務の実態から課題を一緒に定義する。要件書を待つ仕事ではなく、自分で問題を見つけて解く仕事。",
+    },
+    {
+        id: "03",
+        t: "裁量が大きく、早く成長できる",
+        d: "少数精鋭。設計から実装、顧客との対話まで、エンジニアが一気通貫で関わる。受け身では決まらない、自分で動かせる仕事。",
+    },
+    {
+        id: "04",
+        t: "リモート × フレックス",
+        d: "フルリモート、フレックスタイム制。働き方は本人とチームに合わせて柔軟に組む。自由と責任を尊重する文化。",
+    },
+];
+
+const positions = [
+    { id: "P.01", t: "Backend Engineer", stack: "Go / Rust / SQLBoiler / Cognito", exp: "mid+", open: true },
+    { id: "P.02", t: "Frontend Engineer", stack: "TypeScript / React / Next.js / Astro", exp: "mid+", open: true },
+    { id: "P.03", t: "Infrastructure Engineer", stack: "AWS / GCP / Terraform / Docker", exp: "mid+", open: true },
+    { id: "P.04", t: "AI/LLM Engineer", stack: "Python / LangChain / pgvector / RAG", exp: "all", open: true },
+    { id: "P.05", t: "Forward Deployed Engineer", stack: "言語不問 / 業務分析 / 顧客対話", exp: "sr", open: true },
+    { id: "P.06", t: "New Grad / Internship", stack: "言語問わず / 学習意欲重視", exp: "jr", open: false },
+];
+
+const skillGroups = [
+    { label: "languages", items: ["Go", "Rust", "TypeScript", "Python", "PHP"] },
+    { label: "frontend", items: ["React", "Next.js", "Astro"] },
+    { label: "infra", items: ["AWS", "GCP", "Docker", "Terraform"] },
+    { label: "ai · data", items: ["Claude", "GPT", "LangChain", "pgvector", "RAG"] },
+    { label: "mindset", items: ["自走力", "チーム開発", "顧客との対話", "学習意欲"] },
+];
+
+const hiringFlow = [
+    { n: "01", t: "カジュアル面談", d: "30分。雰囲気・働き方の擦り合わせ。" },
+    { n: "02", t: "技術面談", d: "60分。実務に近いお題でお話します。" },
+    { n: "03", t: "最終面談", d: "代表との対話。お互いに見極める。" },
+    { n: "04", t: "オファー", d: "条件提示。納得感を最優先に。" },
+];
+
+const openCount = positions.filter((p) => p.open).length;
+---
+
+<section id="recruit" class="bp-section recruit-hero bp-grid-bg">
+    <div class="bp-section-inner">
+        <DrawingHeader drawing="03-CAREERS / 採用" sheet="03" />
+        <div class="r-hero">
+            <h1>
+                作る側に、<br />
+                <span class="hl">立ちませんか。</span>
+            </h1>
+            <div class="r-status">
+                <CornerMarks />
+                <div class="bp-label-small" style="margin-bottom: 12px">● STATUS</div>
+                <div class="status-line">
+                    <span class="dot"></span> 募集中 / Now hiring
+                </div>
+                <div class="status-sub">engineer · backend · frontend · infra</div>
+            </div>
+        </div>
+
+        <p class="r-lead">
+            技術を楽しむことと、プロフェッショナルとしての成果。両立を諦めない少数精鋭のチーム。一人ひとりの裁量が大きく、エンジニアとしてスピーディーに成長できる環境です。
         </p>
-        <div style="margin-top: 2rem;">
-            <h4>募集ポジション</h4>
-            <p>
-                エンジニア（バックエンド / フロントエンド /
-                インフラなど分野不問）
-            </p>
+    </div>
+</section>
 
-            <h4 style="margin-top: 1.5rem;">歓迎スキル</h4>
-            <div class="tech-list">
-                <span class="tech-tag">Go</span>
-                <span class="tech-tag">Rust</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Astro</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">AWS</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Terraform</span>
-                <span class="tech-tag">AI / LLM</span>
-                <span class="tech-tag">自走力</span>
-                <span class="tech-tag">チーム開発経験</span>
+<section class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="01" en="WHY TECSIZ" jp="ここで働く理由" right="4 REASONS" />
+        <div class="r-why-grid">
+            {
+                reasons.map((r) => (
+                    <article class="r-why-card">
+                        <CornerMarks />
+                        <h3>{r.t}</h3>
+                        <p>{r.d}</p>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<section class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="02" en="OPEN POSITIONS" jp="募集ポジション" right={`${openCount} OPEN / 1 CLOSED`} />
+
+        <div class="r-table">
+            <div class="r-table-head">
+                <div>NO.</div>
+                <div>POSITION</div>
+                <div>STACK / FOCUS</div>
+                <div>LEVEL</div>
+                <div style="text-align: right">STATUS</div>
             </div>
-
-            <div style="margin-top: 3rem;">
-                <h4 style="text-align: center; margin-bottom: 1.5rem;">まずは話を聞いてみませんか？</h4>
-                <form
-                    action="https://formspree.io/f/mkokglwj"
-                    method="POST"
-                    class="recruit-form"
-                >
-                    <input type="hidden" name="_subject" value="採用応募" />
-
-                    <div class="form-group">
-                        <label for="recruit-name">お名前</label>
-                        <input
-                            type="text"
-                            id="recruit-name"
-                            name="name"
-                            placeholder="山田 太郎"
-                            required
-                        />
+            {
+                positions.map((p) => (
+                    <div class={`r-table-row ${p.open ? "" : "closed"}`}>
+                        <div class="r-row-id">{p.id}</div>
+                        <div class="r-row-t">{p.t}</div>
+                        <div class="r-row-stack">{p.stack}</div>
+                        <div class="r-row-exp">{p.exp}</div>
+                        <div class="r-row-status">
+                            {p.open ? <span class="open">● OPEN  →</span> : <span class="closed-lbl">○ CLOSED</span>}
+                        </div>
                     </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
 
-                    <div class="form-group">
-                        <label for="recruit-email">メールアドレス</label>
-                        <input
-                            type="email"
-                            id="recruit-email"
-                            name="_replyto"
-                            placeholder="example@mail.com"
-                            required
-                        />
+<section class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="03" en="WELCOMED SKILLS" jp="歓迎スキル" right="必須ではなく『あれば嬉しい』" />
+        <div class="r-skills-grid">
+            {
+                skillGroups.map((g) => (
+                    <div class="r-skill-card">
+                        <CornerMarks />
+                        <div class="r-skill-label">// {g.label}</div>
+                        <div class="r-skill-tags">
+                            {g.items.map((t) => <span class="tech-tag">{t}</span>)}
+                        </div>
                     </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
 
-                    <div class="form-group">
-                        <label for="recruit-position">希望ポジション</label>
-                        <input
-                            type="text"
-                            id="recruit-position"
-                            name="position"
-                            placeholder="例: フロントエンドエンジニア"
-                            required
-                        />
-                    </div>
+<section class="bp-section recruit-apply" style="border-bottom: none">
+    <div class="bp-section-inner">
+        <SectionHeader no="04" en="APPLICATION" jp="まずは話を聞きにきませんか" right="所要 30 分 / online OK" />
 
-                    <div class="form-group">
-                        <label for="recruit-portfolio">ポートフォリオ / 経歴（URL等）</label>
-                        <textarea
-                            id="recruit-portfolio"
-                            name="portfolio"
-                            rows="4"
-                            placeholder="GitHubのURLや経歴を簡単にご記入ください"
-                        ></textarea>
-                    </div>
+        <div class="r-apply-grid">
+            <aside class="r-flow">
+                <CornerMarks />
+                <div class="bp-label-small" style="margin-bottom: 22px">● HIRING.FLOW</div>
+                {
+                    hiringFlow.map((s, i) => (
+                        <div class="r-flow-step">
+                            <div class="r-flow-num-col">
+                                <div class="r-flow-num">{s.n}</div>
+                                {i < hiringFlow.length - 1 && <div class="r-flow-line" />}
+                            </div>
+                            <div class="r-flow-content">
+                                <div class="r-flow-t">{s.t}</div>
+                                <div class="r-flow-d">{s.d}</div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </aside>
 
-                    <!-- スパム対策用のハニポットフィールド（非表示） -->
-                    <input type="text" name="_gotcha" style="display:none" />
+            <form
+                action="https://formspree.io/f/mkokglwj"
+                method="POST"
+                class="r-form"
+            >
+                <CornerMarks />
+                <input type="hidden" name="_subject" value="採用応募" />
+                <div class="bp-label-small" style="margin-bottom: 22px">● 応募フォーム</div>
 
-                    <button type="submit" class="cta-button submit-btn">
-                        この内容で応募する
-                    </button>
-                </form>
-            </div>
+                <div class="bp-form-group">
+                    <label for="r-name">お名前</label>
+                    <input id="r-name" type="text" name="name" placeholder="山田 太郎" required />
+                </div>
+
+                <div class="bp-form-group">
+                    <label for="r-email">メールアドレス</label>
+                    <input id="r-email" type="email" name="_replyto" placeholder="example@mail.com" required />
+                </div>
+
+                <div class="bp-form-group">
+                    <label for="r-position">希望ポジション</label>
+                    <input id="r-position" type="text" name="position" placeholder="例: Backend Engineer" required />
+                </div>
+
+                <div class="bp-form-group">
+                    <label for="r-portfolio">ポートフォリオ / 経歴（URL等）</label>
+                    <textarea id="r-portfolio" name="portfolio" rows="4" placeholder="GitHubのURLや経歴を簡単にご記入ください"></textarea>
+                </div>
+
+                <input type="text" name="_gotcha" style="display:none" />
+
+                <button type="submit" class="bp-btn bp-btn-block">$ submit --application</button>
+                <div class="r-form-note">// 24h 以内に返信します</div>
+            </form>
         </div>
     </div>
 </section>
 
 <style>
-    .recruit-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: left;
+    .hl { color: var(--bp-blue); }
+
+    .recruit-hero { padding-top: 64px; padding-bottom: 56px; }
+    .r-hero {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 56px;
+        align-items: end;
+    }
+    @media (max-width: 900px) {
+        .r-hero { grid-template-columns: 1fr; gap: 32px; }
+    }
+    .r-hero h1 {
+        font-family: var(--font-sans),serif;
+        font-size: clamp(48px, 7vw, 84px);
+        font-weight: 900;
+        line-height: 1.02;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+    .r-status {
+        border: 1.5px solid var(--bp-ink);
+        padding: 24px;
+        background: var(--bp-paper);
+        position: relative;
+    }
+    .r-status .status-line {
+        font-family: var(--font-sans),serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 8px;
+    }
+    .r-status .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--bp-accent);
+        margin-right: 6px;
+        vertical-align: 1px;
+    }
+    .r-status .status-sub {
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        color: var(--bp-muted);
+        letter-spacing: 0.06em;
+        line-height: 1.7;
+    }
+    .r-lead {
+        font-family: var(--font-sans),serif;
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 40px 0 0;
+        max-width: 720px;
     }
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+    /* Why */
+    .r-why-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    @media (max-width: 700px) {
+        .r-why-grid { grid-template-columns: 1fr; }
+    }
+    .r-why-card {
+        border: 1.5px solid var(--bp-ink);
+        padding: 28px;
+        background: var(--bp-paper);
+        position: relative;
+    }
+    .r-why-card h3 {
+        font-family: var(--font-sans),serif;
+        font-size: 24px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 0 0 14px;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+    }
+    .r-why-card p {
+        font-family: var(--font-sans),serif;
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
     }
 
-    .form-group label {
-        font-size: 0.9rem;
+    /* Positions table */
+    .r-table { border: 1.5px solid var(--bp-ink); }
+    .r-table-head, .r-table-row {
+        display: grid;
+        grid-template-columns: 70px 1fr 1.4fr 80px 100px;
+        gap: 12px;
+        align-items: center;
+        padding: 18px 24px;
+    }
+    .r-table-head {
+        background: var(--bp-ink);
+        color: var(--bp-paper);
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        letter-spacing: 0.14em;
         font-weight: 600;
-        color: var(--text-color);
+        padding: 12px 24px;
+    }
+    .r-table-row {
+        border-top: 1px dashed var(--bp-border-dash);
+        background: var(--bp-paper);
+    }
+    .r-table-row.closed { background: var(--bp-paper-grid); }
+    .r-row-id {
+        font-family: var(--font-mono),serif;
+        font-size: 12px;
+        color: var(--bp-blue);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+    .r-row-t {
+        font-family: var(--font-sans),serif;
+        font-size: 17px;
+        font-weight: 900;
+        color: var(--bp-ink);
+    }
+    .closed .r-row-t { color: var(--bp-muted); }
+    .r-row-stack {
+        font-family: var(--font-mono),serif;
+        font-size: 12px;
+        color: var(--bp-ink-soft);
+    }
+    .r-row-exp {
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+    }
+    .r-row-status {
+        text-align: right;
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        font-weight: 600;
+    }
+    .r-row-status .open { color: var(--bp-accent); }
+    .r-row-status .closed-lbl { color: var(--bp-muted); }
+
+    @media (max-width: 800px) {
+        .r-table-head { display: none; }
+        .r-table-row {
+            grid-template-columns: 60px 1fr;
+            gap: 8px 12px;
+            grid-template-areas:
+                "id name"
+                "id stack"
+                "id meta";
+        }
+        .r-row-id { grid-area: id; }
+        .r-row-t { grid-area: name; }
+        .r-row-stack { grid-area: stack; }
+        .r-row-exp { grid-area: meta; }
+        .r-row-status {
+            grid-area: meta;
+            text-align: left;
+            margin-top: 4px;
+        }
     }
 
-    .form-group input,
-    .form-group textarea {
-        padding: 0.8rem 1rem;
-        background: var(--bg-color);
-        border: 1px solid var(--card-border);
-        border-radius: 0.75rem;
-        color: var(--text-color);
-        font-family: var(--font-main);
-        font-size: 1rem;
-        transition: all 0.3s ease;
+    /* Skills */
+    .r-skills-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+    }
+    @media (max-width: 900px) {
+        .r-skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .r-skills-grid { grid-template-columns: 1fr; }
+    }
+    .r-skill-card {
+        border: 1.5px solid var(--bp-ink);
+        padding: 20px;
+        background: var(--bp-paper);
+        position: relative;
+        min-height: 200px;
+    }
+    .r-skill-label {
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        font-weight: 600;
+        border-bottom: 1px dashed var(--bp-border-dash);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .r-skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    /* Apply */
+    .r-apply-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 32px;
     }
-
-    .submit-btn {
-        width: 100%;
-        border: none;
-        cursor: pointer;
-        padding: 1.2rem;
-        font-size: 1.1rem;
-        margin-top: 1rem;
-        background: linear-gradient(
-            135deg,
-            var(--primary-color),
-            var(--secondary-color)
-        );
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    @media (max-width: 800px) {
+        .r-apply-grid { grid-template-columns: 1fr; }
     }
-
-    .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.5);
+    .r-flow, .r-form {
+        border: 1.5px solid var(--bp-ink);
+        padding: 32px;
+        background: var(--bp-paper);
+        position: relative;
+    }
+    .r-flow-step {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        gap: 12px;
+        align-items: baseline;
+    }
+    .r-flow-num-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+    }
+    .r-flow-num {
+        font-family: var(--font-mono),serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--bp-blue);
+        letter-spacing: 0.08em;
+    }
+    .r-flow-line {
+        flex: 1;
+        width: 0;
+        border-left: 1.5px dashed var(--bp-blue);
+        min-height: 16px;
+    }
+    .r-flow-content {
+        padding-bottom: 16px;
+    }
+    .r-flow-t {
+        font-family: var(--font-sans),serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--bp-ink);
+    }
+    .r-flow-d {
+        font-family: var(--font-sans),serif;
+        font-size: 12px;
+        color: var(--bp-muted);
+        margin-top: 2px;
+        line-height: 1.6;
+    }
+    .r-form-note {
+        margin-top: 16px;
+        font-family: var(--font-mono),serif;
+        font-size: 10px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+        text-align: center;
     }
 </style>

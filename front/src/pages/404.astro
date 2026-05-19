@@ -1,0 +1,214 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/react/Navbar";
+import CornerMarks from "../components/astro/shared/CornerMarks.astro";
+import DrawingHeader from "../components/astro/shared/DrawingHeader.astro";
+import Footer from "../layouts/Footer.astro";
+import "../styles/globals.css";
+
+const pages = [
+    { id: "01", label: "HOME", desc: "トップページ", href: "/", accent: true },
+    { id: "02", label: "SERVICES", desc: "サービス", href: "/services" },
+    { id: "03", label: "RECRUIT", desc: "採用情報", href: "/recruit" },
+    { id: "04", label: "ABOUT", desc: "会社概要", href: "/about" },
+];
+---
+
+<Layout title="404 — Not Found | 株式会社テクシズ">
+    <Navbar client:load />
+    <main>
+        <section class="err-section bp-grid-bg">
+            <div class="bp-section-inner">
+                <DrawingHeader drawing="ERR-404 / NOT FOUND" sheet="X" />
+
+                <div class="err-grid">
+                    <div>
+                        <div class="err-tag">▸ ERROR / 404 — PAGE NOT FOUND</div>
+                        <h1>4<span class="hl">0</span>4</h1>
+                        <h2>このページは<br />存在しないようです。</h2>
+                        <p>
+                            URL が変更されたか、ページが削除された可能性があります。INDEXから、目的のページにお戻りください。
+                        </p>
+                        <div class="err-actions">
+                            <a href="/" class="bp-btn">$ cd / --home</a>
+                            <a href="/#contact" class="bp-btn bp-btn-outline">$ contact --help</a>
+                        </div>
+                    </div>
+
+                    <aside class="err-index">
+                        <CornerMarks />
+                        <div class="bp-label-small" style="margin-bottom: 22px">
+                            INDEX
+                        </div>
+                        {
+                            pages.map((p, i) => (
+                                <a
+                                    href={p.href}
+                                    class="err-index-row"
+                                    data-first={i === 0}
+                                    data-last={i === pages.length - 1}
+                                >
+                                    <div class={`err-id ${p.accent ? "accent" : ""}`}>P.{p.id}</div>
+                                    <div class="err-label">{p.label}</div>
+                                    <div class="err-desc">{p.desc}</div>
+                                    <div class="err-arrow">→</div>
+                                </a>
+                            ))
+                        }
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .err-section {
+        padding: 64px 48px;
+        background-color: var(--bp-paper);
+        min-height: 70vh;
+    }
+    .hl { color: var(--bp-accent); }
+
+    .err-tag {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-accent);
+        letter-spacing: 0.16em;
+        margin-bottom: 24px;
+        font-weight: 600;
+    }
+
+    .err-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+        padding: 24px 0;
+    }
+    @media (max-width: 900px) {
+        .err-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .err-grid h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(120px, 14vw, 180px);
+        font-weight: 900;
+        line-height: 0.85;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.05em;
+    }
+    .err-grid h2 {
+        font-family: var(--font-sans);
+        font-size: 36px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 32px 0 16px;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+    }
+    .err-grid p {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 32px;
+        max-width: 520px;
+    }
+    .err-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .err-index {
+        border: 1.5px solid var(--bp-ink);
+        padding: 32px;
+        background: var(--bp-paper);
+        position: relative;
+    }
+    .err-index-row {
+        display: grid;
+        grid-template-columns: 40px 1fr 1fr 24px;
+        gap: 12px;
+        align-items: center;
+        padding: 14px 0;
+        border-top: 1px dashed var(--bp-border-dash);
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s ease;
+    }
+    .err-index-row[data-first="true"] { border-top: 1.5px solid var(--bp-ink); }
+    .err-index-row[data-last="true"] { border-bottom: 1.5px solid var(--bp-ink); }
+    .err-index-row:hover { background: rgba(10, 29, 58, 0.04); color: inherit; }
+
+    .err-id {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--bp-blue);
+        letter-spacing: 0.1em;
+        font-weight: 700;
+    }
+    .err-id.accent { color: var(--bp-accent); }
+    .err-label {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        letter-spacing: -0.005em;
+    }
+    .err-desc {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-muted);
+    }
+    .err-arrow {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--bp-blue);
+        text-align: right;
+    }
+
+    .err-comment {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px dashed var(--bp-border-dash);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--bp-muted);
+        letter-spacing: 0.06em;
+        line-height: 1.6;
+    }
+
+    .err-dim-row {
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .dim-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: var(--bp-muted);
+        white-space: nowrap;
+    }
+    .dim-line {
+        flex: 1;
+        height: 1px;
+        background: var(--bp-ink);
+        position: relative;
+    }
+    .dim-line span {
+        position: absolute;
+        top: -4px;
+        width: 1px;
+        height: 8px;
+        background: var(--bp-ink);
+    }
+    @media (max-width: 600px) {
+        .err-dim-row { display: none; }
+    }
+</style>

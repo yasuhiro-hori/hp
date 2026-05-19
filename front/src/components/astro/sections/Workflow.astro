@@ -1,37 +1,138 @@
 ---
+
 const steps = [
     {
-        title: "現場に入る",
-        desc: "まず顧客の現場に入り込み、業務の実態と課題を自分たちで掴みます。要件書を受け取るのではなく、一緒に問題を定義するところから始めます。",
+        n: "01",
+        t: "現場に入る",
+        d: "業務の実態と課題を自分たちで掴む。要件書を受け取るのではなく一緒に問題を定義。",
     },
     {
-        title: "動くものを最速で作る",
-        desc: "自社テンプレートとAI活用の開発フローで、議論より先に動くプロトタイプを作ります。早く触れて初めて見えてくることを、一緒に発見します。",
+        n: "02",
+        t: "動くものを作る",
+        d: "議論より先に動くプロトタイプ。早く触れて初めて見えてくることを発見する。",
     },
     {
-        title: "プロダクト化して提供する",
-        desc: "検証を重ねた機能をプロダクトとして整え、顧客の現場に届けます。SaaSとして提供する形態にこだわらず、最も使われる形を一緒に考えます。",
+        n: "03",
+        t: "プロダクト化",
+        d: "検証を重ねた機能をプロダクトとして整え、現場に届ける。",
     },
     {
-        title: "伴走しながら育てる",
-        desc: "リリースはゴールではなく、スタートです。現場の反応を見ながら継続的に改善し、使われるプロダクトへと育てていきます。",
+        n: "04",
+        t: "育てる",
+        d: "リリースはスタート。現場の反応を見ながら継続的に改善。",
     },
 ];
 ---
 
-<section class="section" id="workflow">
-    <h2>開発の流れ</h2>
-    <div class="workflow-container">
-        {
-            steps.map((step, idx) => (
-                <div class="workflow-step">
-                    <div class="step-number">{idx + 1}</div>
-                    <div class="step-content">
-                        <h3>{step.title}</h3>
-                        <p>{step.desc}</p>
+<section id="workflow" class="bp-section workflow-section">
+    <div class="bp-section-inner">
+        <div class="workflow-head">
+            <h2>仕事の流れ</h2>
+        </div>
+
+        <div class="workflow-grid">
+            <div class="workflow-line"></div>
+            {
+                steps.map((s) => (
+                    <div class="workflow-step">
+                        <div class="step-num">{s.n}</div>
+                        <h3>{s.t}</h3>
+                        <p>{s.d}</p>
                     </div>
-                </div>
-            ))
-        }
+                ))
+            }
+        </div>
     </div>
 </section>
+
+<style>
+    .workflow-section {
+        background: var(--bp-ink);
+        color: var(--bp-paper);
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+
+    .workflow-head { margin-bottom: 56px; }
+    .workflow-head .bp-label {
+        color: var(--bp-blue-light);
+        margin-bottom: 16px;
+    }
+    .workflow-head h2 {
+        font-family: var(--font-sans),serif;
+        font-size: 56px;
+        font-weight: 900;
+        color: var(--bp-paper);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+
+    .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        position: relative;
+    }
+    @media (max-width: 900px) {
+        .workflow-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        .workflow-line { display: none; }
+    }
+
+    .workflow-line {
+        position: absolute;
+        left: 20px;
+        right: calc(25% - 20px);
+        top: 19px;
+        height: 1.5px;
+        background: var(--bp-blue-light);
+    }
+
+    .workflow-step {
+        padding-right: 24px;
+    }
+
+    .step-num {
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid var(--bp-blue-light);
+        background: var(--bp-ink);
+        color: var(--bp-blue-light);
+        font-family: var(--font-mono),serif;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .step-dur {
+        font-family: var(--font-mono),serif;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        color: var(--bp-blue-light);
+        margin-bottom: 10px;
+    }
+
+    .workflow-step h3 {
+        font-family: var(--font-sans),serif;
+        font-size: 24px;
+        font-weight: 900;
+        color: var(--bp-paper);
+        margin: 0 0 12px;
+        letter-spacing: -0.015em;
+    }
+
+    .workflow-step p {
+        font-family: var(--font-sans),serif;
+        font-size: 13px;
+        line-height: 1.85;
+        color: #c8d3e2;
+        margin: 0;
+    }
+</style>
