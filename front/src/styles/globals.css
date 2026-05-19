@@ -153,7 +153,7 @@ header.bp-nav {
 .bp-section {
   padding: var(--section-pad-y) var(--section-pad-x);
   border-bottom: 1.5px solid var(--bp-ink);
-  background: var(--bp-paper);
+  background-color: var(--bp-paper);
 }
 
 .bp-section-inner {
