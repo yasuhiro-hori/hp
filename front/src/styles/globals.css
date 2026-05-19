@@ -49,7 +49,7 @@ html, body {
   padding: 0;
   background: var(--bp-paper);
   color: var(--bp-ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -111,7 +111,7 @@ img {
 }
 
 .bp-label-small {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 11px;
   letter-spacing: 0.14em;
   color: var(--bp-blue);
@@ -119,7 +119,7 @@ img {
 }
 
 .bp-label-muted {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 11px;
   letter-spacing: 0.12em;
   color: var(--bp-muted);
@@ -147,7 +147,7 @@ header.bp-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
 }
 
 .bp-section {
@@ -162,7 +162,7 @@ header.bp-nav {
 }
 
 .bp-section h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 56px;
   font-weight: 900;
   margin: 0;
@@ -172,7 +172,7 @@ header.bp-nav {
 }
 
 .bp-section h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-weight: 900;
   color: var(--bp-ink);
   letter-spacing: -0.015em;
@@ -194,7 +194,7 @@ header.bp-nav {
 .bp-card > .bp-corner-br {
   content: "+";
   position: absolute;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 10px;
   color: var(--bp-ink);
   opacity: 0.55;
@@ -217,7 +217,7 @@ header.bp-nav {
 }
 .bp-card-corners span {
   position: absolute;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 10px;
   color: var(--bp-ink);
   opacity: 0.55;
@@ -238,7 +238,7 @@ header.bp-nav {
   color: var(--bp-paper);
   border: none;
   padding: 14px 24px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -276,7 +276,7 @@ header.bp-nav {
   background: var(--bp-ink);
   color: var(--bp-paper);
   padding: 14px 24px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -296,7 +296,7 @@ header.bp-nav {
    ============================================ */
 .bp-tag {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--bp-blue);
@@ -307,7 +307,7 @@ header.bp-nav {
 .bp-tag::before { content: "#"; }
 
 .tech-tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--bp-ink);
@@ -333,7 +333,7 @@ header.bp-nav {
 .bp-drawing-header {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 11px;
   letter-spacing: 0.12em;
   color: var(--bp-ink);
@@ -358,7 +358,7 @@ header.bp-nav {
 }
 .bp-section-header__title { flex: 1 1 auto; }
 .bp-section-header__no {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 12px;
   letter-spacing: 0.18em;
   color: var(--bp-blue);
@@ -387,7 +387,7 @@ header.bp-nav {
   color: var(--bp-ink);
   border: none;
   padding: 12px 24px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -410,7 +410,7 @@ header.bp-nav {
   background: var(--bp-ink);
   color: var(--bp-paper);
   padding: 56px 48px 24px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   border-top: 1.5px solid var(--bp-ink);
 }
 .bp-footer-grid {
@@ -422,7 +422,7 @@ header.bp-nav {
   margin-bottom: 48px;
 }
 .bp-footer-brand h3 {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--bp-paper);
@@ -436,7 +436,7 @@ header.bp-nav {
   margin-bottom: 24px;
 }
 .bp-footer-brand p {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 13px;
   line-height: 1.85;
   color: #c8d3e2;
@@ -459,7 +459,7 @@ header.bp-nav {
   margin-bottom: 10px;
 }
 .bp-footer-links a {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 13px;
   color: #c8d3e2;
 }
@@ -523,7 +523,7 @@ header.bp-nav {
   font-size: 18px;
   padding: 6px 12px;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
 }
 
 @media (max-width: 900px) {
@@ -547,7 +547,7 @@ header.bp-nav {
 .nav-links {
   display: flex;
   gap: 24px;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 12px;
   color: var(--bp-ink);
   letter-spacing: 0.08em;
@@ -593,7 +593,7 @@ header.bp-nav {
   margin-bottom: 20px;
 }
 .bp-form-group label {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 11px;
   color: var(--bp-blue);
   letter-spacing: 0.12em;
@@ -607,7 +607,7 @@ header.bp-nav {
   padding: 12px 14px;
   border: 1.5px solid var(--bp-ink);
   background: var(--bp-paper);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 14px;
   color: var(--bp-ink);
   border-radius: 0;
@@ -631,7 +631,7 @@ header.bp-nav {
   scroll-margin-top: 80px;
 }
 .section h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 56px;
   font-weight: 900;
   letter-spacing: -0.025em;
@@ -651,7 +651,7 @@ header.bp-nav {
   transform: translateY(-2px);
 }
 .card h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 22px;
   font-weight: 900;
   letter-spacing: -0.015em;
@@ -659,7 +659,7 @@ header.bp-nav {
   color: var(--bp-ink);
 }
 .card p {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
   font-size: 14px;
   line-height: 1.85;
   color: var(--bp-ink-soft);

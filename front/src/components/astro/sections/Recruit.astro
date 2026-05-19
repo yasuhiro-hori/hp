@@ -50,7 +50,6 @@ const hiringFlow = [
     { n: "04", t: "オファー", d: "条件提示。納得感を最優先に。" },
 ];
 
-const openCount = positions.filter((p) => p.open).length;
 ---
 
 <section id="recruit" class="bp-section recruit-hero bp-grid-bg">
@@ -79,7 +78,7 @@ const openCount = positions.filter((p) => p.open).length;
 
 <section class="bp-section">
     <div class="bp-section-inner">
-        <SectionHeader no="01" en="WHY TECSIZ" jp="ここで働く理由" right="4 REASONS" />
+        <SectionHeader no="01" en="WHY TECSIZ" jp="ここで働く理由" />
         <div class="r-why-grid">
             {
                 reasons.map((r) => (
@@ -96,7 +95,7 @@ const openCount = positions.filter((p) => p.open).length;
 
 <section class="bp-section">
     <div class="bp-section-inner">
-        <SectionHeader no="02" en="OPEN POSITIONS" jp="募集ポジション" right={`${openCount} OPEN / 1 CLOSED`} />
+        <SectionHeader no="02" en="OPEN POSITIONS" jp="募集ポジション" />
 
         <div class="r-table">
             <div class="r-table-head">
@@ -125,7 +124,7 @@ const openCount = positions.filter((p) => p.open).length;
 
 <section class="bp-section">
     <div class="bp-section-inner">
-        <SectionHeader no="03" en="WELCOMED SKILLS" jp="歓迎スキル" right="必須ではなく『あれば嬉しい』" />
+        <SectionHeader no="03" en="WELCOMED SKILLS" jp="歓迎スキル" />
         <div class="r-skills-grid">
             {
                 skillGroups.map((g) => (
@@ -144,7 +143,7 @@ const openCount = positions.filter((p) => p.open).length;
 
 <section class="bp-section recruit-apply" style="border-bottom: none">
     <div class="bp-section-inner">
-        <SectionHeader no="04" en="APPLICATION" jp="まずは話を聞きにきませんか" right="所要 30 分 / online OK" />
+        <SectionHeader no="04" en="APPLICATION" jp="まずは話を聞きにきませんか" />
 
         <div class="r-apply-grid">
             <aside class="r-flow">
