@@ -27,12 +27,12 @@ const reasons = [
 ];
 
 const positions = [
-    { id: "P.01", t: "Backend Engineer", stack: "Go / Rust / SQLBoiler / Cognito", exp: "mid+", open: true },
-    { id: "P.02", t: "Frontend Engineer", stack: "TypeScript / React / Next.js / Astro", exp: "mid+", open: true },
-    { id: "P.03", t: "Infrastructure Engineer", stack: "AWS / GCP / Terraform / Docker", exp: "mid+", open: true },
-    { id: "P.04", t: "AI/LLM Engineer", stack: "Python / LangChain / pgvector / RAG", exp: "all", open: true },
-    { id: "P.05", t: "Forward Deployed Engineer", stack: "言語不問 / 業務分析 / 顧客対話", exp: "sr", open: true },
-    { id: "P.06", t: "New Grad / Internship", stack: "言語問わず / 学習意欲重視", exp: "jr", open: false },
+    { id: "P.01", t: "Backend Engineer", stack: "Go / Rust / SQLBoiler / Cognito", exp: "Mid-level+", open: true },
+    { id: "P.02", t: "Frontend Engineer", stack: "TypeScript / React / Next.js / Astro", exp: "Mid-level+", open: true },
+    { id: "P.03", t: "Infrastructure Engineer", stack: "AWS / GCP / Terraform / Docker", exp: "Mid-level+", open: true },
+    { id: "P.04", t: "AI/LLM Engineer", stack: "Python / LangChain / pgvector / RAG", exp: "All levels", open: true },
+    { id: "P.05", t: "Forward Deployed Engineer", stack: "言語不問 / 業務分析 / 顧客対話", exp: "Senior", open: true },
+    { id: "P.06", t: "New Grad / Internship", stack: "言語問わず / 学習意欲重視", exp: "Junior", open: false },
 ];
 
 const skillGroups = [
@@ -113,7 +113,7 @@ const hiringFlow = [
                         <div class="r-row-stack">{p.stack}</div>
                         <div class="r-row-exp">{p.exp}</div>
                         <div class="r-row-status">
-                            {p.open ? <span class="open">● OPEN  →</span> : <span class="closed-lbl">○ CLOSED</span>}
+                            {p.open ? <span class="open">● OPEN</span> : <span class="closed-lbl">○ CLOSED</span>}
                         </div>
                     </div>
                 ))
@@ -368,16 +368,16 @@ const hiringFlow = [
             grid-template-areas:
                 "id name"
                 "id stack"
-                "id meta";
+                "id exp"
+                "id status";
         }
         .r-row-id { grid-area: id; }
         .r-row-t { grid-area: name; }
         .r-row-stack { grid-area: stack; }
-        .r-row-exp { grid-area: meta; }
+        .r-row-exp { grid-area: exp; }
         .r-row-status {
-            grid-area: meta;
+            grid-area: status;
             text-align: left;
-            margin-top: 4px;
         }
     }
 
