@@ -108,13 +108,13 @@ const sections = [
         <DrawingHeader drawing="02-PRODUCTS / ソリューション" sheet="02" />
         <div class="ph-grid">
             <h1>
-                実装済みの<br />
-                <span class="hl">3つの解</span>と、その<br />基盤テンプレート。
+                実装済みの
+                <span class="hl">3つの解</span>と、その基盤テンプレート。
             </h1>
-            <p>
-                現場で何度も繰り返し求められる課題に対して、再現性のある解として作り込んできた領域。ゼロから検討する必要のない、検証済みの選択肢。
-            </p>
         </div>
+        <p class="ph-lead">
+            現場で何度も繰り返し求められる課題に対して、再現性のある解として作り込んできた領域。ゼロから検討する必要のない、検証済みの選択肢。
+        </p>
 
         <div class="ph-index">
             {
@@ -210,12 +210,13 @@ const sections = [
         letter-spacing: -0.025em;
     }
     .hl { color: var(--bp-blue); }
-    .ph-grid p {
+    .ph-lead {
         font-family: var(--font-sans);
         font-size: 16px;
         line-height: 1.85;
         color: var(--bp-ink-soft);
-        margin: 0;
+        margin: 24px 0 0;
+        max-width: 640px;
     }
 
     .ph-index {
