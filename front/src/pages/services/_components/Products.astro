@@ -109,7 +109,7 @@ const sections = [
         <div class="ph-grid">
             <h1>
                 実装済みの
-                <span class="hl">3つの解</span>と、その基盤テンプレート。
+                <span class="hl">3つの解</span>と、<br />その基盤テンプレート。
             </h1>
         </div>
         <p class="ph-lead">
@@ -186,17 +186,7 @@ const sections = [
         padding-bottom: 56px;
     }
 
-    .ph-grid {
-        display: grid;
-        grid-template-columns: 1fr 480px;
-        gap: 56px;
-        align-items: end;
-    }
     @media (max-width: 900px) {
-        .ph-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
-        }
         .ph-grid h1 br { display: none; }
     }
 
