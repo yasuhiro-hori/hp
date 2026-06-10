@@ -1,0 +1,177 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/react/Navbar";
+import Footer from "../../layouts/Footer.astro";
+import "../../styles/globals.css";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+    `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+---
+
+<Layout
+    title="ブログ | 株式会社テクシズ"
+    description="株式会社テクシズのブログ。Forward Deployed Engineerとしての現場の話、AI活用やシステム開発の知見を発信します。"
+>
+    <Navbar client:load />
+    <main>
+        <section class="bp-section blog-hero bp-grid-bg">
+            <div class="bp-section-inner">
+                <div class="drawing-header">
+                    <span class="drawing-title">ブログ</span>
+                </div>
+                <h1>BLOG</h1>
+                <p class="hero-desc">
+                    現場で得た知見を書きます。FDEの実践、AI活用、システム開発のこと。
+                </p>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                {
+                    posts.length === 0 ? (
+                        <p class="empty">記事は準備中です。</p>
+                    ) : (
+                        <ul class="post-list">
+                            {posts.map((post) => (
+                                <li>
+                                    <a href={`/blog/${post.id}/`} class="post-link">
+                                        <time
+                                            class="post-date"
+                                            datetime={post.data.pubDate.toISOString()}
+                                        >
+                                            {formatDate(post.data.pubDate)}
+                                        </time>
+                                        <div class="post-text">
+                                            <span class="post-title">
+                                                {post.data.title}
+                                            </span>
+                                            <span class="post-desc">
+                                                {post.data.description}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .blog-hero {
+        padding-top: 64px;
+        padding-bottom: 56px;
+    }
+
+    .drawing-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-muted);
+        margin-bottom: 32px;
+    }
+
+    .blog-hero h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(48px, 7vw, 80px);
+        font-weight: 900;
+        line-height: 1.02;
+        color: var(--bp-ink);
+        margin: 0 0 24px;
+        letter-spacing: -0.025em;
+    }
+
+    .hero-desc {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+
+    .empty {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+        margin: 0;
+    }
+
+    .post-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: 800px;
+    }
+
+    .post-list li {
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .post-list li:first-child {
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+
+    .post-link {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 24px;
+        padding: 24px 8px;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+    .post-link:hover {
+        background: var(--bp-paper-2);
+    }
+
+    .post-date {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+        padding-top: 3px;
+    }
+
+    .post-text {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .post-title {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        line-height: 1.6;
+    }
+    .post-link:hover .post-title {
+        color: var(--bp-blue);
+    }
+
+    .post-desc {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--bp-muted);
+    }
+
+    @media (max-width: 640px) {
+        .post-link {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+    }
+</style>

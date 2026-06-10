@@ -1,0 +1,356 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/react/Navbar";
+import Footer from "../../layouts/Footer.astro";
+import "../../styles/globals.css";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog", ({ data }) => !data.draft);
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+    `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+---
+
+<Layout
+    title={`${post.data.title} | 株式会社テクシズ`}
+    description={post.data.description}
+>
+    <Navbar client:load />
+    <main>
+        <section class="bp-section post-hero bp-grid-bg">
+            <div class="bp-section-inner">
+                <div class="drawing-header">
+                    <a href="/blog/" class="back-link">ブログ</a>
+                    <span class="sep">/</span>
+                    <time datetime={post.data.pubDate.toISOString()}>
+                        {formatDate(post.data.pubDate)}
+                    </time>
+                    {
+                        post.data.updatedDate && (
+                            <>
+                                <span class="sep">/</span>
+                                <span>
+                                    更新 {formatDate(post.data.updatedDate)}
+                                </span>
+                            </>
+                        )
+                    }
+                </div>
+                <h1>{post.data.title}</h1>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <div class="post-layout">
+                    <div>
+                        <article class="post-body">
+                            <Content />
+                        </article>
+                        <div class="post-footer">
+                            <a href="/blog/" class="back-to-list"
+                                >← 記事一覧へ戻る</a
+                            >
+                        </div>
+                    </div>
+                    <aside class="post-aside">
+                        <div class="aside-label">// 記事一覧</div>
+                        <ul class="aside-list">
+                            {
+                                allPosts.map((p) => (
+                                    <li>
+                                        {p.id === post.id ? (
+                                            <span class="aside-item current">
+                                                <span class="aside-date">
+                                                    {formatDate(p.data.pubDate)}
+                                                </span>
+                                                <span class="aside-title">
+                                                    {p.data.title}
+                                                </span>
+                                            </span>
+                                        ) : (
+                                            <a
+                                                href={`/blog/${p.id}/`}
+                                                class="aside-item"
+                                            >
+                                                <span class="aside-date">
+                                                    {formatDate(p.data.pubDate)}
+                                                </span>
+                                                <span class="aside-title">
+                                                    {p.data.title}
+                                                </span>
+                                            </a>
+                                        )}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .post-hero {
+        padding-top: 64px;
+        padding-bottom: 56px;
+    }
+
+    .drawing-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-muted);
+        margin-bottom: 32px;
+    }
+    .sep {
+        color: var(--bp-border-dash);
+    }
+    .back-link {
+        color: var(--bp-muted);
+        text-decoration: none;
+    }
+    .back-link:hover {
+        color: var(--bp-blue);
+    }
+
+    .post-hero h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(28px, 4.5vw, 44px);
+        font-weight: 900;
+        line-height: 1.4;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.01em;
+        max-width: 800px;
+    }
+
+    .post-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 800px) 260px;
+        gap: 64px;
+        align-items: start;
+    }
+    @media (max-width: 980px) {
+        .post-layout {
+            grid-template-columns: 1fr;
+            gap: 56px;
+        }
+    }
+
+    .post-aside {
+        position: sticky;
+        top: 96px;
+    }
+    @media (max-width: 980px) {
+        .post-aside {
+            position: static;
+            border-top: 1px dashed var(--bp-border-dash);
+            padding-top: 32px;
+        }
+    }
+
+    .aside-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-blue);
+        letter-spacing: 0.1em;
+        margin-bottom: 16px;
+    }
+
+    .aside-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .aside-list li {
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .aside-list li:first-child {
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+
+    .aside-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 14px 4px;
+        text-decoration: none;
+    }
+    a.aside-item:hover {
+        background: var(--bp-paper-2);
+    }
+    a.aside-item:hover .aside-title {
+        color: var(--bp-blue);
+    }
+
+    .aside-date {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--bp-muted);
+        letter-spacing: 0.08em;
+    }
+
+    .aside-title {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.6;
+        color: var(--bp-ink);
+    }
+
+    .aside-item.current {
+        border-left: 3px solid var(--bp-blue);
+        padding-left: 12px;
+    }
+    .aside-item.current .aside-title {
+        color: var(--bp-blue);
+        font-weight: 700;
+    }
+
+    .post-body {
+        max-width: 800px;
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.95;
+        color: var(--bp-ink-soft);
+    }
+
+    .post-body :global(h2) {
+        font-family: var(--font-mono);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--bp-blue);
+        letter-spacing: 0.1em;
+        margin: 48px 0 16px;
+        padding-top: 32px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .post-body :global(h2)::before {
+        content: "// ";
+    }
+    .post-body :global(h2:first-child) {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .post-body :global(h3) {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin: 32px 0 12px;
+    }
+
+    .post-body :global(p) {
+        margin: 0 0 20px;
+    }
+
+    .post-body :global(ul),
+    .post-body :global(ol) {
+        padding-left: 1.5em;
+        margin: 0 0 20px;
+    }
+    .post-body :global(li) {
+        margin-bottom: 6px;
+    }
+
+    .post-body :global(a) {
+        color: var(--bp-blue);
+        text-decoration: none;
+    }
+    .post-body :global(a):hover {
+        text-decoration: underline;
+    }
+
+    .post-body :global(code) {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        background: var(--bp-paper-grid);
+        padding: 2px 6px;
+        border-radius: 2px;
+    }
+
+    .post-body :global(pre) {
+        padding: 20px;
+        margin: 0 0 20px;
+        overflow-x: auto;
+        border: 1px solid var(--bp-border);
+        border-radius: 2px;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+    .post-body :global(pre code) {
+        background: none;
+        padding: 0;
+    }
+
+    .post-body :global(blockquote) {
+        margin: 0 0 20px;
+        padding: 4px 0 4px 20px;
+        border-left: 3px solid var(--bp-blue-light);
+        color: var(--bp-muted);
+    }
+
+    .post-body :global(img) {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .post-body :global(table) {
+        border-collapse: collapse;
+        margin: 0 0 20px;
+        font-size: 14px;
+    }
+    .post-body :global(th),
+    .post-body :global(td) {
+        border: 1px solid var(--bp-border);
+        padding: 8px 14px;
+        text-align: left;
+    }
+    .post-body :global(th) {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        background: var(--bp-paper-grid);
+    }
+
+    .post-footer {
+        max-width: 800px;
+        margin-top: 56px;
+        padding-top: 32px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .back-to-list {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        color: var(--bp-blue);
+        text-decoration: none;
+    }
+    .back-to-list:hover {
+        text-decoration: underline;
+    }
+</style>
