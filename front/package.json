@@ -17,19 +17,19 @@
     "deploy": "pnpm build && gh-pages -d dist -t -b gh-pages -r https://yasuhiro-hori@github.com/yasuhiro-hori/hp.git"
   },
   "dependencies": {
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/sitemap": "^3.7.0",
-    "astro": "^5.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@astrojs/react": "^6.0.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@astrojs/check": "^0.9.9",
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "gh-pages": "^6.3.0",
-    "typescript": "^5"
+    "typescript": "^6.0.3"
   },
   "pnpm": {
     "overrides": {
