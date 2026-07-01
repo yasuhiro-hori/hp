@@ -19,6 +19,26 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+
+		<!-- Google tag (gtag.js) -->
+		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-J99R1TMD8Z"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+			// astro:page-load 側で page_view を送るため、config 時点の自動送信は無効化する
+			gtag("config", "G-J99R1TMD8Z", { send_page_view: false });
+
+			document.addEventListener("astro:page-load", () => {
+				gtag("event", "page_view", {
+					page_path: location.pathname + location.search,
+					page_title: document.title,
+					page_location: location.href,
+				});
+			});
+		</script>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
