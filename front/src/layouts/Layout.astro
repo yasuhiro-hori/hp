@@ -5,13 +5,43 @@ interface Props {
 	title: string;
 	description?: string;
 	noindex?: boolean;
+	/** og:type。記事ページでは "article" を指定する */
+	ogType?: "website" | "article";
+	/** ページ固有の構造化データ（Organization に追加して出力される） */
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
 	description = "顧客の現場に入り、プロダクトをつくる。Forward Deployed Engineerとして業務課題を一緒に定義し、AIを活用してSaaSを共創する開発スタジオです。",
 	noindex = false,
+	ogType = "website",
+	jsonLd,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://tecsiz.co.jp").href;
+const ogImage = new URL("/logo_text_thick.png", Astro.site ?? "https://tecsiz.co.jp").href;
+
+const organization = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "株式会社テクシズ",
+	alternateName: "TECSIZ Co., Ltd.",
+	url: "https://tecsiz.co.jp",
+	logo: ogImage,
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: "浜松町2-2-15 浜松町ダイヤビル2F",
+		addressLocality: "港区",
+		addressRegion: "東京都",
+		postalCode: "105-0013",
+		addressCountry: "JP",
+	},
+	description:
+		"顧客の現場に入り、プロダクトをつくる。Forward Deployed Engineerとして業務課題を一緒に定義し、AIを活用してSaaSを共創する開発スタジオです。",
+};
+
+const structuredData = [organization, ...(jsonLd ? [jsonLd].flat() : [])];
 ---
 
 <!doctype html>
@@ -43,7 +73,14 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		<link rel="canonical" href={canonical} />
+		{
+			noindex ? (
+				<meta name="robots" content="noindex, nofollow" />
+			) : (
+				<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+			)
+		}
 		<meta name="color-scheme" content="light" />
 		<meta name="theme-color" content="#fafaf6" />
 
@@ -57,31 +94,21 @@ const {
 		<link rel="apple-touch-icon" href="/favicon.ico" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:locale" content="ja_JP" />
 		<meta property="og:site_name" content="株式会社テクシズ" />
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
 		<ClientRouter />
-		<script
-			is:inline
-			type="application/ld+json"
-			set:html={JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "Organization",
-				name: "株式会社テクシズ",
-				alternateName: "TECSIZ Co., Ltd.",
-				url: "https://tecsiz.co.jp",
-				address: {
-					"@type": "PostalAddress",
-					streetAddress: "浜松町2-2-15 浜松町ダイヤビル2F",
-					addressLocality: "港区",
-					addressRegion: "東京都",
-					postalCode: "105-0013",
-					addressCountry: "JP",
-				},
-				description:
-					"顧客の現場に入り、プロダクトをつくる。Forward Deployed Engineerとして業務課題を一緒に定義し、AIを活用してSaaSを共創する開発スタジオです。",
-			})}
-		/>
+		{
+			structuredData.map((data) => (
+				<script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
+			))
+		}
 	</head>
 	<body>
 		<slot />

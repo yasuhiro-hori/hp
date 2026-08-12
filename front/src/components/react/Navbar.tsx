@@ -143,6 +143,12 @@ export default function Navbar() {
                     >
                         about
                     </a>
+                    <a
+                        href="/blog"
+                        className={activePath.startsWith('/blog') ? 'active' : ''}
+                    >
+                        blog
+                    </a>
                     <a href="/#contact" className="nav-cta">
                         → contact
                     </a>
