@@ -18,7 +18,25 @@ const faqs = [
         q: "開発期間はどのくらいかかりますか？",
         a: "最初の動くプロトタイプであれば、最短数週間で作ることを目指します。自社テンプレート基盤とAI活用の開発フローにより、従来の受託開発より大幅にスピードアップしています。",
     },
+    {
+        q: "1人月に満たない小さな案件でも相談できますか？",
+        a: "はい、お受けしています。月0.3人月（月6日程度）から使えるラボ型契約のほか、数日で終わる改修・調査・技術相談といったスポットのご依頼にも対応します。「フルタイムで雇うほどではないが、社内だけでは手が回らない」という規模がむしろ得意な領域です。ご依頼の内容によって、その都度お見積もりする形と、月ごとに一定量を確保する形のどちらが合うかをご提案します。",
+    },
+    {
+        q: "既存システムの保守運用だけでもお願いできますか？",
+        a: "対応できます。他社が開発したシステムや、社内の担当者が作ったツールの引き継ぎも含めてご相談ください。障害対応・小さな機能追加・ライブラリのバージョン更新・クラウド費用の見直しなどを、月ごとの契約で継続的に支えます。まずは現状のコードと構成を確認させていただき、引き継ぎに必要な作業と月々の稼働量をご提示します。",
+    },
 ];
+
+const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+};
 ---
 
 <section id="faq" class="bp-section">
@@ -42,8 +60,15 @@ const faqs = [
                 ))
             }
         </div>
+
+        <p class="faq-more">
+            費用感や契約形態のご相談は<a href="/services#engagement">関わり方の一覧</a
+            >もご覧ください。
+        </p>
     </div>
 </section>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
 <style>
     .faq-list {
@@ -114,6 +139,22 @@ const faqs = [
         line-height: 1.85;
         color: var(--bp-ink-soft);
         margin: 0;
+    }
+
+    .faq-more {
+        max-width: 960px;
+        margin: 24px auto 0;
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-muted);
+        text-align: right;
+    }
+    .faq-more a {
+        color: var(--bp-blue);
+        text-decoration: none;
+    }
+    .faq-more a:hover {
+        text-decoration: underline;
     }
 
     @media (max-width: 700px) {

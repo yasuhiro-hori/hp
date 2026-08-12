@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/react/Navbar";
 import ProductsSection from "./_components/Products.astro";
+import Engagement from "./_components/Engagement.astro";
 import BackendTemplates from "./_components/BackendTemplates";
 import SectionHeader from "@/components/astro/shared/SectionHeader.astro";
 import Contact from "../_components/Contact.astro";
@@ -23,6 +24,8 @@ import "../../styles/globals.css";
                 <BackendTemplates client:load />
             </div>
         </section>
+
+        <Engagement />
 
         <Contact />
     </main>

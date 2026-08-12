@@ -161,6 +161,10 @@ const sections = [
                 <div class="ph-idx-id">● P.05</div>
                 <div class="ph-idx-t">Backend テンプレート</div>
             </a>
+            <a href="#engagement" class="ph-index-item">
+                <div class="ph-idx-id">● P.06</div>
+                <div class="ph-idx-t">関わり方・費用感</div>
+            </a>
         </div>
     </div>
 </section>
@@ -244,7 +248,7 @@ const sections = [
     .ph-index {
         margin-top: 56px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 0;
         border-top: 1px solid var(--bp-ink);
     }
@@ -257,7 +261,8 @@ const sections = [
         color: inherit;
         transition: background 0.15s ease;
     }
-    .ph-index-item:last-child { border-right: none; }
+    /* 3列グリッドの右端は罫線を引かない */
+    .ph-index-item:nth-child(3n) { border-right: none; }
 
     @media (max-width: 900px) {
         .ph-index { grid-template-columns: repeat(2, 1fr); }

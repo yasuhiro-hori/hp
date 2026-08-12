@@ -1,0 +1,711 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/react/Navbar";
+import Footer from "@/layouts/Footer.astro";
+import CornerMarks from "@/components/astro/shared/CornerMarks.astro";
+import SectionHeader from "@/components/astro/shared/SectionHeader.astro";
+import Contact from "@/pages/_components/Contact.astro";
+import "@/styles/globals.css";
+
+const plans = [
+    {
+        vol: "0.3人月",
+        days: "月6日程度",
+        d: "小さな改善を継続的に積み上げるための最小構成。既存システムの保守と、月に1〜2機能の追加が目安です。",
+    },
+    {
+        vol: "0.5人月",
+        days: "月10日程度",
+        d: "保守に加えて、新しい画面や機能をまとまった単位で開発できる量。社内システムの改善が常時走っている状態に向きます。",
+    },
+    {
+        vol: "1.0人月〜",
+        days: "月20日程度",
+        d: "実質的に専任エンジニアが1人いる状態。新規プロダクトの開発と運用を並行して進められます。",
+    },
+];
+
+const canDo = [
+    "既存システムの障害対応・不具合修正",
+    "管理画面への機能追加、画面の改修",
+    "業務データの集計・レポートの自動化",
+    "AI OCRやLLMを使った小さな自動化の試作",
+    "ライブラリのバージョン更新、脆弱性対応",
+    "クラウド構成とコストの見直し",
+];
+
+const comparison = [
+    {
+        axis: "着手までの速さ",
+        lab: "契約後すぐ。案件ごとの見積もり不要",
+        spot: "都度、要件定義と見積もりが必要",
+        hire: "採用〜入社まで数ヶ月",
+    },
+    {
+        axis: "業務知識の蓄積",
+        lab: "同じ担当者が継続して積み上げる",
+        spot: "案件ごとに説明し直しになる",
+        hire: "社内に完全に残る",
+    },
+    {
+        axis: "量の調整",
+        lab: "月単位で増減できる",
+        spot: "都度ゼロから",
+        hire: "調整できない",
+    },
+    {
+        axis: "小さな依頼のしやすさ",
+        lab: "枠の中なので気軽に頼める",
+        spot: "小さすぎると発注が面倒",
+        hire: "頼みやすい",
+    },
+    {
+        axis: "固定費",
+        lab: "契約量に応じた月額",
+        spot: "使った分だけ",
+        hire: "人件費として固定",
+    },
+];
+
+const fits = [
+    "社内システムの継続的な改善・保守が必要だが、専任エンジニアを置くほどではない",
+    "エンジニアを採用したいが、採用が決まるまでの間も開発を止めたくない",
+    "小さな改修依頼が定期的に発生していて、都度の発注が負担になっている",
+    "AI活用を試したいが、まず小さく始めて様子を見たい",
+];
+
+const notFits = [
+    "大規模な新規システムを短期間で作りたい（受託開発のほうが適しています）",
+    "完全に単発の作業で、継続的な関係が不要（スポットでお受けします）",
+    "常駐して指示どおりに手を動かす人員が必要な場合",
+];
+
+const steps = [
+    { t: "現状のヒアリング", d: "既存システムの構成、困っていること、月にどれくらいの依頼が発生しそうかを確認します" },
+    { t: "契約量の決定", d: "0.3 / 0.5 / 1.0人月のどれで始めるかを決めます。少なめに始めて増やす形をおすすめしています" },
+    { t: "引き継ぎ・環境把握", d: "コードとインフラを読み、既存の運用を把握します。ここは初月の稼働に含みます" },
+    { t: "運用開始", d: "依頼をチケットとして受け、優先順位を相談しながら進めます。月次で稼働実績を共有します" },
+];
+
+const faqs = [
+    {
+        q: "最低契約期間はありますか？",
+        a: "3ヶ月からのご契約をお願いしています。初月はコードと業務の把握に一定の時間を使うため、それより短いと成果が出しきれないためです。以降は月単位で見直せます。",
+    },
+    {
+        q: "使わなかった分は繰り越せますか？",
+        a: "翌月までの繰り越しに対応しています。ただし恒常的に余るようであれば、契約量を下げるご提案をします。使わない枠に払い続けていただく意味はありません。",
+    },
+    {
+        q: "他社が作ったシステムでも引き継げますか？",
+        a: "対応しています。まずコードと構成を確認させていただき、引き継ぎに必要な作業量をご提示します。ドキュメントが残っていない場合も、実際のコードから読み解いて進めます。",
+    },
+    {
+        q: "急ぎの障害対応はしてもらえますか？",
+        a: "契約量の範囲内で優先的に対応します。ただし24時間365日の当番体制が必要な場合は、別途ご相談ください。監視の仕組みづくりから一緒に設計することもできます。",
+    },
+];
+
+const jsonLd = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "ラボ型開発",
+        serviceType: "ソフトウェア開発（ラボ型契約・準委任）",
+        description:
+            "月0.3人月（月6日程度）から使えるラボ型開発契約。既存システムの保守運用から機能追加まで、必要な分だけ開発リソースを確保できます。",
+        areaServed: { "@type": "Country", name: "日本" },
+        provider: {
+            "@type": "Organization",
+            name: "株式会社テクシズ",
+            url: "https://tecsiz.co.jp",
+        },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "ホーム", item: "https://tecsiz.co.jp/" },
+            { "@type": "ListItem", position: 2, name: "ソリューション", item: "https://tecsiz.co.jp/services/" },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: "ラボ型開発",
+                item: "https://tecsiz.co.jp/services/lab-development/",
+            },
+        ],
+    },
+];
+---
+
+<Layout
+    title="ラボ型開発 | 月0.3人月から使える開発リソース | 株式会社テクシズ"
+    description="フルタイムのエンジニア採用は重すぎる、でもスポット外注では知見が残らない。月0.3人月（月6日程度）から必要な分だけ開発リソースを確保できるラボ型契約の仕組み、費用感、向くケース・向かないケースを解説します。"
+    jsonLd={jsonLd}
+>
+    <Navbar client:load />
+    <main>
+        <section class="bp-section lab-hero bp-grid-bg">
+            <div class="bp-section-inner">
+                <nav class="crumbs" aria-label="パンくず">
+                    <a href="/">ホーム</a>
+                    <span class="sep">/</span>
+                    <a href="/services">ソリューション</a>
+                    <span class="sep">/</span>
+                    <span>ラボ型開発</span>
+                </nav>
+                <h1>
+                    <span class="hl">月0.3人月</span>から、<br />
+                    必要な分だけ。
+                </h1>
+                <p class="lab-lead">
+                    フルタイムで1人雇うほどの仕事量はない。かといってスポットで外注すると、毎回ゼロから説明が必要で業務知識が積み上がらない。ラボ型開発は、その間を埋める契約です。
+                </p>
+                <div class="lab-hero-cta">
+                    <a href="/#contact" class="bp-btn">$ inquire --about=lab</a>
+                    <a href="/blog/lab-style-development/" class="bp-btn bp-btn-outline">
+                        → 詳しい解説記事を読む
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="01" en="PLANS" jp="契約量の目安" />
+                <p class="sec-sub">
+                    月ごとに一定のエンジニアリソースを確保する契約です。少なめに始めて、仕事量が増えたら上げ、落ち着いたら戻す。この調整が月単位でできるのがラボ型の利点です。
+                </p>
+
+                <div class="plan-grid">
+                    {
+                        plans.map((p) => (
+                            <div class="plan-card">
+                                <CornerMarks />
+                                <div class="plan-vol">{p.vol}</div>
+                                <div class="plan-days">{p.days}</div>
+                                <p>{p.d}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+                <p class="plan-note">
+                    ※ 具体的な金額は、必要な技術領域と体制によって変わるためお問い合わせください。まずは0.3人月から始められるケースが多いです。
+                </p>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="02" en="SCOPE" jp="0.3人月でできること" />
+                <p class="sec-sub">
+                    月6日程度の稼働で、次のような仕事を継続的に進められます。「これは頼めるだろうか」と迷う規模のものこそ、枠の中で気軽に相談してください。
+                </p>
+                <ul class="scope-list">
+                    {canDo.map((c) => <li>{c}</li>)}
+                </ul>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="03" en="COMPARISON" jp="他の選択肢との違い" />
+                <p class="sec-sub">
+                    ラボ型・スポット外注・正社員採用は、どれが優れているという話ではなく、状況によって向き不向きが分かれます。
+                </p>
+                <div class="table-wrap">
+                    <table class="cmp-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col" class="highlight">ラボ型開発</th>
+                                <th scope="col">スポット外注</th>
+                                <th scope="col">正社員採用</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                comparison.map((row) => (
+                                    <tr>
+                                        <th scope="row">{row.axis}</th>
+                                        <td class="highlight">{row.lab}</td>
+                                        <td>{row.spot}</td>
+                                        <td>{row.hire}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="04" en="FIT" jp="向くケース・向かないケース" />
+                <div class="fit-grid">
+                    <div class="fit-card">
+                        <div class="fit-label ok">● 向いています</div>
+                        <ul>
+                            {fits.map((f) => <li>{f}</li>)}
+                        </ul>
+                    </div>
+                    <div class="fit-card">
+                        <div class="fit-label ng">● 向いていません</div>
+                        <ul>
+                            {notFits.map((f) => <li>{f}</li>)}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="05" en="PROCESS" jp="開始までの流れ" />
+                <div class="step-list">
+                    {
+                        steps.map((s, i) => (
+                            <div class="step">
+                                <div class="step-num-col">
+                                    <div class="step-num">{i + 1}</div>
+                                    {i < steps.length - 1 && <div class="step-line" />}
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-t">{s.t}</div>
+                                    <div class="step-d">{s.d}</div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="06" en="FAQ" jp="よくある質問" />
+                <div class="faq-list">
+                    {
+                        faqs.map((f, i) => (
+                            <details class="faq-item" open={i === 0}>
+                                <summary>
+                                    <span class="faq-q-label">Q</span>
+                                    <span class="faq-q-text">{f.q}</span>
+                                    <span class="faq-toggle" aria-hidden="true">
+                                        [+]
+                                    </span>
+                                </summary>
+                                <div class="faq-a">
+                                    <span class="faq-a-label">A</span>
+                                    <p>{f.a}</p>
+                                </div>
+                            </details>
+                        ))
+                    }
+                </div>
+                <p class="faq-more">
+                    スポットのご依頼や保守運用のみのご相談は<a href="/services#engagement"
+                        >関わり方の一覧</a
+                    >をご覧ください。
+                </p>
+            </div>
+        </section>
+
+        <Contact />
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .lab-hero {
+        padding-top: 64px;
+        padding-bottom: 56px;
+    }
+
+    .crumbs {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--bp-muted);
+        margin-bottom: 32px;
+    }
+    .crumbs a {
+        color: var(--bp-muted);
+        text-decoration: none;
+    }
+    .crumbs a:hover {
+        color: var(--bp-blue);
+    }
+    .crumbs .sep {
+        color: var(--bp-border-dash);
+    }
+
+    .lab-hero h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(36px, 6vw, 76px);
+        font-weight: 900;
+        line-height: 1.06;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+    .hl {
+        color: var(--bp-blue);
+    }
+
+    .lab-lead {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 24px 0 0;
+        max-width: 640px;
+    }
+
+    .lab-hero-cta {
+        margin-top: 36px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .sec-sub {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 36px;
+        max-width: 880px;
+    }
+
+    /* --- plans --- */
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .plan-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .plan-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+        position: relative;
+    }
+    .plan-vol {
+        font-family: var(--font-sans);
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        letter-spacing: -0.02em;
+    }
+    .plan-days {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.08em;
+        padding-bottom: 16px;
+        margin: 6px 0 16px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .plan-card p {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+    .plan-note {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--bp-muted);
+        margin: 20px 0 0;
+    }
+
+    /* --- scope --- */
+    .scope-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 32px;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    @media (max-width: 700px) {
+        .scope-list {
+            grid-template-columns: 1fr;
+        }
+    }
+    .scope-list li {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--bp-ink-soft);
+        padding: 18px 4px 18px 26px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+        position: relative;
+    }
+    .scope-list li::before {
+        content: "▸";
+        position: absolute;
+        left: 4px;
+        color: var(--bp-blue);
+    }
+
+    /* --- comparison --- */
+    .table-wrap {
+        overflow-x: auto;
+    }
+    .cmp-table {
+        width: 100%;
+        min-width: 720px;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 13px;
+    }
+    .cmp-table th,
+    .cmp-table td {
+        border: 1px solid var(--bp-border);
+        padding: 14px 16px;
+        text-align: left;
+        vertical-align: top;
+        line-height: 1.7;
+        color: var(--bp-ink-soft);
+    }
+    .cmp-table thead th {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        color: var(--bp-ink);
+        background: var(--bp-paper-grid);
+        white-space: nowrap;
+    }
+    .cmp-table tbody th {
+        font-weight: 700;
+        color: var(--bp-ink);
+        background: var(--bp-paper-grid);
+        white-space: nowrap;
+    }
+    .cmp-table .highlight {
+        background: rgba(10, 29, 58, 0.04);
+        color: var(--bp-ink);
+    }
+    .cmp-table thead .highlight {
+        color: var(--bp-blue);
+    }
+
+    /* --- fit --- */
+    .fit-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .fit-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .fit-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+    }
+    .fit-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        margin-bottom: 18px;
+    }
+    .fit-label.ok {
+        color: var(--bp-blue);
+    }
+    .fit-label.ng {
+        color: var(--bp-muted);
+    }
+    .fit-card ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .fit-card li {
+        font-family: var(--font-sans);
+        font-size: 13.5px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+        padding: 14px 0;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+
+    /* --- steps --- */
+    .step-list {
+        max-width: 760px;
+    }
+    .step {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 16px;
+        align-items: start;
+    }
+    .step-num-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+    }
+    .step-num {
+        width: 34px;
+        height: 34px;
+        border: 1.5px solid var(--bp-ink);
+        border-radius: 50%;
+        background: var(--bp-paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        flex-shrink: 0;
+    }
+    .step-line {
+        flex: 1;
+        width: 0;
+        border-left: 1.5px dashed var(--bp-blue);
+        min-height: 12px;
+    }
+    .step-content {
+        padding-bottom: 24px;
+    }
+    .step-t {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 6px;
+    }
+    .step-d {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-ink-soft);
+        line-height: 1.8;
+    }
+
+    /* --- faq (トップページのFAQと同じ見た目) --- */
+    .faq-list {
+        max-width: 960px;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    .faq-item {
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+    .faq-item summary {
+        display: grid;
+        grid-template-columns: 70px 1fr 32px;
+        gap: 20px;
+        padding: 22px 8px;
+        cursor: pointer;
+        list-style: none;
+        align-items: center;
+        transition: background 0.15s ease;
+    }
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+    .faq-item summary:hover {
+        background: rgba(10, 29, 58, 0.03);
+    }
+    .faq-q-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-q-text {
+        font-family: var(--font-sans);
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        letter-spacing: -0.005em;
+    }
+    .faq-toggle {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--bp-blue);
+        text-align: right;
+        transition: transform 0.2s ease;
+    }
+    .faq-item[open] .faq-toggle {
+        transform: rotate(45deg);
+    }
+    .faq-a {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 20px;
+        padding: 18px 8px 24px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .faq-a-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-accent);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-a p {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+    @media (max-width: 700px) {
+        .faq-item summary {
+            grid-template-columns: 56px 1fr 24px;
+            gap: 12px;
+            padding: 18px 4px;
+        }
+        .faq-q-text {
+            font-size: 15px;
+        }
+        .faq-a {
+            grid-template-columns: 56px 1fr;
+            gap: 12px;
+            padding: 14px 4px 18px;
+        }
+    }
+    .faq-more {
+        max-width: 960px;
+        margin: 24px 0 0;
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-muted);
+    }
+    .faq-more a {
+        color: var(--bp-blue);
+        text-decoration: none;
+    }
+    .faq-more a:hover {
+        text-decoration: underline;
+    }
+</style>

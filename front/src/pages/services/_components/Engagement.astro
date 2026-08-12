@@ -1,0 +1,215 @@
+---
+import CornerMarks from "@/components/astro/shared/CornerMarks.astro";
+import SectionHeader from "@/components/astro/shared/SectionHeader.astro";
+
+const plans = [
+    {
+        id: "PROJECT",
+        no: "A",
+        title: "受託開発",
+        scale: "プロジェクト単位 / 数週間〜",
+        d: "作るものが決まっている、あるいは一緒に定義するところから始めて、リリースまでを一括で請け負う形です。新規プロダクトや基幹システムの刷新など、まとまった規模の開発に向いています。",
+        points: [
+            "要件定義から設計・開発・リリースまで一貫して担当",
+            "最短数週間で動くプロトタイプを提示",
+            "自社テンプレート基盤を使い、立ち上げ期間を短縮",
+        ],
+        href: null,
+    },
+    {
+        id: "LAB",
+        no: "B",
+        title: "ラボ型開発",
+        scale: "月0.3人月（月6日程度）〜",
+        d: "月ごとに一定の開発リソースを確保しておき、その枠のなかで必要な開発を進める形です。案件ごとの見積もりが不要になるため、小さな改善を継続的に積み上げたい場合に向いています。",
+        points: [
+            "0.3人月から開始でき、仕事量に応じて増減可能",
+            "案件ごとの発注・見積もりが不要",
+            "担当エンジニアに業務知識が蓄積される",
+        ],
+        href: "/services/lab-development/",
+    },
+    {
+        id: "SPOT",
+        no: "C",
+        title: "スポット / 保守運用",
+        scale: "数日〜 / 月次契約",
+        d: "1人月に満たない小さな依頼や、すでに動いているシステムの面倒を見る形です。他社が開発したシステム、社内の担当者がAIで作ったツールの引き継ぎもご相談ください。",
+        points: [
+            "数日で終わる改修・調査・技術相談の単発依頼",
+            "障害対応・機能追加・バージョン更新の継続支援",
+            "既存システムの引き継ぎと、クラウド費用の見直し",
+        ],
+        href: null,
+    },
+];
+---
+
+<section id="engagement" class="bp-section">
+    <div class="bp-section-inner">
+        <SectionHeader no="06" en="ENGAGEMENT" jp="関わり方" />
+        <p class="eng-sub">
+            規模の大きな開発だけをお受けしているわけではありません。月0.3人月のラボ型契約から、数日で終わるスポットの改修、既存システムの保守運用まで、必要な量だけ使っていただける形を用意しています。
+        </p>
+
+        <div class="eng-grid">
+            {
+                plans.map((p) => (
+                    <div class="eng-card">
+                        <CornerMarks />
+                        <div class="eng-head">
+                            <span class="eng-no">● PLAN.{p.no}</span>
+                            <span class="eng-id">{p.id}</span>
+                        </div>
+                        <h3>{p.title}</h3>
+                        <div class="eng-scale">{p.scale}</div>
+                        <p class="eng-d">{p.d}</p>
+                        <ul class="eng-points">
+                            {p.points.map((pt) => (
+                                <li>{pt}</li>
+                            ))}
+                        </ul>
+                        {p.href && (
+                            <a href={p.href} class="eng-link">
+                                → ラボ型開発の詳細
+                            </a>
+                        )}
+                    </div>
+                ))
+            }
+        </div>
+
+        <div class="eng-cta">
+            <p>
+                どの形が合うか分からない段階でも構いません。やりたいことの規模と社内の体制をうかがったうえで、無理のない関わり方をご提案します。
+            </p>
+            <a href="/#contact" class="bp-btn">$ inquire --about=engagement</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .eng-sub {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 40px;
+        max-width: 880px;
+    }
+
+    .eng-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .eng-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .eng-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .eng-head {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        margin-bottom: 18px;
+    }
+    .eng-id {
+        opacity: 0.5;
+    }
+
+    .eng-card h3 {
+        font-family: var(--font-sans);
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 0 0 8px;
+        letter-spacing: -0.015em;
+    }
+
+    .eng-scale {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        letter-spacing: 0.06em;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+
+    .eng-d {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 18px;
+    }
+
+    .eng-points {
+        list-style: none;
+        margin: 0 0 20px;
+        padding: 0;
+        flex: 1;
+    }
+    .eng-points li {
+        font-family: var(--font-sans);
+        font-size: 12.5px;
+        line-height: 1.75;
+        color: var(--bp-ink-soft);
+        padding-left: 18px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+    .eng-points li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--bp-blue);
+    }
+
+    .eng-link {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        color: var(--bp-blue);
+        text-decoration: none;
+        padding-top: 14px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .eng-link:hover {
+        text-decoration: underline;
+    }
+
+    .eng-cta {
+        margin-top: 32px;
+        padding-top: 28px;
+        border-top: 1.5px solid var(--bp-ink);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .eng-cta p {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+        max-width: 560px;
+    }
+</style>
