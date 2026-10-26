@@ -9,31 +9,30 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
         <div class="hero-layout">
             <div class="hero-main">
-                <div class="hero-tag">▸ FORWARD DEPLOYED ENGINEERING — AI×SAAS</div>
+                <div class="hero-tag">▸ VULNERABILITY RESPONSE — 脆弱性対応</div>
 
                 <h1>
-                    現場で<br />
-                    <span class="hl">設計</span>する<br />
-                    ソフトウェア。
+                    その<span class="hl">脆弱性</span>、<br />
+                    管理者だけでは<br />
+                    守れません。
                 </h1>
 
                 <p class="hero-lead">
-                    Forward Deployed Engineer
-                    として業務課題を一緒に定義し、AIを活用してSaaSを共創する。受託でも自社サービスでもない、新しいかたちの開発スタジオ。
+                    毎週のように届く脆弱性アラート。どれが本当に危険か、更新して何が壊れるかは、コードを読まなければ判断できません。<strong>エンジニア経験のない管理者が兼任で管理するのは、もう無理があります。</strong>テクシズのエンジニアが、棚卸しから修正・リリース、継続的な更新まで引き受けます。
                 </p>
 
-                <a href="/services/vulnerability/" class="hero-notice">
-                    <span class="hero-notice-tag">NEW</span>
+                <a href="/blog/vulnerability-alerts-left-unattended/" class="hero-notice">
+                    <span class="hero-notice-tag">BLOG</span>
                     <span class="hero-notice-text">
-                        <strong>その脆弱性、対応します。</strong>
-                        溜まった脆弱性アラートや古いままのライブラリを、棚卸しから修正・継続運用まで。
+                        <strong>その脆弱性アラート、放置していませんか</strong>
+                        エンジニアのいない会社でシステムの脆弱性を管理するということ
                     </span>
                     <span class="hero-notice-arrow" aria-hidden="true">→</span>
                 </a>
 
                 <div class="hero-actions">
                     <a href="/#contact" class="bp-btn">$ tecsiz --contact</a>
-                    <a href="/services" class="bp-btn bp-btn-outline">view works/</a>
+                    <a href="/services/vulnerability/" class="bp-btn bp-btn-outline">view vulnerability/</a>
                 </div>
             </div>
 
@@ -110,9 +109,9 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
     h1 {
         font-family: var(--font-sans),serif;
-        font-size: clamp(48px, 7vw, 92px);
+        font-size: clamp(40px, 6vw, 80px);
         font-weight: 900;
-        line-height: 1;
+        line-height: 1.12;
         color: var(--bp-ink);
         margin: 0;
         letter-spacing: -0.025em;
@@ -126,6 +125,9 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         color: var(--bp-ink-soft);
         max-width: 540px;
         margin: 28px 0 0;
+    }
+    .hero-lead strong {
+        color: var(--bp-ink);
     }
 
     .hero-notice {
