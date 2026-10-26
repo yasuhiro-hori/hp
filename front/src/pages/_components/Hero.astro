@@ -22,6 +22,15 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
                     として業務課題を一緒に定義し、AIを活用してSaaSを共創する。受託でも自社サービスでもない、新しいかたちの開発スタジオ。
                 </p>
 
+                <a href="/services/vulnerability/" class="hero-notice">
+                    <span class="hero-notice-tag">NEW</span>
+                    <span class="hero-notice-text">
+                        <strong>その脆弱性、対応します。</strong>
+                        溜まった脆弱性アラートや古いままのライブラリを、棚卸しから修正・継続運用まで。
+                    </span>
+                    <span class="hero-notice-arrow" aria-hidden="true">→</span>
+                </a>
+
                 <div class="hero-actions">
                     <a href="/#contact" class="bp-btn">$ tecsiz --contact</a>
                     <a href="/services" class="bp-btn bp-btn-outline">view works/</a>
@@ -48,6 +57,10 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
                         <tr>
                             <td>cycle</td>
                             <td>数週間〜 / continuous</td>
+                        </tr>
+                        <tr>
+                            <td>security</td>
+                            <td>脆弱性対応 · 継続更新</td>
                         </tr>
                         <tr>
                             <td>stack</td>
@@ -113,6 +126,50 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         color: var(--bp-ink-soft);
         max-width: 540px;
         margin: 28px 0 0;
+    }
+
+    .hero-notice {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 28px;
+        max-width: 560px;
+        padding: 14px 18px;
+        background: var(--bp-paper);
+        border: 1.5px solid var(--bp-ink);
+        text-decoration: none;
+        color: var(--bp-ink);
+        transition: transform 0.18s ease;
+    }
+    .hero-notice:hover {
+        transform: translateY(-2px);
+        color: var(--bp-ink);
+    }
+    .hero-notice-tag {
+        flex-shrink: 0;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--bp-paper);
+        background: var(--bp-blue);
+        padding: 4px 8px;
+    }
+    .hero-notice-text {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--bp-ink-soft);
+    }
+    .hero-notice-text strong {
+        display: block;
+        font-size: 15px;
+        color: var(--bp-ink);
+    }
+    .hero-notice-arrow {
+        margin-left: auto;
+        font-family: var(--font-mono);
+        color: var(--bp-blue);
     }
 
     .hero-actions {
