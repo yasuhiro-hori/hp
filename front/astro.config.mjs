@@ -20,6 +20,9 @@ export default defineConfig({
             },
         }),
     ],
+    redirects: {
+        '/blog/non-engineers-cannot-manage-vulnerabilities': '/blog/vulnerability-management-for-non-engineers/',
+    },
     output: 'static',
     build: {
         format: 'directory'

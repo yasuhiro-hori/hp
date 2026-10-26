@@ -4,34 +4,34 @@ import SectionHeader from "@/components/astro/shared/SectionHeader.astro";
 const cases = [
     {
         id: 1,
-        tag: "AI / OCR",
-        t: "AI OCR",
-        d: "帳票・請求書・手書き書類の読み取りをLLMと組み合わせて自動化。非定型フォーマットへの対応と既存システムへの統合を実現。",
-        stack: "Python · Claude · pgvector",
-        href: "/services#ai-ocr",
+        tag: "SECURITY / UPDATE",
+        t: "脆弱性対応",
+        d: "溜まった脆弱性アラートの棚卸しから、ライブラリ・フレームワークの更新、継続的な監視まで。他社が開発したシステムにも対応します。",
+        stack: "npm · go modules · docker · aws",
+        href: "/services/vulnerability/",
     },
     {
         id: 2,
-        tag: "AI / SEARCH",
-        t: "AIベクトル検索",
-        d: "キーワードで探せないものを、意図から探せるようにする。EC・求人・不動産など、大量コンテンツを持つサービスの検索体験を刷新。",
-        stack: "pgvector · Next.js · Go",
-        href: "/services#ai-search",
+        tag: "SECURITY / AUDIT",
+        t: "バイブコーディング セキュリティ診断",
+        d: "社内の担当者がAIで作ったツールを対象に、認証・権限・データの扱いを第三者の目で確認し、課題を緊急度別にまとめます。",
+        stack: "supabase · firebase · next.js",
+        href: "/services#vibe-coding-audit",
     },
     {
         id: 3,
-        tag: "WEB / SYSTEM",
-        t: "業務システム開発",
-        d: "Go / Next.js の自社テンプレートをベースに業務システムを構築。管理画面・社内ツール・BtoB向けWebアプリをスピーディーに立ち上げ。",
-        stack: "Go · Next.js · AWS",
-        href: "/services#business-systems",
+        tag: "MAINTENANCE / LAB",
+        t: "保守運用・引き継ぎ",
+        d: "保守が止まったシステムの引き継ぎや、日々の小さな改修を、月0.3人月から続けられるラボ型契約でお支えします。",
+        stack: "go · next.js · aws",
+        href: "/services/lab-development/",
     },
 ];
 ---
 
 <section id="works" class="bp-section">
     <div class="bp-section-inner">
-        <SectionHeader no="04" en="WORKS" jp="導入実績" />
+        <SectionHeader no="04" en="WORKS" jp="サービス" />
 
         <div class="works-grid">
             {
