@@ -185,8 +185,8 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         position: relative;
     }
     .hero-spec {
+        --spec-border: #9aa6a1;
         background: transparent;
-        border-left: 1px solid var(--bp-border);
         padding: 0 0 0 28px;
     }
     .spec-title {
@@ -208,7 +208,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         color: var(--bp-ink);
     }
     .hero-spec tr {
-        border-top: 1px solid var(--bp-border);
+        border-top: 1px solid var(--spec-border);
     }
     .hero-spec td {
         padding: 8px 0;
@@ -249,7 +249,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
     }
     @media (max-width: 600px) {
         .hero { padding-top: 48px; padding-bottom: 56px; }
-        .hero-spec { border-left: 0; border-top: 1px solid var(--bp-border); padding: 24px 0 0; }
+        .hero-spec { border-top: 1px solid var(--spec-border); padding: 24px 0 0; }
         .dim-row { display: none; }
         h1 br { display: none; }
     }
