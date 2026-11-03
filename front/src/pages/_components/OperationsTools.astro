@@ -1,0 +1,97 @@
+---
+const checks = [
+    {
+        title: "アクセス・エラーログの確認",
+        description: "AWS WAFのログから不審なアクセスを抽出。ECSのエラー・警告ログは既知のパターンと照合し、確認が必要なものを整理します。",
+    },
+    {
+        title: "依存ライブラリの脆弱性検査",
+        description: "npm・pnpm auditとgovulncheckで、JavaScript・Goの依存ライブラリを検査。検出結果を履歴として残し、新たに見つかった問題や解消した問題を追跡します。",
+    },
+    {
+        title: "実行環境の更新・サポート期限の確認",
+        description: "本番コンテナのNode.jsにセキュリティ更新が未適用でないかを確認。Dockerfileで使うAlpine Linuxのサポート期限も確認します。",
+    },
+];
+---
+
+<section id="operations-tools" class="bp-section">
+    <div class="bp-section-inner tools-layout">
+        <div class="tools-intro">
+            <p class="tools-label">自社開発の取り組み</p>
+            <h2>日々の運用チェックを、<br />仕組みにする。</h2>
+            <p class="tools-lead">
+                ログの確認や脆弱性検査を継続できるように、運用チェックツールも自社で開発しています。
+                毎回の確認を自動化し、対応が必要な問題を整理するための取り組みです。
+            </p>
+            <p class="tools-note">
+                集計・検査はスクリプトで行い、AIが結果の解釈や日本語での報告を補助します。
+            </p>
+            <a class="tools-link" href="/blog/automating-daily-operations-checks/">運用チェックツールの開発について読む →</a>
+        </div>
+        <dl class="tools-checks">
+            {checks.map((check) => (
+                <div class="tools-check">
+                    <dt>{check.title}</dt>
+                    <dd>{check.description}</dd>
+                </div>
+            ))}
+        </dl>
+    </div>
+</section>
+
+<style>
+    .tools-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+        align-items: start;
+    }
+    .tools-label {
+        margin: 0 0 20px;
+        color: var(--bp-blue);
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .tools-intro h2 {
+        font-size: clamp(26px, 3vw, 36px);
+        line-height: 1.6;
+        font-weight: 600;
+    }
+    .tools-lead {
+        margin: 24px 0 0;
+        color: var(--bp-ink-soft);
+        font-size: 15px;
+        line-height: 1.9;
+    }
+    .tools-note {
+        margin: 20px 0 0;
+        color: var(--bp-ink-soft);
+        font-size: 13px;
+        line-height: 1.9;
+    }
+    .tools-link {
+        display: inline-block;
+        margin-top: 24px;
+        color: var(--bp-blue);
+        font-size: 14px;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    .tools-checks { margin: 0; }
+    .tools-check {
+        padding: 24px 0;
+        border-top: 1px solid var(--bp-border);
+    }
+    .tools-check:last-child { padding-bottom: 0; }
+    .tools-check dt { font-size: 17px; font-weight: 600; }
+    .tools-check dd {
+        margin: 12px 0 0;
+        color: var(--bp-ink-soft);
+        font-size: 14px;
+        line-height: 1.9;
+    }
+    @media (max-width: 900px) {
+        .tools-layout { grid-template-columns: 1fr; gap: 32px; }
+    }
+</style>
