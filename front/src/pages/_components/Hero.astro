@@ -9,7 +9,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
         <div class="hero-layout">
             <div class="hero-main">
-                <div class="hero-tag">▸ VULNERABILITY RESPONSE — 脆弱性対応</div>
+                <div class="hero-tag">業務システムの脆弱性対応・保守運用</div>
 
                 <h1>
                     脆弱性の管理、<br />
@@ -22,7 +22,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
                 </p>
 
                 <a href="/blog/vulnerability-management-for-non-engineers/" class="hero-notice">
-                    <span class="hero-notice-tag">BLOG</span>
+                    <span class="hero-notice-tag">読みもの</span>
                     <span class="hero-notice-text">
                         <strong>脆弱性の管理、ひとりで抱えなくて大丈夫です</strong>
                         エンジニアでない管理者の方に担っていただきたい役割
@@ -31,8 +31,8 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
                 </a>
 
                 <div class="hero-actions">
-                    <a href="/#contact" class="bp-btn">$ tecsiz --contact</a>
-                    <a href="/services/vulnerability/" class="bp-btn bp-btn-outline">view vulnerability/</a>
+                    <a href="/#contact" class="bp-btn">まずは相談する</a>
+                    <a href="/services/vulnerability/" class="bp-btn bp-btn-outline">サービスについて →</a>
                 </div>
             </div>
 
@@ -45,28 +45,28 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
                 <table>
                     <tbody>
                         <tr>
-                            <td>service</td>
+                            <td>業務</td>
                             <td>脆弱性対応 · 保守運用</td>
                         </tr>
                         <tr>
-                            <td>scope</td>
-                            <td>依存関係 · fw更新 · cloud設定</td>
+                            <td>対応範囲</td>
+                            <td>依存関係・FW更新・クラウド設定</td>
                         </tr>
                         <tr>
-                            <td>plan</td>
+                            <td>契約</td>
                             <td>スポット / 月0.3人月〜</td>
                         </tr>
                         <tr>
-                            <td>report</td>
+                            <td>ご報告</td>
                             <td>非エンジニア向けの報告書</td>
                         </tr>
                         <tr>
-                            <td>stack</td>
+                            <td>技術</td>
                             <td>go · ts · python · aws</td>
                         </tr>
                         <tr>
-                            <td>based</td>
-                            <td>東京 · tokyo · jp</td>
+                            <td>所在地</td>
+                            <td>東京都</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,8 +77,8 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
 <style>
     .hero {
-        padding: 64px 48px 80px;
-        border-bottom: 1.5px solid var(--bp-ink);
+        padding: 96px var(--section-pad-x) 88px;
+        border-bottom: 1px solid var(--bp-border);
     }
     .hero-inner {
         max-width: var(--container-max);
@@ -95,9 +95,9 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
     .hero-layout {
         display: grid;
-        grid-template-columns: 1fr 420px;
-        gap: 56px;
-        align-items: start;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 72px;
+        align-items: center;
     }
     @media (max-width: 900px) {
         .hero-layout {
@@ -108,14 +108,14 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
 
     h1 {
         font-family: var(--font-sans),serif;
-        font-size: clamp(40px, 6vw, 80px);
-        font-weight: 900;
-        line-height: 1.12;
+        font-size: clamp(32px, 4.4vw, 56px);
+        font-weight: 600;
+        line-height: 1.5;
         color: var(--bp-ink);
         margin: 0;
         letter-spacing: -0.025em;
     }
-    .hl { color: var(--bp-blue); }
+    .hl { color: inherit; }
 
     .hero-lead {
         font-family: var(--font-sans),serif;
@@ -137,7 +137,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         max-width: 560px;
         padding: 14px 18px;
         background: var(--bp-paper);
-        border: 1.5px solid var(--bp-ink);
+        border: 1px solid var(--bp-border);
         text-decoration: none;
         color: var(--bp-ink);
         transition: transform 0.18s ease;
@@ -185,9 +185,9 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         position: relative;
     }
     .hero-spec {
-        background: var(--bp-paper);
-        border: 1.5px solid var(--bp-ink);
-        padding: 28px;
+        background: transparent;
+        border-left: 1px solid var(--bp-border);
+        padding: 0 0 0 28px;
     }
     .spec-title {
         margin-bottom: 16px;
@@ -208,7 +208,7 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         color: var(--bp-ink);
     }
     .hero-spec tr {
-        border-top: 1px dashed var(--bp-border-dash);
+        border-top: 1px solid var(--bp-border);
     }
     .hero-spec td {
         padding: 8px 0;
@@ -248,6 +248,8 @@ import DrawingHeader from "@/components/astro/shared/DrawingHeader.astro";
         background: var(--bp-ink);
     }
     @media (max-width: 600px) {
+        .hero { padding-top: 48px; padding-bottom: 56px; }
+        .hero-spec { border-left: 0; border-top: 1px solid var(--bp-border); padding: 24px 0 0; }
         .dim-row { display: none; }
         h1 br { display: none; }
     }

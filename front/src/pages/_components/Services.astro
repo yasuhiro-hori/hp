@@ -26,7 +26,7 @@ const items = [
 
 <section id="services" class="bp-section">
     <div class="bp-section-inner">
-        <SectionHeader no="02" en="SERVICES" jp="提供価値" />
+        <SectionHeader no="02" en="SERVICES" jp="私たちにできること" />
 
         <div class="svc-grid">
             {
@@ -34,7 +34,7 @@ const items = [
                     <article class="svc-card">
                         <CornerMarks />
                         <h3>{x.jp}</h3>
-                        <div class="svc-en">{x.en}</div>
+
                         <p>{x.d}</p>
                         <div class="svc-tags">
                             {x.tags.map((t) => <span class="bp-tag">{t}</span>)}
@@ -50,7 +50,7 @@ const items = [
     .svc-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 36px;
     }
     @media (max-width: 900px) {
         .svc-grid { grid-template-columns: 1fr; }
@@ -58,8 +58,8 @@ const items = [
 
     .svc-card {
         background: var(--bp-paper);
-        border: 1.5px solid var(--bp-ink);
-        padding: 28px;
+        border-top: 1px solid var(--bp-border);
+        padding: 28px 0;
         position: relative;
     }
 
@@ -79,8 +79,8 @@ const items = [
 
     .svc-card h3 {
         font-family: var(--font-sans),serif;
-        font-size: 30px;
-        font-weight: 900;
+        font-size: 24px;
+        font-weight: 600;
         color: var(--bp-ink);
         margin: 0 0 8px;
         letter-spacing: -0.015em;

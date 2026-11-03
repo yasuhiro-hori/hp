@@ -5,17 +5,17 @@
 
 :root {
   /* Colors */
-  --bp-ink: #0a1d3a;
-  --bp-ink-soft: #1f2a3d;
-  --bp-blue: #1746a2;
+  --bp-ink: #252b2d;
+  --bp-ink-soft: #50595b;
+  --bp-blue: #315e66;
   --bp-blue-light: #7aa7d9;
-  --bp-paper: #fafaf6;
+  --bp-paper: #fcfcfa;
   --bp-paper-2: #ffffff;
   --bp-paper-grid: #eef0f3;
-  --bp-hero-bg: #f3f3f3;
+  --bp-hero-bg: #f4f5f1;
   --bp-muted: #6b7785;
-  --bp-border: #b8bfc8;
-  --bp-border-dash: #b8bfc8;
+  --bp-border: #d9ddda;
+  --bp-border-dash: #d9ddda;
   --bp-accent: #c8410c; /* 朱・事故時のみ */
   --bp-accent-soft: rgba(200, 65, 12, 0.08);
 
@@ -31,14 +31,14 @@
   --nav-bg: rgba(250, 250, 246, 0.9);
 
   /* Type */
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-sans: "Zen Kaku Gothic New", "IBM Plex Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-sans);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
   --font-main: var(--font-sans);
 
   /* Layout */
   --bp-grid: 24px;
-  --container-max: 1280px;
-  --section-pad-y: 80px;
+  --container-max: 1120px;
+  --section-pad-y: 96px;
   --section-pad-x: 48px;
 
   /* Shadows (rarely used — blueprint is flat) */
@@ -108,50 +108,6 @@ img {
   background-color: var(--bp-hero-bg);
 }
 
-/* ぼかした色の円がゆっくり漂う */
-.bp-hero-bg::before,
-.bp-hero-bg::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 60vw;
-  height: 60vw;
-  max-width: 820px;
-  max-height: 820px;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-}
-
-.bp-hero-bg::before {
-  top: -30%;
-  left: -15%;
-  background: rgba(0, 0, 0, 0.02);
-  animation: bp-hero-float-a 16s ease-in-out infinite alternate;
-}
-
-.bp-hero-bg::after {
-  bottom: -35%;
-  right: -10%;
-  background: rgba(0, 0, 0, 0.015);
-  animation: bp-hero-float-b 20s ease-in-out infinite alternate;
-}
-
-@keyframes bp-hero-float-a {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(35vw, 15%) scale(1.2); }
-}
-
-@keyframes bp-hero-float-b {
-  from { transform: translate(0, 0) scale(1.1); }
-  to   { transform: translate(-30vw, -20%) scale(0.9); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bp-hero-bg::before,
-  .bp-hero-bg::after { animation: none; }
-}
-
 /* ============================================
    Typography helpers
    ============================================ */
@@ -193,7 +149,7 @@ header.bp-nav {
   background: var(--nav-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1.5px solid var(--bp-ink);
+  border-bottom: 1px solid var(--bp-border);
 }
 
 .bp-nav-inner {
@@ -208,7 +164,7 @@ header.bp-nav {
 
 .bp-section {
   padding: var(--section-pad-y) var(--section-pad-x);
-  border-bottom: 1.5px solid var(--bp-ink);
+  border-bottom: 1px solid var(--bp-border);
   background-color: var(--bp-paper);
 }
 
@@ -219,17 +175,17 @@ header.bp-nav {
 
 .bp-section h2 {
   font-family: var(--font-sans), serif;
-  font-size: 56px;
-  font-weight: 900;
+  font-size: 36px;
+  font-weight: 600;
   margin: 0;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.5;
   color: var(--bp-ink);
 }
 
 .bp-section h3 {
   font-family: var(--font-sans), serif;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--bp-ink);
   letter-spacing: -0.015em;
 }
@@ -239,49 +195,10 @@ header.bp-nav {
    ============================================ */
 .bp-card {
   background: var(--bp-paper);
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
   padding: 28px;
   position: relative;
 }
-
-.bp-card::before,
-.bp-card::after,
-.bp-card > .bp-corner-bl,
-.bp-card > .bp-corner-br {
-  content: "+";
-  position: absolute;
-  font-family: var(--font-mono), serif;
-  font-size: 10px;
-  color: var(--bp-ink);
-  opacity: 0.55;
-  letter-spacing: 0.12em;
-  pointer-events: none;
-}
-
-.bp-card::before { top: 8px; left: 8px; }
-.bp-card::after { top: 8px; right: 8px; }
-.bp-card > .bp-corner-bl { content: ""; bottom: 8px; left: 8px; }
-.bp-card > .bp-corner-bl::before { content: "+"; }
-.bp-card > .bp-corner-br { content: ""; bottom: 8px; right: 8px; }
-.bp-card > .bp-corner-br::before { content: "+"; }
-
-/* Cleaner: use four pseudo-elements via wrapper */
-.bp-card-corners {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.bp-card-corners span {
-  position: absolute;
-  font-family: var(--font-mono), serif;
-  font-size: 10px;
-  color: var(--bp-ink);
-  opacity: 0.55;
-}
-.bp-card-corners span:nth-child(1) { top: 8px; left: 8px; }
-.bp-card-corners span:nth-child(2) { top: 8px; right: 8px; }
-.bp-card-corners span:nth-child(3) { bottom: 4px; left: 8px; }
-.bp-card-corners span:nth-child(4) { bottom: 4px; right: 8px; }
 
 /* ============================================
    Buttons
@@ -312,7 +229,7 @@ header.bp-nav {
 .bp-btn-outline {
   background: transparent;
   color: var(--bp-ink);
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
 }
 .bp-btn-outline:hover {
   background: var(--bp-ink);
@@ -356,11 +273,11 @@ header.bp-nav {
   font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--bp-blue);
-  border: 1px solid var(--bp-blue);
+  border: 1px solid var(--bp-border);
   padding: 4px 10px;
   background: transparent;
 }
-.bp-tag::before { content: "#"; }
+
 
 .tech-tag {
   font-family: var(--font-mono), serif;
@@ -373,7 +290,7 @@ header.bp-nav {
   display: inline-block;
   transition: background 0.15s ease, color 0.15s ease;
 }
-.tech-tag::before { content: "#"; opacity: 0.5; margin-right: 2px; }
+
 .tech-tag:hover { background: var(--bp-ink); color: var(--bp-paper); }
 
 .tech-list {
@@ -407,7 +324,7 @@ header.bp-nav {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 48px;
-  border-bottom: 1.5px solid var(--bp-ink);
+  border-bottom: 1px solid var(--bp-border);
   padding-bottom: 12px;
   gap: 24px;
   flex-wrap: wrap;
@@ -424,7 +341,7 @@ header.bp-nav {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--bp-muted);
-  letterSpacing: 0.12em;
+  letter-spacing: 0.12em;
   white-space: nowrap;
 }
 
@@ -433,7 +350,7 @@ header.bp-nav {
    ============================================ */
 .toggle-container {
   display: inline-flex;
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
   margin-bottom: 32px;
   background: var(--bp-paper);
 }
@@ -548,7 +465,7 @@ header.bp-nav {
     --section-pad-y: 48px;
     --section-pad-x: 20px;
   }
-  .bp-section h2 { font-size: 36px; }
+  .bp-section h2 { font-size: 28px; }
   .bp-nav-inner { padding: 12px 20px; }
   .bp-footer-grid {
     grid-template-columns: 1fr;
@@ -574,7 +491,7 @@ header.bp-nav {
 .menu-toggle {
   display: none;
   background: transparent;
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
   color: var(--bp-ink);
   font-size: 18px;
   padding: 6px 12px;
@@ -590,7 +507,7 @@ header.bp-nav {
     left: 0;
     width: 100%;
     background: var(--bp-paper);
-    border-bottom: 1.5px solid var(--bp-ink);
+    border-bottom: 1px solid var(--bp-border);
     flex-direction: column;
     padding: 24px 20px;
     gap: 16px;
@@ -661,7 +578,7 @@ header.bp-nav {
 .bp-form-group textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
   background: var(--bp-paper);
   font-family: var(--font-sans), serif;
   font-size: 14px;
@@ -688,17 +605,17 @@ header.bp-nav {
 }
 .section h2 {
   font-family: var(--font-sans), serif;
-  font-size: 56px;
-  font-weight: 900;
+  font-size: 36px;
+  font-weight: 600;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.5;
   color: var(--bp-ink);
   margin: 0 0 48px;
 }
 
 .card {
   background: var(--bp-paper);
-  border: 1.5px solid var(--bp-ink);
+  border: 1px solid var(--bp-border);
   padding: 28px;
   position: relative;
   transition: transform 0.2s ease;
@@ -709,7 +626,7 @@ header.bp-nav {
 .card h3 {
   font-family: var(--font-sans), serif;
   font-size: 22px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: -0.015em;
   margin: 0 0 12px;
   color: var(--bp-ink);
@@ -726,4 +643,13 @@ header.bp-nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
+}
+
+/* Readable navigation and keyboard focus across pages. */
+.nav-links { font-size: 14px; letter-spacing: 0.02em; }
+:where(a, button, input, textarea):focus-visible { outline: 2px solid var(--bp-blue); outline-offset: 4px; }
+section[id] { scroll-margin-top: 88px; }
+@media (max-width: 900px) {
+  .nav-links { visibility: hidden; pointer-events: none; }
+  .nav-links.open { visibility: visible; pointer-events: auto; }
 }

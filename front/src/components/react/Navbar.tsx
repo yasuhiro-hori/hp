@@ -110,7 +110,7 @@ export default function Navbar() {
                                 fontFamily: 'var(--font-mono)',
                             }}
                         >
-                            SOFTWARE.DEVELOPMENT.STUDIO
+                            株式会社テクシズ
                         </div>
                     </a>
                 </div>
@@ -129,22 +129,22 @@ export default function Navbar() {
                         href="/services"
                         className={activePath.startsWith('/services') ? 'active' : ''}
                     >
-                        services
+                        サービス
                     </a>
                     <a
                         href="/recruit"
                         className={activePath.startsWith('/recruit') ? 'active' : ''}
                     >
-                        recruit
+                        採用情報
                     </a>
                     <a
                         href="/about"
                         className={activePath === '/about' ? 'active' : ''}
                     >
-                        about
+                        会社概要
                     </a>
                     <a href="/#contact" className="nav-cta">
-                        → contact
+                        お問い合わせ
                     </a>
                 </div>
             </nav>
