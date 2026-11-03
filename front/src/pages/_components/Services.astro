@@ -50,13 +50,16 @@ const items = [
     .svc-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 36px;
+        column-gap: 36px;
     }
     @media (max-width: 900px) {
         .svc-grid { grid-template-columns: 1fr; }
     }
 
     .svc-card {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 3;
         background: var(--bp-paper);
         border-top: 1px solid var(--bp-border);
         padding: 28px 0;
@@ -105,6 +108,8 @@ const items = [
     .svc-tags {
         display: flex;
         flex-wrap: wrap;
+        align-content: flex-start;
+        align-items: flex-start;
         gap: 6px;
     }
 </style>
