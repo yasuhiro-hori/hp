@@ -1,0 +1,1257 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/react/Navbar";
+import Footer from "@/layouts/Footer.astro";
+import CornerMarks from "@/components/astro/shared/CornerMarks.astro";
+import SectionHeader from "@/components/astro/shared/SectionHeader.astro";
+import Contact from "@/pages/_components/Contact.astro";
+import "@/styles/globals.css";
+
+const threats = [
+    {
+        tag: "THREAT 01",
+        t: "外部からの攻撃",
+        d: "インターネット側から管理画面やAPIを狙う攻撃です。VPNを入れて入口を絞るだけで、かなりの攻撃を減らせます。ただしVPN機器そのものも狙われ、脆弱性を突かれれば突破されます。",
+        verdict: "開発側で「防ぐ」ことができる",
+    },
+    {
+        tag: "THREAT 02",
+        t: "感染PC・退職者アカウント",
+        d: "マルウェアに感染した社内PCや、止め忘れた退職者のアカウントは、正規の利用者としてVPNの内側から入ってきます。VPNは「誰が入れるか」を絞る仕組みなので、正規の鍵を持った相手は止められません。",
+        verdict: "開発側では「被害を小さく・早く気づく」まで",
+    },
+    {
+        tag: "THREAT 03",
+        t: "在職者・転職者の持ち出し",
+        d: "権限を持った本人が、在職中にデータを持ち出すケースです。大手企業でも転職・退職に伴う営業秘密の持ち出しが繰り返し起きています。システム上は「正しい操作」に見えるのが厄介な点です。",
+        verdict: "権限設計と記録で「抑止・追跡」する",
+    },
+];
+
+const boundary = [
+    {
+        axis: "外部からの攻撃",
+        vpn: "入口を絞れる。ただしVPN機器の脆弱性を突かれると突破される",
+        dev: "WAF・認証強化・脆弱性の継続的な修正で防ぐ",
+        org: "VPN機器の更新・端末チェック",
+    },
+    {
+        axis: "感染PCからの侵入",
+        vpn: "防げない（正規の端末・正規のVPN接続として入ってくる）",
+        dev: "権限の最小化・再認証・回数制限で被害を小さくし、ログで早く気づく",
+        org: "EDR・OS更新・メールフィルタで感染そのものを減らす",
+    },
+    {
+        axis: "退職者アカウント",
+        vpn: "防げない（アカウントが生きていれば接続できる）",
+        dev: "未使用アカウントの検知・SSO連携で止め忘れを見つけやすくする",
+        org: "退職・異動当日のアカウント停止を手順として回す",
+    },
+    {
+        axis: "在職者の持ち出し",
+        vpn: "防げない",
+        dev: "閲覧・ダウンロード権限を絞り、誰が何を出したかを記録する",
+        org: "就業規則・誓約書・退職時の確認",
+    },
+];
+
+const devMeasures = [
+    {
+        cat: "PREVENT",
+        jp: "防ぐ",
+        items: [
+            {
+                t: "閲覧・ダウンロード権限を絞る",
+                d: "「ログインできれば誰でも全件CSVを取れる」状態をなくします。役割ごとに見られる範囲・出せる範囲を分け、全件出力は必要な人だけに限定します。いちばん効く対策です。",
+                key: true,
+            },
+            {
+                t: "重い操作の前にもう一度MFA",
+                d: "CSVの一括ダウンロードや権限変更など、被害が大きい操作の直前に多要素認証を再度求めます（ステップアップ認証）。乗っ取られたセッションだけでは持ち出せなくなります。",
+                key: true,
+            },
+            {
+                t: "WAF・アプリ側の脆弱性対策",
+                d: "SQLインジェクションなど既知の攻撃パターンをWAFで遮断し、依存ライブラリやフレームワークの脆弱性を継続的に修正します。",
+            },
+            {
+                t: "管理画面・APIの公開範囲の見直し",
+                d: "社内からしか使わない画面やAPIがインターネットに公開されたままになっていないかを確認し、必要な範囲に絞ります。",
+            },
+        ],
+    },
+    {
+        cat: "LIMIT",
+        jp: "被害を小さくする",
+        items: [
+            {
+                t: "ダウンロードAPIの回数制限",
+                d: "WAFのレートリミットで、短時間に大量のダウンロードが走ったら途中で止めます。全件を一気に持ち出す動きを、途中で打ち切れるようにします。",
+                key: true,
+            },
+            {
+                t: "1回あたりの出力件数の上限",
+                d: "画面やCSVで一度に出せる件数に上限を設け、それ以上は申請・承認制にします。",
+            },
+            {
+                t: "個人情報のマスキング",
+                d: "業務上フルで見る必要がない電話番号・住所などは、一覧や出力でマスクして表示します。",
+            },
+            {
+                t: "セッションの短縮と強制ログアウト",
+                d: "放置されたログイン状態を残さないようにし、管理者が特定のユーザーを即座にログアウト・停止できるようにします。",
+            },
+        ],
+    },
+    {
+        cat: "DETECT",
+        jp: "早く気づく・追える",
+        items: [
+            {
+                t: "誰が・いつ・何を出したかの記録",
+                d: "閲覧・検索・ダウンロードの操作ログを、本人が消せない場所に残します。持ち出しが疑われたときに、後から追跡できる状態にします。",
+                key: true,
+            },
+            {
+                t: "普段と違う動きの監視",
+                d: "深夜の大量ダウンロード、普段使わないアカウントのログイン、見慣れない場所からのアクセスなどをWAFとアプリのログから検知し、通知します。",
+                key: true,
+            },
+            {
+                t: "使われていないアカウントの検知",
+                d: "長期間ログインのないアカウントを定期的に洗い出し、止め忘れの退職者アカウントを見つけやすくします。",
+            },
+            {
+                t: "SSO・ID管理との連携",
+                d: "Google Workspace・Microsoft Entra ID などと連携し、元のアカウントを止めればアプリも使えなくなる構成にします。",
+            },
+        ],
+    },
+];
+
+const orgMeasures = [
+    {
+        t: "EDRを全PCに導入する",
+        d: "怪しい動きを検知して止めるウイルス対策ソフト。感染したPCが踏み台になるのを防ぎます。",
+    },
+    {
+        t: "OS・ブラウザの自動更新と、管理者権限の分離",
+        d: "更新を自動にし、普段使うアカウントから管理者権限を外します。感染しても被害が広がりにくくなります。",
+    },
+    {
+        t: "メールの添付ファイル・リンクのフィルタリング",
+        d: "感染経路の大半はメールです。危険な添付ファイルやリンクを受信の段階で止めます。",
+    },
+    {
+        t: "VPNに「端末チェック」を付ける",
+        d: "会社が管理しているPCだけがVPNに接続できるようにし、私物PCや持ち出されたPCからの接続を防ぎます。",
+    },
+    {
+        t: "退職・異動の当日にアカウントを止める",
+        d: "VPN・メール・各アプリのアカウントを、その日のうちに止める手順を決めて回します。担当が決まっていないと、ここが必ず漏れます。",
+    },
+    {
+        t: "何か起きたときの連絡先と停止手順を決める",
+        d: "不審な動きに気づいたとき、誰に連絡し、誰がどのアカウントを止めるのか。事前に決めておかないと、初動が遅れます。",
+    },
+];
+
+const orgSupport = [
+    "対策ごとの担当部署・担当者を整理した「責任分担表」のたたき台づくり",
+    "退職・異動時に止めるべきアカウントの一覧と、停止手順書の作成",
+    "アプリ側の利用者一覧と人事情報の突き合わせ（止め忘れアカウントの棚卸し）",
+    "インシデント発生時の連絡体制と、アカウント停止の手順の整理",
+    "EDR・メールフィルタ・VPN機器など、専門の製品・業者選びの際の技術的な相談",
+];
+
+const cases = [
+    {
+        cat: "外部",
+        when: "2026年9月公表",
+        t: "VPN機器の脆弱性から侵入され、最大約24.6万件の個人情報が漏えいした可能性",
+        who: "デジタル庁",
+        lesson: "VPNを入れても、VPN機器そのものの更新を止めれば入口になる。",
+        url: "https://it-trend.jp/vpn/article/48-9804",
+        src: "ITトレンド",
+    },
+    {
+        cat: "退職者",
+        when: "2026年6月",
+        t: "元従業員が在職中のID・パスワードで元勤務先のシステムに侵入し、データを削除",
+        who: "国内企業",
+        lesson: "退職時にアカウントを止めていなければ、正規の利用者として入られる。",
+        url: "https://rocket-boys.co.jp/security-measures-lab/former-employee-unauthorized-access-event-system/",
+        src: "セキュリティ対策Lab",
+    },
+    {
+        cat: "退職者",
+        when: "2023年",
+        t: "解雇された元従業員が、VPN経由で約4か月間にわたり社内サーバーへ不正アクセス",
+        who: "国内IT企業",
+        lesson: "VPNは「正しい鍵を持った相手」を止められない。気づくまでに4か月かかった。",
+        url: "https://cybersecurity-jp.com/news/85169",
+        src: "サイバーセキュリティ.com",
+    },
+    {
+        cat: "転職者",
+        when: "2021年",
+        t: "元社員が5G関連の営業秘密を持ち出し、転職先で利用（逮捕・有罪判決）",
+        who: "ソフトバンク",
+        lesson: "大手でも、在職中に権限内で持ち出されると防ぎきれない。",
+        url: "https://www.softbank.jp/corp/news/press/sbkk/2021/20210112_01/",
+        src: "ソフトバンク プレスリリース",
+    },
+    {
+        cat: "転職者",
+        when: "2022年",
+        t: "転職した社長が、前職の仕入れデータを持ち出し（逮捕）",
+        who: "回転寿司チェーン",
+        lesson: "役職者ほど広い権限を持つ。権限の広さはそのまま持ち出せる量になる。",
+        url: "https://www.itmedia.co.jp/business/spv/2210/14/news171.html",
+        src: "ITmedia ビジネスオンライン",
+    },
+    {
+        cat: "転職者",
+        when: "2026年9月",
+        t: "元社員が在職中に持ち出した半導体関連の営業秘密を、退職後に海外企業へ流出させた疑い（逮捕）",
+        who: "旭化成",
+        lesson: "持ち出しは在職中、発覚は退職後。操作の記録がなければ追えない。",
+        url: "https://news.infoseek.co.jp/article/itmedia_bizmakoto_20261013016/",
+        src: "ITmedia ビジネスオンライン（infoseek）",
+    },
+];
+
+const plans = [
+    {
+        vol: "現状診断",
+        days: "固定スコープ / 数週間",
+        d: "アプリの権限設計・ダウンロード機能・ログ・公開範囲を確認し、「今だと誰が何を持ち出せるか」を具体的にレポートします。組織側で決めるべきことも一覧にしてお渡しします。",
+    },
+    {
+        vol: "対策の実装",
+        days: "診断結果に応じて",
+        d: "権限の見直し、再MFA、WAFのレート制限、操作ログと監視の仕組みなど、開発側の対策を実装します。業務を止めないよう、影響の小さいものから段階的に入れます。",
+    },
+    {
+        vol: "継続運用",
+        days: "月0.3人月〜 / 月額",
+        d: "ログの定期確認、未使用アカウントの棚卸し、WAFルールの調整、脆弱性の継続的な修正を毎月回します。ラボ型契約の枠で、他の改修と合わせて依頼できます。",
+    },
+];
+
+const steps = [
+    { t: "現状のヒアリング", d: "システムの構成、扱っているデータ、利用者と権限の実態、VPNなど既存の対策、社内の担当体制を確認します" },
+    { t: "持ち出し経路の洗い出し", d: "画面・CSV・API・管理画面など、データが外に出る経路をすべて洗い出し、「誰が何を出せるか」を一覧にします" },
+    { t: "開発側・組織側の切り分け", d: "開発で防げること、被害を小さくするしかないこと、組織で担当を決めるべきことを分けてご提示します" },
+    { t: "優先順位をつけて実装", d: "権限の絞り込みなど効果の大きいものから実装し、動作確認のうえでリリースします" },
+    { t: "監視と見直し（継続）", d: "ログを定期的に確認し、アカウントの棚卸しやルールの調整を続けます" },
+];
+
+const fits = [
+    "顧客情報や取引データを扱う業務システムがあり、ログインできれば誰でも一覧やCSVを取れる状態になっている",
+    "VPNを入れた（入れる予定）が、それで十分なのか分からない",
+    "退職者のアカウントがきちんと止まっているか、確かめる方法がない",
+    "誰がいつ何をダウンロードしたか、記録が残っていない",
+    "取引先や監査から、情報管理の体制について説明を求められている",
+    "情シスが兼任で、セキュリティの担当がはっきり決まっていない",
+];
+
+const notFits = [
+    "EDRの導入・運用やPCの資産管理そのものの代行（専門の業者をご紹介し、選定の相談には乗ります）",
+    "24時間365日のSOC・監視運用の委託",
+    "第三者機関による認定・証明書付きの診断が必要な場合",
+];
+
+const faqs = [
+    {
+        q: "VPNを入れれば十分ではないのですか？",
+        a: "VPNで外部からの攻撃はかなり減らせますが、十分ではありません。VPN機器そのものの脆弱性を突かれて侵入された事例がありますし、マルウェアに感染した社内PCや、止め忘れた退職者のアカウントは「正規の利用者」としてVPNの内側から入ってきます。VPNは入口を絞る仕組みで、入ってきた後に何ができるかは、アプリ側の権限やログで決まります。",
+    },
+    {
+        q: "内部からの持ち出しを、システムで完全に防ぐことはできますか？",
+        a: "正直に言うと、できません。業務でデータを扱う権限を持った人が持ち出そうとすれば、システムだけで完全に止めることは不可能です。開発側でできるのは「出せる範囲を絞る」「大量の持ち出しを途中で止める」「誰が何を出したかを記録して早く気づく・後から追える」ところまでです。だからこそ、権限の設計とログが重要になります。",
+    },
+    {
+        q: "まず何から手を付けるべきですか？",
+        a: "多くの場合、閲覧・ダウンロード権限の絞り込みです。「ログインできれば誰でも全件CSVを取れる」状態は珍しくなく、ここを直すだけで、アカウントを乗っ取られた場合も、内部の人が持ち出そうとした場合も、出せる量が大きく減ります。次に、重い操作の前の再MFAと、操作ログの記録です。",
+    },
+    {
+        q: "EDRやPCの管理もお願いできますか？",
+        a: "EDRの導入・運用やPCの管理は、開発の範囲外のため直接はお受けしていません。ただし、こうした対策は担当が決まっていないと必ず抜け漏れが出ます。どの対策を誰が担当するかを整理した責任分担表のたたき台づくりや、製品・業者選びの技術的な相談には対応します。",
+    },
+    {
+        q: "退職者のアカウントが残っていないか確認できますか？",
+        a: "アプリ側の利用者一覧と、人事側の在籍情報を突き合わせて、止め忘れのアカウントを洗い出せます。あわせて、長期間ログインのないアカウントを自動で検知する仕組みや、SSOと連携して元のアカウントを止めればアプリも使えなくなる構成もご提案します。",
+    },
+    {
+        q: "他社が作ったシステムでも対応できますか？",
+        a: "対応しています。まずコードと構成を確認させていただき、権限やログの現状と、必要な作業量をご提示します。ドキュメントが残っていない場合も、実際のコードから読み解いて進めます。",
+    },
+    {
+        q: "対策を入れると、業務が不便になりませんか？",
+        a: "なります。セキュリティと使いやすさはある程度トレードオフです。だからこそ、すべての操作を厳しくするのではなく、全件ダウンロードや権限変更など「被害が大きい操作」に絞って再MFAや承認を挟みます。普段の閲覧や入力の手間はできるだけ増やさないように設計します。",
+    },
+];
+
+const jsonLd = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "情報漏えい対策",
+        serviceType: "業務システムの情報漏えい対策・内部不正対策",
+        description:
+            "VPNだけでは防げない、感染PC・退職者アカウント・内部の持ち出しによる情報漏えいに対し、権限の絞り込み、重い操作前の再MFA、WAFによる回数制限、操作ログと監視を開発側で実装します。組織側で担当を決めるべき対策の整理も支援します。",
+        areaServed: { "@type": "Country", name: "日本" },
+        provider: {
+            "@type": "Organization",
+            name: "株式会社テクシズ",
+            url: "https://tecsiz.co.jp",
+        },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "ホーム", item: "https://tecsiz.co.jp/" },
+            { "@type": "ListItem", position: 2, name: "ソリューション", item: "https://tecsiz.co.jp/services/" },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: "情報漏えい対策",
+                item: "https://tecsiz.co.jp/services/data-leak-prevention/",
+            },
+        ],
+    },
+];
+---
+
+<Layout
+    title="情報漏えい対策 | VPNだけでは防げない内部不正・退職者・感染PCへの備え | 株式会社テクシズ"
+    description="VPNは外部からの攻撃を減らせますが、感染PCや退職者アカウント、在職者の持ち出しは防げません。テクシズは権限の絞り込み、重い操作前の再MFA、WAFによる回数制限、操作ログと監視を実装し、組織側で決めるべき対策の整理まで支援します。"
+    jsonLd={jsonLd}
+>
+    <Navbar client:load />
+    <main>
+        <section class="bp-section lab-hero bp-hero-bg">
+            <div class="bp-section-inner">
+                <nav class="crumbs" aria-label="パンくず">
+                    <a href="/">ホーム</a>
+                    <span class="sep">/</span>
+                    <a href="/services">ソリューション</a>
+                    <span class="sep">/</span>
+                    <span>情報漏えい対策</span>
+                </nav>
+                <h1>
+                    <span class="hl">VPN</span>だけでは、<br />
+                    守りきれない。
+                </h1>
+                <p class="lab-lead">
+                    VPNを入れれば、外部からの攻撃はかなり減らせます。しかし、マルウェアに感染した社内PC、止め忘れた退職者のアカウント、在職中の持ち出しは、どれも「正規の利用者」としてVPNの内側から来ます。テクシズは、開発側で防げること・被害を小さくするしかないこと・組織で担当を決めるべきことをはっきり切り分け、システムに必要な対策を実装します。
+                </p>
+                <div class="lab-hero-cta">
+                    <a href="/#contact" class="bp-btn">$ inquire --about=data-leak</a>
+                    <a href="/blog/vpn-is-not-enough/" class="bp-btn bp-btn-outline">
+                        → 詳しい解説記事を読む
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="01" en="THREATS" jp="情報はどこから漏れるか" />
+                <p class="sec-sub">
+                    情報漏えいの経路は、大きく3つに分かれます。それぞれ「効く対策」が違うため、ひとまとめに「セキュリティ対策」として扱うと抜け漏れが出ます。
+                </p>
+                <div class="threat-grid">
+                    {
+                        threats.map((th) => (
+                            <div class="threat-card">
+                                <CornerMarks />
+                                <div class="threat-tag">{th.tag}</div>
+                                <h3>{th.t}</h3>
+                                <p>{th.d}</p>
+                                <div class="threat-verdict">→ {th.verdict}</div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="02" en="BOUNDARY" jp="防げること・防げないこと" />
+                <p class="sec-sub">
+                    開発側で<strong>「防ぐ」</strong>ことができるのは、外部からの攻撃までです。内部からの攻撃は開発側では防げず、できるのは<strong>「被害を小さくする」「早く気づく」</strong>までです。この線引きを曖昧にしたまま「対策済み」としないことが、最初の一歩だと考えています。
+                </p>
+                <div class="table-wrap">
+                    <table class="cmp-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">VPNだけの場合</th>
+                                <th scope="col" class="highlight">開発側の対策（テクシズ）</th>
+                                <th scope="col">組織側の対策（責任部署）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                boundary.map((row) => (
+                                    <tr>
+                                        <th scope="row">{row.axis}</th>
+                                        <td>{row.vpn}</td>
+                                        <td class="highlight">{row.dev}</td>
+                                        <td>{row.org}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="03" en="SYSTEM" jp="開発側で実装する対策" />
+                <p class="sec-sub">
+                    「防ぐ」「被害を小さくする」「早く気づく・追える」の3段構えで実装します。<span class="key-mark">★</span>
+                    は特に効果が大きく、優先して入れることをおすすめする対策です。
+                </p>
+                <div class="measure-groups">
+                    {
+                        devMeasures.map((g) => (
+                            <div class="measure-group">
+                                <div class="measure-head">
+                                    <span class="measure-cat">{g.cat}</span>
+                                    <span class="measure-jp">{g.jp}</span>
+                                </div>
+                                <ul class="measure-list">
+                                    {g.items.map((m) => (
+                                        <li>
+                                            <div class="measure-t">
+                                                {m.key && <span class="key-mark">★</span>}
+                                                {m.t}
+                                            </div>
+                                            <div class="measure-d">{m.d}</div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div class="callout">
+                    <div class="callout-label">// MOST EFFECTIVE</div>
+                    <p>
+                        いちばん効くのは、<strong>閲覧・ダウンロード権限を絞ること</strong>です。「ログインできれば誰でも全件CSVを取れる」状態のシステムは珍しくありません。この状態では、アカウントが1つ乗っ取られるだけで、あるいは1人が持ち出そうと考えるだけで、全件が外に出ます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="04" en="ORGANIZATION" jp="開発の範囲外：責任部署が必要な対策" />
+                <p class="sec-sub">
+                    PC・VPN・アカウントの管理は、開発の範囲外です。責任部署を作り、担当を明確にする必要があります。担当が決まらないと退職者アカウントの残存が起きやすく、実際にそこから侵入された事例もあります。
+                </p>
+                <ol class="org-list">
+                    {
+                        orgMeasures.map((m, i) => (
+                            <li>
+                                <span class="org-no">{String(i + 1).padStart(2, "0")}</span>
+                                <div>
+                                    <div class="org-t">{m.t}</div>
+                                    <div class="org-d">{m.d}</div>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ol>
+
+                <div class="support-box">
+                    <CornerMarks />
+                    <div class="support-label">● 範囲外でも、ここまでは手伝えます</div>
+                    <ul class="scope-list">
+                        {orgSupport.map((c) => <li>{c}</li>)}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="05" en="CASES" jp="実際に起きている事例" />
+                <p class="sec-sub">
+                    VPNの突破、退職者アカウントからの侵入、転職に伴う持ち出し。いずれも、大手企業や行政機関でも実際に起きています。
+                </p>
+                <div class="case-list">
+                    {
+                        cases.map((c) => (
+                            <a href={c.url} class="case-item" target="_blank" rel="noopener noreferrer">
+                                <div class="case-meta">
+                                    <span class="case-cat">{c.cat}</span>
+                                    <span>{c.when}</span>
+                                    <span>{c.who}</span>
+                                </div>
+                                <div class="case-t">{c.t}</div>
+                                <div class="case-lesson">▸ {c.lesson}</div>
+                                <div class="case-src">出典：{c.src} ↗</div>
+                            </a>
+                        ))
+                    }
+                </div>
+                <p class="plan-note">
+                    ※ 事例の内容は各出典の報道・公表に基づきます。捜査中・係争中の事案を含みます。
+                </p>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="06" en="MENU" jp="ご依頼の形" />
+                <p class="sec-sub">
+                    まず「今、誰が何を持ち出せるのか」を知るところから。診断だけのご依頼も、実装・継続運用までのご依頼も可能です。
+                </p>
+                <div class="plan-grid">
+                    {
+                        plans.map((p) => (
+                            <div class="plan-card">
+                                <CornerMarks />
+                                <div class="plan-vol">{p.vol}</div>
+                                <div class="plan-days">{p.days}</div>
+                                <p>{p.d}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+                <p class="plan-note">
+                    ※ 費用はシステムの規模・技術スタック・扱うデータの種類によって変わるため、現状を確認したうえでお見積もりします。
+                </p>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="07" en="FIT" jp="向くケース・向かないケース" />
+                <div class="fit-grid">
+                    <div class="fit-card">
+                        <div class="fit-label ok">● 向いています</div>
+                        <ul>
+                            {fits.map((f) => <li>{f}</li>)}
+                        </ul>
+                    </div>
+                    <div class="fit-card">
+                        <div class="fit-label ng">● 向いていません</div>
+                        <ul>
+                            {notFits.map((f) => <li>{f}</li>)}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="08" en="PROCESS" jp="対応の流れ" />
+                <div class="step-list">
+                    {
+                        steps.map((s, i) => (
+                            <div class="step">
+                                <div class="step-num-col">
+                                    <div class="step-num">{i + 1}</div>
+                                    {i < steps.length - 1 && <div class="step-line" />}
+                                </div>
+                                <div class="step-content">
+                                    <div class="step-t">{s.t}</div>
+                                    <div class="step-d">{s.d}</div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section class="bp-section">
+            <div class="bp-section-inner">
+                <SectionHeader no="09" en="FAQ" jp="よくある質問" />
+                <div class="faq-list">
+                    {
+                        faqs.map((f, i) => (
+                            <details class="faq-item" open={i === 0}>
+                                <summary>
+                                    <span class="faq-q-label">Q</span>
+                                    <span class="faq-q-text">{f.q}</span>
+                                    <span class="faq-toggle" aria-hidden="true">
+                                        [+]
+                                    </span>
+                                </summary>
+                                <div class="faq-a">
+                                    <span class="faq-a-label">A</span>
+                                    <p>{f.a}</p>
+                                </div>
+                            </details>
+                        ))
+                    }
+                </div>
+                <p class="faq-more">
+                    ライブラリ・フレームワークの脆弱性は<a href="/services/vulnerability/">脆弱性対応</a
+                    >、継続的な保守は<a href="/services/lab-development/">ラボ型開発</a>もご覧ください。
+                </p>
+            </div>
+        </section>
+
+        <Contact />
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .lab-hero {
+        padding-top: 64px;
+        padding-bottom: 56px;
+    }
+
+    .crumbs {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--bp-muted);
+        margin-bottom: 32px;
+    }
+    .crumbs a {
+        color: var(--bp-muted);
+        text-decoration: none;
+    }
+    .crumbs a:hover {
+        color: var(--bp-blue);
+    }
+    .crumbs .sep {
+        color: var(--bp-border-dash);
+    }
+
+    .lab-hero h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(36px, 6vw, 76px);
+        font-weight: 900;
+        line-height: 1.06;
+        color: var(--bp-ink);
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+    .hl {
+        color: var(--bp-blue);
+    }
+
+    .lab-lead {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 24px 0 0;
+        max-width: 640px;
+    }
+
+    .lab-hero-cta {
+        margin-top: 36px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .sec-sub {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 36px;
+        max-width: 880px;
+    }
+
+    /* --- plans --- */
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .plan-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .plan-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+        position: relative;
+    }
+    .plan-vol {
+        font-family: var(--font-sans);
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        letter-spacing: -0.02em;
+    }
+    .plan-days {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.08em;
+        padding-bottom: 16px;
+        margin: 6px 0 16px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .plan-card p {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+    .plan-note {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--bp-muted);
+        margin: 20px 0 0;
+    }
+
+    /* --- scope --- */
+    .scope-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 32px;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    @media (max-width: 700px) {
+        .scope-list {
+            grid-template-columns: 1fr;
+        }
+    }
+    .scope-list li {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--bp-ink-soft);
+        padding: 18px 4px 18px 26px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+        position: relative;
+    }
+    .scope-list li::before {
+        content: "▸";
+        position: absolute;
+        left: 4px;
+        color: var(--bp-blue);
+    }
+
+    /* --- comparison --- */
+    .table-wrap {
+        overflow-x: auto;
+    }
+    .cmp-table {
+        width: 100%;
+        min-width: 720px;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 13px;
+    }
+    .cmp-table th,
+    .cmp-table td {
+        border: 1px solid var(--bp-border);
+        padding: 14px 16px;
+        text-align: left;
+        vertical-align: top;
+        line-height: 1.7;
+        color: var(--bp-ink-soft);
+    }
+    .cmp-table thead th {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        color: var(--bp-ink);
+        background: var(--bp-paper-grid);
+        white-space: nowrap;
+    }
+    .cmp-table tbody th {
+        font-weight: 700;
+        color: var(--bp-ink);
+        background: var(--bp-paper-grid);
+        white-space: nowrap;
+    }
+    .cmp-table .highlight {
+        background: rgba(10, 29, 58, 0.04);
+        color: var(--bp-ink);
+    }
+    .cmp-table thead .highlight {
+        color: var(--bp-blue);
+    }
+
+    /* --- fit --- */
+    .fit-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .fit-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .fit-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+    }
+    .fit-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        margin-bottom: 18px;
+    }
+    .fit-label.ok {
+        color: var(--bp-blue);
+    }
+    .fit-label.ng {
+        color: var(--bp-muted);
+    }
+    .fit-card ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .fit-card li {
+        font-family: var(--font-sans);
+        font-size: 13.5px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+        padding: 14px 0;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+
+    /* --- steps --- */
+    .step-list {
+        max-width: 760px;
+    }
+    .step {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 16px;
+        align-items: start;
+    }
+    .step-num-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+    }
+    .step-num {
+        width: 34px;
+        height: 34px;
+        border: 1.5px solid var(--bp-ink);
+        border-radius: 50%;
+        background: var(--bp-paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        flex-shrink: 0;
+    }
+    .step-line {
+        flex: 1;
+        width: 0;
+        border-left: 1.5px dashed var(--bp-blue);
+        min-height: 12px;
+    }
+    .step-content {
+        padding-bottom: 24px;
+    }
+    .step-t {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 6px;
+    }
+    .step-d {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-ink-soft);
+        line-height: 1.8;
+    }
+
+    /* --- faq (トップページのFAQと同じ見た目) --- */
+    .faq-list {
+        max-width: 960px;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    .faq-item {
+        border-bottom: 1.5px solid var(--bp-ink);
+    }
+    .faq-item summary {
+        display: grid;
+        grid-template-columns: 70px 1fr 32px;
+        gap: 20px;
+        padding: 22px 8px;
+        cursor: pointer;
+        list-style: none;
+        align-items: center;
+        transition: background 0.15s ease;
+    }
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+    .faq-item summary:hover {
+        background: rgba(10, 29, 58, 0.03);
+    }
+    .faq-q-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-blue);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-q-text {
+        font-family: var(--font-sans);
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        letter-spacing: -0.005em;
+    }
+    .faq-toggle {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        color: var(--bp-blue);
+        text-align: right;
+        transition: transform 0.2s ease;
+    }
+    .faq-item[open] .faq-toggle {
+        transform: rotate(45deg);
+    }
+    .faq-a {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 20px;
+        padding: 18px 8px 24px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+    .faq-a-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--bp-accent);
+        letter-spacing: 0.14em;
+        font-weight: 700;
+    }
+    .faq-a p {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+    @media (max-width: 700px) {
+        .faq-item summary {
+            grid-template-columns: 56px 1fr 24px;
+            gap: 12px;
+            padding: 18px 4px;
+        }
+        .faq-q-text {
+            font-size: 15px;
+        }
+        .faq-a {
+            grid-template-columns: 56px 1fr;
+            gap: 12px;
+            padding: 14px 4px 18px;
+        }
+    }
+    .faq-more {
+        max-width: 960px;
+        margin: 24px 0 0;
+        font-family: var(--font-sans);
+        font-size: 13px;
+        color: var(--bp-muted);
+    }
+    .faq-more a {
+        color: var(--bp-blue);
+        text-decoration: none;
+    }
+    .faq-more a:hover {
+        text-decoration: underline;
+    }
+
+    .sec-sub strong {
+        color: var(--bp-ink);
+    }
+
+    /* --- threats --- */
+    .threat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .threat-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .threat-card {
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .threat-tag {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+    }
+    .threat-card h3 {
+        font-family: var(--font-sans);
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--bp-ink);
+        margin: 8px 0 14px;
+        letter-spacing: -0.01em;
+    }
+    .threat-card p {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.85;
+        color: var(--bp-ink-soft);
+        margin: 0 0 18px;
+        flex: 1;
+    }
+    .threat-verdict {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        padding-top: 14px;
+        border-top: 1px dashed var(--bp-border-dash);
+    }
+
+    /* --- dev measures --- */
+    .measure-groups {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    @media (max-width: 900px) {
+        .measure-groups {
+            grid-template-columns: 1fr;
+        }
+    }
+    .measure-group {
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    .measure-head {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        padding: 16px 0 6px;
+    }
+    .measure-cat {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+    }
+    .measure-jp {
+        font-family: var(--font-sans);
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--bp-ink);
+    }
+    .measure-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .measure-list li {
+        padding: 16px 0;
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .measure-t {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 6px;
+    }
+    .measure-d {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+    }
+    .key-mark {
+        color: var(--bp-accent);
+        margin-right: 4px;
+    }
+    .callout {
+        margin-top: 32px;
+        border: 1.5px solid var(--bp-ink);
+        border-left-width: 6px;
+        background: var(--bp-paper);
+        padding: 22px 26px;
+        max-width: 960px;
+    }
+    .callout-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        color: var(--bp-blue);
+        margin-bottom: 8px;
+    }
+    .callout p {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--bp-ink-soft);
+        margin: 0;
+    }
+    .callout strong {
+        color: var(--bp-ink);
+    }
+
+    /* --- organization --- */
+    .org-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 32px;
+        border-top: 1.5px solid var(--bp-ink);
+    }
+    @media (max-width: 700px) {
+        .org-list {
+            grid-template-columns: 1fr;
+        }
+    }
+    .org-list li {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 12px;
+        padding: 18px 4px;
+        border-bottom: 1px dashed var(--bp-border-dash);
+    }
+    .org-no {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--bp-blue);
+        padding-top: 2px;
+    }
+    .org-t {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--bp-ink);
+        margin-bottom: 4px;
+    }
+    .org-d {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+    }
+    .support-box {
+        position: relative;
+        margin-top: 36px;
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 28px;
+    }
+    .support-label {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--bp-blue);
+        margin-bottom: 18px;
+    }
+
+    /* --- cases --- */
+    .case-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    @media (max-width: 900px) {
+        .case-list {
+            grid-template-columns: 1fr;
+        }
+    }
+    .case-item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1.5px solid var(--bp-ink);
+        background: var(--bp-paper);
+        padding: 22px 24px;
+        text-decoration: none;
+        transition: background 0.15s ease;
+    }
+    .case-item:hover {
+        background: rgba(10, 29, 58, 0.03);
+    }
+    .case-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: var(--bp-muted);
+    }
+    .case-cat {
+        color: var(--bp-paper);
+        background: var(--bp-ink);
+        padding: 1px 8px;
+    }
+    .case-t {
+        font-family: var(--font-sans);
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.6;
+        color: var(--bp-ink);
+    }
+    .case-lesson {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--bp-ink-soft);
+        flex: 1;
+    }
+    .case-src {
+        font-family: var(--font-sans);
+        font-size: 11px;
+        color: var(--bp-blue);
+    }
+</style>
